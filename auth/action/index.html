@@ -17,6 +17,8 @@
       --err:#B3261E;
       --radius:16px;
       --shadow: 0 10px 30px rgba(0,0,0,.10);
+      --input:#f5f7f6;
+      --border:#e6eeeb;
     }
     html,body{height:100%}
     body{
@@ -87,6 +89,17 @@
     }
     .chip.active{ border-color: var(--brand); color:var(--brand); font-weight:600; }
 
+    /* Form styles */
+    form{ display:grid; gap:12px; margin-top:8px; }
+    .field{ display:grid; gap:6px; }
+    label{ font-size:14px; color:#333; font-weight:600; }
+    input[type="password"]{
+      padding:12px 14px; border-radius:10px; border:1px solid var(--border); background:var(--input);
+      font-size:16px; outline:none;
+    }
+    .error{ font-size:13px; color:#B3261E; }
+    .actions{ display:flex; gap:10px; align-items:center; }
+
     /* Mobile */
     @media (max-width: 760px){
       .card{ grid-template-columns: 1fr; }
@@ -123,13 +136,13 @@
   <!-- Firebase (Module) -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
-    import { getAuth, applyActionCode } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js";
+    import { getAuth, applyActionCode, verifyPasswordResetCode, confirmPasswordReset } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js";
 
-    // TODO: 🔧 Rellena con tu configuración real
+    // ✅ Config del proyecto japanify-be550
     const firebaseConfig = {
       apiKey: "AIzaSyADWRgIWgrEFoRn9DuKPg7s7p8NewilXGo",
       authDomain: "japanify-be550.firebaseapp.com",
-      projectId: "japanify-be550",
+      projectId: "japanify-be550"
     };
 
     // --- i18n ---
@@ -143,6 +156,20 @@
         help: "Si el botón no funciona, cierra esta pestaña y abre la app.",
         failTitle: "No se pudo verificar",
         failMsg: "El enlace no es válido o ha caducado. Solicita uno nuevo desde la app.",
+
+        // Reset
+        resetTitle: "Crear una nueva contraseña",
+        resetDesc: "Introduce tu nueva contraseña para la cuenta:",
+        newPass: "Nueva contraseña",
+        confirmPass: "Confirmar contraseña",
+        passHint: "Al menos 6 caracteres",
+        passMismatch: "Las contraseñas no coinciden.",
+        passShort: "La contraseña debe tener 6 caracteres como mínimo.",
+        resetBtn: "Actualizar contraseña",
+        resetOkTitle: "¡Contraseña actualizada!",
+        resetOkMsg: "Ya puedes iniciar sesión en Japanify.",
+        resetFailTitle: "No se pudo restablecer la contraseña",
+        resetFailMsg: "El enlace no es válido o ha caducado. Solicita uno nuevo desde la app."
       },
       de: {
         verifying: "Konto wird verifiziert…",
@@ -153,16 +180,42 @@
         help: "Falls der Button nicht funktioniert, schließe diesen Tab und öffne die App.",
         failTitle: "Verifizierung fehlgeschlagen",
         failMsg: "Der Link ist ungültig oder abgelaufen. Fordere in der App einen neuen Link an.",
+
+        resetTitle: "Neues Passwort festlegen",
+        resetDesc: "Lege ein neues Passwort fest für das Konto:",
+        newPass: "Neues Passwort",
+        confirmPass: "Passwort bestätigen",
+        passHint: "Mindestens 6 Zeichen",
+        passMismatch: "Passwörter stimmen nicht überein.",
+        passShort: "Das Passwort muss mindestens 6 Zeichen haben.",
+        resetBtn: "Passwort aktualisieren",
+        resetOkTitle: "Passwort aktualisiert!",
+        resetOkMsg: "Du kannst dich jetzt bei Japanify anmelden.",
+        resetFailTitle: "Passwort konnte nicht zurückgesetzt werden",
+        resetFailMsg: "Der Link ist ungültig oder abgelaufen. Fordere in der App einen neuen Link an."
       },
       fr: {
         verifying: "Vérification de votre compte…",
-        wait: "Un instant, nous confirmons votre adresse e-mail.",
-        okTitle: "E-mail vérifié !",
-        okMsg: "Votre e-mail a été confirmé. Vous pouvez maintenant vous connecter à Japanify.",
+        wait: "Un instant, nous confirmons votre adresse e‑mail.",
+        okTitle: "E‑mail vérifié !",
+        okMsg: "Votre e‑mail a été confirmé. Vous pouvez maintenant vous connecter à Japanify.",
         cta: "Aller à l’application",
         help: "Si le bouton ne fonctionne pas, fermez cet onglet et ouvrez l’app.",
         failTitle: "Échec de la vérification",
-        failMsg: "Le lien est invalide ou a expiré. Demandez-en un nouveau depuis l’app.",
+        failMsg: "Le lien est invalide ou expiré. Demandez‑en un nouveau depuis l’app.",
+
+        resetTitle: "Créer un nouveau mot de passe",
+        resetDesc: "Saisissez votre nouveau mot de passe pour le compte :",
+        newPass: "Nouveau mot de passe",
+        confirmPass: "Confirmer le mot de passe",
+        passHint: "Au moins 6 caractères",
+        passMismatch: "Les mots de passe ne correspondent pas.",
+        passShort: "Le mot de passe doit comporter au moins 6 caractères.",
+        resetBtn: "Mettre à jour le mot de passe",
+        resetOkTitle: "Mot de passe mis à jour !",
+        resetOkMsg: "Vous pouvez maintenant vous connecter à Japanify.",
+        resetFailTitle: "Impossible de réinitialiser le mot de passe",
+        resetFailMsg: "Lien invalide ou expiré. Demandez‑en un nouveau depuis l’app."
       },
       en: {
         verifying: "Verifying your account…",
@@ -173,6 +226,19 @@
         help: "If the button doesn't work, close this tab and open the app.",
         failTitle: "Verification failed",
         failMsg: "The link is invalid or expired. Request a new one from the app.",
+
+        resetTitle: "Create a new password",
+        resetDesc: "Enter a new password for the account:",
+        newPass: "New password",
+        confirmPass: "Confirm password",
+        passHint: "At least 6 characters",
+        passMismatch: "Passwords do not match.",
+        passShort: "Password must be at least 6 characters.",
+        resetBtn: "Update password",
+        resetOkTitle: "Password updated!",
+        resetOkMsg: "You can now sign in to Japanify.",
+        resetFailTitle: "Couldn't reset password",
+        resetFailMsg: "The link is invalid or expired. Request a new one from the app."
       },
       ko: {
         verifying: "계정을 확인하는 중…",
@@ -183,6 +249,19 @@
         help: "버튼이 작동하지 않으면 이 탭을 닫고 앱을 여세요.",
         failTitle: "확인 실패",
         failMsg: "링크가 유효하지 않거나 만료되었습니다. 앱에서 새 링크를 요청하세요.",
+
+        resetTitle: "새 비밀번호 만들기",
+        resetDesc: "다음 계정의 새 비밀번호를 입력하세요:",
+        newPass: "새 비밀번호",
+        confirmPass: "비밀번호 확인",
+        passHint: "최소 6자",
+        passMismatch: "비밀번호가 일치하지 않습니다.",
+        passShort: "비밀번호는 최소 6자여야 합니다.",
+        resetBtn: "비밀번호 업데이트",
+        resetOkTitle: "비밀번호가 변경되었습니다!",
+        resetOkMsg: "이제 Japanify에 로그인할 수 있습니다.",
+        resetFailTitle: "비밀번호를 재설정할 수 없습니다",
+        resetFailMsg: "링크가 유효하지 않거나 만료되었습니다. 앱에서 새 링크를 요청하세요."
       },
       zh: {
         verifying: "正在验证您的账户…",
@@ -193,10 +272,22 @@
         help: "如果按钮无效，请关闭此标签页并打开应用。",
         failTitle: "验证失败",
         failMsg: "链接无效或已过期。请在应用中重新请求。",
+
+        resetTitle: "设置新密码",
+        resetDesc: "为以下账户输入新密码：",
+        newPass: "新密码",
+        confirmPass: "确认新密码",
+        passHint: "至少 6 个字符",
+        passMismatch: "两次输入的密码不一致。",
+        passShort: "密码长度至少为 6 个字符。",
+        resetBtn: "更新密码",
+        resetOkTitle: "密码已更新！",
+        resetOkMsg: "现在可以登录 Japanify。",
+        resetFailTitle: "无法重置密码",
+        resetFailMsg: "链接无效或已过期。请在应用中重新请求。"
       }
     };
 
-    // Normaliza el idioma (acepta: es, de, fr, en, ko, zh, zh-cn, zh-hans, zh-simplificado)
     function normalizeLang(raw){
       const l = (raw || "").toLowerCase();
       if (l.startsWith("es")) return "es";
@@ -252,25 +343,24 @@
       document.documentElement.lang = lang;
     }
 
-    function showOK(){
+    function showOK(customTitle, customMsg){
       $status.classList.add("hide");
       $ok.classList.remove("hide");
       $err.classList.add("hide");
-      $title.textContent = t().okTitle;
-      $desc.textContent = t().okMsg;
+      $title.textContent = customTitle || t().okTitle;
+      $desc.textContent = customMsg || t().okMsg;
     }
-    function showERR(){
+    function showERR(customTitle, customMsg){
       $status.classList.add("hide");
       $ok.classList.add("hide");
       $err.classList.remove("hide");
-      $title.textContent = t().failTitle;
-      $desc.textContent = t().failMsg;
+      $title.textContent = customTitle || t().failTitle;
+      $desc.innerHTML = customMsg || t().failMsg;
     }
 
-    // 👇 Patch: lógica para decidir el destino del botón
-    const DEFAULT_WEB_URL = "https://shiruacademy.com/"; // destino web por defecto
-    const DEFAULT_DEEP_LINK = "japanify://login";        // cambia si usas deep links
-
+    // Destino del CTA
+    const DEFAULT_WEB_URL = "https://shiruacademy.com/";
+    const DEFAULT_DEEP_LINK = "japanify://login";
     function isMobile(){
       return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
     }
@@ -290,17 +380,66 @@
     const mode = qs.get("mode");
     const oobCode = qs.get("oobCode");
 
+    function renderResetForm(email){
+      $status.classList.add("hide");
+      $ok.classList.add("hide");
+      $err.classList.add("hide");
+      $title.textContent = t().resetTitle;
+      $desc.innerHTML = `${t().resetDesc} <strong>${email}</strong>`;
+
+      const form = document.createElement("form");
+      form.innerHTML = `
+        <div class="field">
+          <label for="pwd1">${t().newPass} <span class="muted">(${t().passHint})</span></label>
+          <input id="pwd1" type="password" autocomplete="new-password" required minlength="6" />
+        </div>
+        <div class="field">
+          <label for="pwd2">${t().confirmPass}</label>
+          <input id="pwd2" type="password" autocomplete="new-password" required minlength="6" />
+          <div class="error" id="formErr" style="display:none;"></div>
+        </div>
+        <div class="actions">
+          <button type="submit" class="btn">${t().resetBtn}</button>
+        </div>
+      `;
+      $help.textContent = "";
+      document.querySelector(".side").appendChild(form);
+
+      form.addEventListener("submit", async (e)=>{
+        e.preventDefault();
+        const errBox = document.getElementById("formErr");
+        errBox.style.display = "none";
+        errBox.textContent = "";
+
+        const p1 = (document.getElementById("pwd1")).value.trim();
+        const p2 = (document.getElementById("pwd2")).value.trim();
+        if (p1.length < 6) { errBox.textContent = t().passShort; errBox.style.display = "block"; return; }
+        if (p1 !== p2) { errBox.textContent = t().passMismatch; errBox.style.display = "block"; return; }
+
+        try{
+          await confirmPasswordReset(auth, oobCode, p1);
+          showOK(t().resetOkTitle, t().resetOkMsg);
+        }catch(err){
+          console.error("reset error", err);
+          showERR(t().resetFailTitle, t().resetFailMsg + ` <small>(${err.code || err.message})</small>`);
+        }
+      });
+    }
+
     async function run(){
       try{
         if(mode === "verifyEmail" && oobCode){
           await applyActionCode(auth, oobCode);
           showOK();
+        }else if (mode === "resetPassword" && oobCode) {
+          const email = await verifyPasswordResetCode(auth, oobCode);
+          renderResetForm(email);
         }else{
-          throw new Error("Unsupported or missing parameters.");
+          throw new Error("missing-params");
         }
       }catch(err){
-        console.error(err);
-        showERR();
+        console.error("Auth error:", err);
+        showERR(null, t().failMsg + ` <small>(${err.code || err.message})</small>`);
       }
     }
     run();
