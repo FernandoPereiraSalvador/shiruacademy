@@ -100,7 +100,6 @@
     .error{ font-size:13px; color:#B3261E; }
     .actions{ display:flex; gap:10px; align-items:center; }
 
-    /* Mobile */
     @media (max-width: 760px){
       .card{ grid-template-columns: 1fr; }
       .hero{ order:-1; }
@@ -133,19 +132,16 @@
     </section>
   </main>
 
-  <!-- Firebase (Module) -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
     import { getAuth, applyActionCode, verifyPasswordResetCode, confirmPasswordReset } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js";
 
-    // ✅ Config del proyecto japanify-be550
     const firebaseConfig = {
       apiKey: "AIzaSyADWRgIWgrEFoRn9DuKPg7s7p8NewilXGo",
       authDomain: "japanify-be550.firebaseapp.com",
       projectId: "japanify-be550"
     };
 
-    // --- i18n ---
     const dict = {
       es: {
         verifying: "Verificando tu cuenta…",
@@ -157,7 +153,6 @@
         failTitle: "No se pudo verificar",
         failMsg: "El enlace no es válido o ha caducado. Solicita uno nuevo desde la app.",
 
-        // Reset
         resetTitle: "Crear una nueva contraseña",
         resetDesc: "Introduce tu nueva contraseña para la cuenta:",
         newPass: "Nueva contraseña",
@@ -170,6 +165,29 @@
         resetOkMsg: "Ya puedes iniciar sesión en Japanify.",
         resetFailTitle: "No se pudo restablecer la contraseña",
         resetFailMsg: "El enlace no es válido o ha caducado. Solicita uno nuevo desde la app."
+      },
+      en: {
+        verifying: "Verifying your account…",
+        wait: "Please wait a moment while we confirm your email address.",
+        okTitle: "Email verified!",
+        okMsg: "Your email is confirmed. You can now sign in to Japanify.",
+        cta: "Open the app",
+        help: "If the button doesn't work, close this tab and open the app.",
+        failTitle: "Verification failed",
+        failMsg: "The link is invalid or expired. Request a new one from the app.",
+
+        resetTitle: "Create a new password",
+        resetDesc: "Enter a new password for the account:",
+        newPass: "New password",
+        confirmPass: "Confirm password",
+        passHint: "At least 6 characters",
+        passMismatch: "Passwords do not match.",
+        passShort: "Password must be at least 6 characters.",
+        resetBtn: "Update password",
+        resetOkTitle: "Password updated!",
+        resetOkMsg: "You can now sign in to Japanify.",
+        resetFailTitle: "Couldn't reset password",
+        resetFailMsg: "The link is invalid or expired. Request a new one from the app."
       },
       de: {
         verifying: "Konto wird verifiziert…",
@@ -216,29 +234,6 @@
         resetOkMsg: "Vous pouvez maintenant vous connecter à Japanify.",
         resetFailTitle: "Impossible de réinitialiser le mot de passe",
         resetFailMsg: "Lien invalide ou expiré. Demandez‑en un nouveau depuis l’app."
-      },
-      en: {
-        verifying: "Verifying your account…",
-        wait: "Please wait a moment while we confirm your email address.",
-        okTitle: "Email verified!",
-        okMsg: "Your email is confirmed. You can now sign in to Japanify.",
-        cta: "Open the app",
-        help: "If the button doesn't work, close this tab and open the app.",
-        failTitle: "Verification failed",
-        failMsg: "The link is invalid or expired. Request a new one from the app.",
-
-        resetTitle: "Create a new password",
-        resetDesc: "Enter a new password for the account:",
-        newPass: "New password",
-        confirmPass: "Confirm password",
-        passHint: "At least 6 characters",
-        passMismatch: "Passwords do not match.",
-        passShort: "Password must be at least 6 characters.",
-        resetBtn: "Update password",
-        resetOkTitle: "Password updated!",
-        resetOkMsg: "You can now sign in to Japanify.",
-        resetFailTitle: "Couldn't reset password",
-        resetFailMsg: "The link is invalid or expired. Request a new one from the app."
       },
       ko: {
         verifying: "계정을 확인하는 중…",
@@ -304,7 +299,6 @@
     let lang = normalizeLang(langParam);
     const t = () => dict[lang] || dict.en;
 
-    // UI refs
     const $status = document.getElementById("status");
     const $statusText = document.getElementById("statusText");
     const $title = document.getElementById("title");
@@ -343,22 +337,26 @@
       document.documentElement.lang = lang;
     }
 
+    // 🔧 FIX: también cambiamos el texto del banner según el caso
     function showOK(customTitle, customMsg){
       $status.classList.add("hide");
       $ok.classList.remove("hide");
       $err.classList.add("hide");
-      $title.textContent = customTitle || t().okTitle;
+      const title = customTitle || t().okTitle;
+      $title.textContent = title;
       $desc.textContent = customMsg || t().okMsg;
+      $okText.textContent = title; // <— actualiza el banner
     }
     function showERR(customTitle, customMsg){
       $status.classList.add("hide");
       $ok.classList.add("hide");
       $err.classList.remove("hide");
-      $title.textContent = customTitle || t().failTitle;
+      const title = customTitle || t().failTitle;
+      $title.textContent = title;
       $desc.innerHTML = customMsg || t().failMsg;
+      $errText.textContent = title; // <— actualiza el banner
     }
 
-    // Destino del CTA
     const DEFAULT_WEB_URL = "https://shiruacademy.com/";
     const DEFAULT_DEEP_LINK = "japanify://login";
     function isMobile(){
@@ -373,7 +371,6 @@
     applyStrings();
     setCtaHref();
 
-    // --- Firebase init & action handling ---
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
@@ -418,7 +415,7 @@
 
         try{
           await confirmPasswordReset(auth, oobCode, p1);
-          showOK(t().resetOkTitle, t().resetOkMsg);
+          showOK(t().resetOkTitle, t().resetOkMsg); // <— mostrará "Contraseña actualizada" (o idioma)
         }catch(err){
           console.error("reset error", err);
           showERR(t().resetFailTitle, t().resetFailMsg + ` <small>(${err.code || err.message})</small>`);
