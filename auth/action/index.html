@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Japanify • Auth</title>
+  <meta name="color-scheme" content="light only">
+  <style>
+    :root{
+      --bg: #FAF5D8;
+      --card: #ffffff;
+      --text: #161616;
+      --muted:#666;
+      --brand:#3C7262;
+      --brand-2:#2b574c;
+      --ok:#3C7262;
+      --err:#B3261E;
+      --radius:16px;
+      --shadow: 0 10px 30px rgba(0,0,0,.10);
+    }
+    html,body{height:100%}
+    body{
+      margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(60,114,98,.15), transparent 70%),
+        radial-gradient(1200px 600px at 110% 110%, rgba(60,114,98,.12), transparent 70%),
+        var(--bg);
+      color:var(--text); display:grid; place-items:center; padding:20px;
+    }
+    .card{
+      background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow);
+      width:min(820px, 92vw); overflow:hidden; display:grid; grid-template-columns: 1fr 1.1fr;
+    }
+    .side{
+      background:
+        linear-gradient(160deg, #ffffff 0%, #f6fbf9 70%),
+        #fff;
+      padding: clamp(20px, 4vw, 36px);
+      display:flex; flex-direction:column; justify-content:center; gap:16px;
+    }
+    .hero{
+      position:relative; background:linear-gradient(135deg, #e6f2ee 0%, #ffffff 70%);
+      display:grid; place-items:center; padding: clamp(20px, 4vw, 36px);
+    }
+    .hero img{
+      width:100%; height:auto; max-width: 420px; object-fit:contain;
+      filter: drop-shadow(0 12px 20px rgba(0,0,0,.12));
+      transform: translateZ(0);
+    }
+
+    h1{margin:0 0 8px; font-size: clamp(22px, 3.2vw, 30px); line-height:1.15;}
+    p{margin:0; color:var(--muted); font-size: clamp(14px, 1.6vw, 16px); line-height:1.5}
+    .btn{
+      display:inline-block; margin-top:14px; padding:12px 18px; border-radius:10px;
+      background:var(--brand); color:#fff; text-decoration:none; font-weight:600;
+      box-shadow: 0 8px 16px rgba(60,114,98,.25);
+      transition: transform .08s ease, background .2s ease;
+    }
+    .btn:hover{ background:var(--brand-2); transform: translateY(-1px); }
+    .muted{ color:var(--muted); font-size:13px; }
+    .status{
+      display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:.2px;
+      font-size:14px; color:var(--muted);
+    }
+    .dot{
+      inline-size:10px; block-size:10px; border-radius:50%; background:#888; position:relative;
+    }
+    .dot.spin::after{
+      content:""; position:absolute; inset:-6px; border:2px solid rgba(60,114,98,.25);
+      border-top-color: var(--brand); border-radius:50%; animation: spin 1s linear infinite;
+    }
+    @keyframes spin{ to{ transform: rotate(360deg);} }
+
+    .banner{
+      display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:10px; font-weight:600;
+    }
+    .ok{ background: #e8f3f0; color: var(--ok); }
+    .err{ background: #fdecea; color: var(--err); }
+    .hide{ display:none!important; }
+
+    .lang{
+      display:flex; gap:8px; flex-wrap:wrap; margin-top:8px;
+    }
+    .chip{
+      border:1px solid #e0e0e0; color:#444; padding:4px 8px; border-radius:8px; font-size:12px; cursor:pointer;
+      background:#fff;
+    }
+    .chip.active{ border-color: var(--brand); color:var(--brand); font-weight:600; }
+
+    /* Mobile */
+    @media (max-width: 760px){
+      .card{ grid-template-columns: 1fr; }
+      .hero{ order:-1; }
+      .hero img{ max-width: 300px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="card" role="main" aria-live="polite">
+    <section class="hero" aria-hidden="true">
+      <img src="./geisha.png" alt="Japanify – Geisha" width="420" height="420" loading="eager" />
+    </section>
+
+    <section class="side">
+      <div class="status" id="status">
+        <span class="dot spin" aria-hidden="true"></span>
+        <span id="statusText">Verifying…</span>
+      </div>
+
+      <h1 id="title">Verifying your account…</h1>
+      <p id="desc">Please wait a second while we confirm your email address.</p>
+
+      <div class="banner ok hide" id="okBanner">✓ <span id="okText">Email verified!</span></div>
+      <div class="banner err hide" id="errBanner">⚠ <span id="errText">Verification failed.</span></div>
+
+      <a class="btn" id="cta" href="#">Open the app</a>
+      <p class="muted" id="help">If the button doesn't work, you can close this tab and open the app.</p>
+
+      <div class="lang" id="langRow" aria-label="Language"></div>
+    </section>
+  </main>
+
+  <!-- Firebase (Module) -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
+    import { getAuth, applyActionCode } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js";
+
+    // TODO: 🔧 Rellena con tu configuración real
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      appId: "YOUR_APP_ID",
+    };
+
+    // --- i18n ---
+    const dict = {
+      es: {
+        verifying: "Verificando tu cuenta…",
+        wait: "Espera un momento mientras confirmamos tu correo.",
+        okTitle: "¡Correo verificado!",
+        okMsg: "Tu email ha sido confirmado. Ya puedes acceder a Japanify.",
+        cta: "Ir a la app",
+        help: "Si el botón no funciona, cierra esta pestaña y abre la app.",
+        failTitle: "No se pudo verificar",
+        failMsg: "El enlace no es válido o ha caducado. Solicita uno nuevo desde la app.",
+      },
+      de: {
+        verifying: "Konto wird verifiziert…",
+        wait: "Einen Moment bitte, wir bestätigen deine E-Mail-Adresse.",
+        okTitle: "E-Mail verifiziert!",
+        okMsg: "Deine E-Mail wurde bestätigt. Du kannst dich jetzt bei Japanify anmelden.",
+        cta: "Zur App",
+        help: "Falls der Button nicht funktioniert, schließe diesen Tab und öffne die App.",
+        failTitle: "Verifizierung fehlgeschlagen",
+        failMsg: "Der Link ist ungültig oder abgelaufen. Fordere in der App einen neuen Link an.",
+      },
+      fr: {
+        verifying: "Vérification de votre compte…",
+        wait: "Un instant, nous confirmons votre adresse e-mail.",
+        okTitle: "E-mail vérifié !",
+        okMsg: "Votre e-mail a été confirmé. Vous pouvez maintenant vous connecter à Japanify.",
+        cta: "Aller à l’application",
+        help: "Si le bouton ne fonctionne pas, fermez cet onglet et ouvrez l’app.",
+        failTitle: "Échec de la vérification",
+        failMsg: "Le lien est invalide ou a expiré. Demandez-en un nouveau depuis l’app.",
+      },
+      en: {
+        verifying: "Verifying your account…",
+        wait: "Please wait a moment while we confirm your email address.",
+        okTitle: "Email verified!",
+        okMsg: "Your email is confirmed. You can now sign in to Japanify.",
+        cta: "Open the app",
+        help: "If the button doesn't work, close this tab and open the app.",
+        failTitle: "Verification failed",
+        failMsg: "The link is invalid or expired. Request a new one from the app.",
+      },
+      ko: {
+        verifying: "계정을 확인하는 중…",
+        wait: "이메일 주소를 확인하는 동안 잠시만 기다려 주세요.",
+        okTitle: "이메일 확인 완료!",
+        okMsg: "이메일이 확인되었습니다. 이제 Japanify에 로그인할 수 있어요.",
+        cta: "앱으로 이동",
+        help: "버튼이 작동하지 않으면 이 탭을 닫고 앱을 여세요.",
+        failTitle: "확인 실패",
+        failMsg: "링크가 유효하지 않거나 만료되었습니다. 앱에서 새 링크를 요청하세요.",
+      },
+      zh: {
+        verifying: "正在验证您的账户…",
+        wait: "请稍候，我们正在确认您的邮箱地址。",
+        okTitle: "邮箱已验证！",
+        okMsg: "您的邮箱已确认。现在可以登录 Japanify。",
+        cta: "打开应用",
+        help: "如果按钮无效，请关闭此标签页并打开应用。",
+        failTitle: "验证失败",
+        failMsg: "链接无效或已过期。请在应用中重新请求。",
+      }
+    };
+
+    // Normaliza el idioma (acepta: es, de, fr, en, ko, zh, zh-cn, zh-hans, zh-simplificado)
+    function normalizeLang(raw){
+      const l = (raw || "").toLowerCase();
+      if (l.startsWith("es")) return "es";
+      if (l.startsWith("de")) return "de";
+      if (l.startsWith("fr")) return "fr";
+      if (l.startsWith("en")) return "en";
+      if (l.startsWith("ko")) return "ko";
+      if (l.startsWith("zh") || l.includes("hans") || l.includes("simpl") || l.includes("simplificado") || l.includes("zh-cn")) return "zh";
+      return "en";
+    }
+
+    const qs = new URLSearchParams(location.search);
+    const langParam = qs.get("lang") || navigator.language || "en";
+    let lang = normalizeLang(langParam);
+    const t = () => dict[lang] || dict.en;
+
+    // UI refs
+    const $status = document.getElementById("status");
+    const $statusText = document.getElementById("statusText");
+    const $title = document.getElementById("title");
+    const $desc = document.getElementById("desc");
+    const $ok = document.getElementById("okBanner");
+    const $err = document.getElementById("errBanner");
+    const $okText = document.getElementById("okText");
+    const $errText = document.getElementById("errText");
+    const $cta = document.getElementById("cta");
+    const $help = document.getElementById("help");
+    const $langRow = document.getElementById("langRow");
+
+    function renderLangChips(){
+      const langs = [
+        ["es","ES"],["de","DE"],["fr","FR"],["en","EN"],["ko","KO"],["zh","中文"]
+      ];
+      $langRow.innerHTML = "";
+      langs.forEach(([code,label])=>{
+        const a = document.createElement("button");
+        a.className = "chip" + (code===lang?" active":"");
+        a.textContent = label;
+        a.onclick = ()=>{ lang = code; applyStrings(); };
+        $langRow.appendChild(a);
+      });
+    }
+
+    function applyStrings(){
+      $statusText.textContent = t().verifying;
+      $title.textContent = t().verifying;
+      $desc.textContent = t().wait;
+      $okText.textContent = t().okTitle;
+      $errText.textContent = t().failTitle;
+      $cta.textContent = t().cta;
+      $help.textContent = t().help;
+      renderLangChips();
+      document.documentElement.lang = lang;
+    }
+
+    function showOK(){
+      $status.classList.add("hide");
+      $ok.classList.remove("hide");
+      $err.classList.add("hide");
+      $title.textContent = t().okTitle;
+      $desc.textContent = t().okMsg;
+    }
+    function showERR(){
+      $status.classList.add("hide");
+      $ok.classList.add("hide");
+      $err.classList.remove("hide");
+      $title.textContent = t().failTitle;
+      $desc.textContent = t().failMsg;
+    }
+
+    // 👇 Patch: lógica para decidir el destino del botón
+    const DEFAULT_WEB_URL = "https://shiruacademy.com/"; // destino web por defecto
+    const DEFAULT_DEEP_LINK = "japanify://login";        // cambia si usas deep links
+
+    function isMobile(){
+      return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    }
+    function setCtaHref(){
+      const continueUrl = qs.get("continueUrl");
+      if (continueUrl) { $cta.href = continueUrl; return; }
+      $cta.href = isMobile() ? DEFAULT_DEEP_LINK : DEFAULT_WEB_URL;
+    }
+
+    applyStrings();
+    setCtaHref();
+
+    // --- Firebase init & action handling ---
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const mode = qs.get("mode");
+    const oobCode = qs.get("oobCode");
+
+    async function run(){
+      try{
+        if(mode === "verifyEmail" && oobCode){
+          await applyActionCode(auth, oobCode);
+          showOK();
+        }else{
+          throw new Error("Unsupported or missing parameters.");
+        }
+      }catch(err){
+        console.error(err);
+        showERR();
+      }
+    }
+    run();
+  </script>
+</body>
+</html>
