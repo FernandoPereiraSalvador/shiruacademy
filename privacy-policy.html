@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Política de privacidad – Japanify</title>
+  <title data-i18n="metaTitle">Política de privacidad – Japanify</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root{
@@ -37,26 +37,28 @@
 </head>
 <body>
   <div class="container">
-    <h1>Política de privacidad</h1>
-    <p><strong>App:</strong> Japanify</p>
-    <p><strong>Desarrollador:</strong> Fernando Jose Pereira Salvador</p>
+    <h1 data-i18n="title">Política de privacidad</h1>
+    <p data-i18n="app"><strong>App:</strong> Japanify</p>
+    <p data-i18n="developer"><strong>Desarrollador:</strong> Fernando Jose Pereira Salvador</p>
 
-    <h2>Datos que recopilamos</h2>
+    <h2 data-i18n="dataTitle">Datos que recopilamos</h2>
     <ul>
-      <li>Correo electrónico (para crear una cuenta)</li>
-      <li>Fotos de perfil (opcional)</li>
-      <li>Grabaciones de voz (para ejercicios)</li>
-      <li>Datos analíticos (Firebase Analytics, Crashlytics)</li>
+      <li data-i18n="email">Correo electrónico (para crear una cuenta)</li>
+      <li data-i18n="profile">Fotos de perfil (opcional)</li>
+      <li data-i18n="voice">Grabaciones de voz (para ejercicios)</li>
+      <li data-i18n="analytics">Datos analíticos (Firebase Analytics, Crashlytics)</li>
     </ul>
 
-    <h2>Cómo usamos los datos</h2>
-    <p>Los datos se usan únicamente para proporcionar funcionalidades educativas en la app y mejorar la experiencia del usuario. No compartimos esta información con terceros.</p>
+    <h2 data-i18n="usageTitle">Cómo usamos los datos</h2>
+    <p data-i18n="usageText">Los datos se usan únicamente para proporcionar funcionalidades educativas en la app y mejorar la experiencia del usuario. No compartimos esta información con terceros.</p>
 
-    <h2>Contacto</h2>
-    <p>Si deseas eliminar tu cuenta o tus datos, puedes escribir a: <a href="mailto:fernandopereirasalvador@gmail.com">fernandopereirasalvador@gmail.com</a></p>
+    <h2 data-i18n="contactTitle">Contacto</h2>
+    <p data-i18n="contactText">Si deseas eliminar tu cuenta o tus datos, puedes escribir a: <a href="mailto:fernandopereirasalvador@gmail.com">fernandopereirasalvador@gmail.com</a></p>
 
-    <p><a href="index.html">Volver al inicio</a></p>
+    <p><a href="index.html" data-i18n="back">Volver al inicio</a></p>
   </div>
+  <script src="i18n.js"></script>
+  <script>applyTranslations('privacy');</script>
 </body>
 </html>
 

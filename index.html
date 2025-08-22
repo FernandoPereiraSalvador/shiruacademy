@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Japanify – Aprende japonés con minijuegos</title>
+  <title data-i18n="title">Japanify – Aprende japonés con minijuegos</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root{
@@ -145,9 +145,9 @@
     <div class="card">
       <div class="content">
         <img src="./logo.png" alt="Japanify" class="logo" />
-        <h1>Bienvenido a Japanify</h1>
-        <p>Aprende japonés de forma divertida con minijuegos que se adaptan a tu ritmo.</p>
-        <a href="https://play.google.com/store/apps/details?id=com.example" class="cta" target="_blank" rel="noopener">Disponible en Google Play</a>
+        <h1 data-i18n="welcome">Bienvenido a Japanify</h1>
+        <p data-i18n="intro">Aprende japonés de forma divertida con minijuegos que se adaptan a tu ritmo.</p>
+        <a href="https://play.google.com/store/apps/details?id=com.example" class="cta" target="_blank" rel="noopener" data-i18n="cta">Disponible en Google Play</a>
       </div>
       <div class="hero-img">
         <img src="auth/action/geisha.png" alt="Geisha" />
@@ -155,14 +155,16 @@
     </div>
   </main>
   <footer>
-    <a href="privacy-policy.html">Política de privacidad</a> &middot; &copy; 2025 Japanify
+    <a href="privacy-policy.html" data-i18n="privacy">Política de privacidad</a> &middot; &copy; 2025 Japanify
   </footer>
   <button class="portfolio-btn" id="portfolioBtn">?</button>
   <dialog id="portfolioDialog">
-    <p>Visita mi portafolio<br><a href="https://fernandopereirasalvador.com" target="_blank" rel="noopener">fernandopereirasalvador.com</a></p>
-    <button id="closeDialog" class="cta" style="margin-top:12px;">Cerrar</button>
+    <p data-i18n="portfolioPrompt">Visita mi portafolio<br><a href="https://fernandopereirasalvador.com" target="_blank" rel="noopener">fernandopereirasalvador.com</a></p>
+    <button id="closeDialog" class="cta" style="margin-top:12px;" data-i18n="close">Cerrar</button>
   </dialog>
+  <script src="i18n.js"></script>
   <script>
+    applyTranslations('index');
     const btn = document.getElementById('portfolioBtn');
     const dialog = document.getElementById('portfolioDialog');
     const close = document.getElementById('closeDialog');
