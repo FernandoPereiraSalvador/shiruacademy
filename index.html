@@ -24,8 +24,8 @@
         var(--bg);
       color:var(--text);
       display:flex;
+      flex-direction:column;
       align-items:center;
-      justify-content:center;
       min-height:100vh;
       padding:20px;
       text-align:center;
@@ -95,6 +95,20 @@
       color:var(--muted);
       text-align:center;
     }
+    .portfolio{
+      position:fixed;
+      right:20px;
+      bottom:20px;
+      padding:8px 12px;
+      background:var(--brand);
+      color:#fff;
+      font-size:12px;
+      border-radius:8px;
+      text-decoration:none;
+      box-shadow:0 4px 8px rgba(60,114,98,.25);
+      transition:background .2s ease;
+    }
+    .portfolio:hover{background:var(--brand-2);}
     @media (max-width:760px){
       .card{flex-direction:column;padding:30px;}
       .content{text-align:center;}
@@ -102,7 +116,7 @@
   </style>
 </head>
 <body>
-  <main class="card">
+  <main class="card" style="margin:auto 0;">
     <div class="content">
       <img src="./logo.png" alt="Japanify" class="logo" />
       <h1>Bienvenido a Japanify</h1>
@@ -116,5 +130,6 @@
   <footer>
     &copy; 2025 Japanify
   </footer>
+  <a href="https://fernandopereirasalvador.com" class="portfolio" target="_blank" rel="noopener">Portafolio</a>
 </body>
 </html>
