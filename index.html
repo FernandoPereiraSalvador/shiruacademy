@@ -134,6 +134,7 @@
     .nav-links a {
       text-decoration:none;
       transition:color .2s ease;
+      color:rgba(255,255,255,0.85);
     }
     .nav-links a:hover {
       color:#ffffff;
@@ -798,7 +799,7 @@
   </footer>
 
   <button class="portfolio-btn" id="portfolioBtn">?</button>
-  <dialog id="portfolioDialog">
+  <dialog id="portfolioDialog" hidden>
     <p data-i18n="portfolioPrompt">Visita mi portafolio<br><a href="https://fernandopereirasalvador.com" target="_blank" rel="noopener">fernandopereirasalvador.com</a></p>
     <button id="closeDialog" class="btn-primary" style="border:none;" data-i18n="close">Cerrar</button>
   </dialog>
@@ -809,8 +810,19 @@
     const btn = document.getElementById('portfolioBtn');
     const dialog = document.getElementById('portfolioDialog');
     const close = document.getElementById('closeDialog');
-    btn.addEventListener('click', () => dialog.showModal());
-    close.addEventListener('click', () => dialog.close());
+    btn.addEventListener('click', () => {
+      if (dialog.hasAttribute('hidden')) {
+        dialog.removeAttribute('hidden');
+      }
+      dialog.showModal();
+    });
+    const hideDialog = () => {
+      dialog.close();
+      dialog.setAttribute('hidden', '');
+    };
+    close.addEventListener('click', hideDialog);
+    dialog.addEventListener('cancel', hideDialog);
+    dialog.addEventListener('close', () => dialog.setAttribute('hidden', ''));
   </script>
 </body>
 </html>
