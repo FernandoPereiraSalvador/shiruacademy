@@ -8,10 +8,33 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <nav class="lesson-nav">
-    <a href="../blog.html">← Volver al blog</a>
-  </nav>
-  <div class="content">
+  <header class="site-header">
+    <nav class="site-nav">
+      <div class="brand">
+        <img src="../logo.png" alt="Japanify logo" />
+        <span data-i18n="brand">Japanify</span>
+      </div>
+      <div class="nav-links">
+        <a href="../index.html" data-i18n="navHome">Inicio</a>
+        <a href="../index.html#features" data-i18n="navFeatures">Funcionalidades</a>
+        <a href="../index.html#benefits" data-i18n="navBenefits">Beneficios</a>
+        <a href="../blog.html" class="active" data-i18n="navBlog">Blog</a>
+      </div>
+      <a
+        href="https://play.google.com/store/apps/details?id=com.shiruacademy.japanify"
+        class="nav-cta"
+        target="_blank"
+        rel="noopener"
+        data-i18n="navDownload"
+      >Descargar la app</a>
+    </nav>
+  </header>
+
+  <main>
+    <nav class="lesson-nav">
+      <a href="../blog.html" data-i18n="articleBack">← Volver al blog</a>
+    </nav>
+    <div class="content">
     <h1 class="lesson-title">La guía más sencilla de partículas japonesas: wa (は), ga (が) y wo (を)</h1>
     <p class="lesson-subtitle">Olvídate de memorizar reglas infinitas y aprende a ver las partículas como etiquetas fáciles de usar.</p>
 
@@ -96,6 +119,12 @@
     <div class="section-title">6. Tu siguiente paso</div>
     <p>Ahora ya ves las partículas como etiquetas, no como palabras misteriosas. Para que se queden contigo, necesitas práctica guiada. Empieza hoy con Japanify y refuerza cada partícula con ejercicios reales:</p>
     <a class="cta-button" href="https://play.google.com/store/apps/details?id=com.shiruacademy.japanify" target="_blank" rel="noopener">Descargar Japanify en Google Play</a>
-  </div>
+    </div>
+  </main>
+
+  <script src="../i18n.js"></script>
+  <script>
+    applyTranslations('blog');
+  </script>
 </body>
 </html>
