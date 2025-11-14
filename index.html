@@ -545,6 +545,8 @@
     footer a:hover {
       text-decoration:underline;
     }
+
+    /* BOTÓN PORTFOLIO FLOTANTE */
     .portfolio-btn {
       position:fixed;
       right:24px;
@@ -566,6 +568,8 @@
     .portfolio-btn:hover {
       transform:translateY(-3px);
     }
+
+    /* DIALOG PORTFOLIO */
     dialog {
       border:none;
       border-radius:var(--radius-md);
@@ -579,7 +583,14 @@
       background:rgba(60,114,98,0.25);
       backdrop-filter:blur(4px);
     }
+
+    /* Por defecto oculto */
     #portfolioDialog {
+      display:none;
+    }
+
+    /* Cuando está abierto (showModal añade [open]) */
+    #portfolioDialog[open] {
       max-width:420px;
       width:calc(100% - 48px);
       display:flex;
@@ -587,10 +598,12 @@
       gap:20px;
       text-align:center;
     }
+
     #portfolioDialog p {
       margin:0;
       line-height:1.6;
     }
+
     #closeDialog {
       margin:0 auto;
       border:none;
@@ -598,6 +611,7 @@
       min-width:180px;
       justify-content:center;
     }
+
     @media (max-width:960px) {
       .page {
         padding:18px 18px 60px;
@@ -798,31 +812,36 @@
     <a href="privacy-policy.html" data-i18n="privacy">Política de privacidad</a> · &copy; 2025 Japanify
   </footer>
 
+  <!-- Botón flotante portafolio + diálogo -->
   <button class="portfolio-btn" id="portfolioBtn">?</button>
-  <dialog id="portfolioDialog" hidden>
-    <p data-i18n="portfolioPrompt">Visita mi portafolio<br><a href="https://fernandopereirasalvador.com" target="_blank" rel="noopener">fernandopereirasalvador.com</a></p>
+  <dialog id="portfolioDialog">
+    <p data-i18n="portfolioPrompt">
+      Visita mi portafolio<br>
+      <a href="https://fernandopereirasalvador.com" target="_blank" rel="noopener">
+        fernandopereirasalvador.com
+      </a>
+    </p>
     <button id="closeDialog" class="btn-primary" style="border:none;" data-i18n="close">Cerrar</button>
   </dialog>
 
   <script src="i18n.js"></script>
   <script>
     applyTranslations('index');
-    const btn = document.getElementById('portfolioBtn');
+
+    const btn    = document.getElementById('portfolioBtn');
     const dialog = document.getElementById('portfolioDialog');
-    const close = document.getElementById('closeDialog');
+    const close  = document.getElementById('closeDialog');
+
     btn.addEventListener('click', () => {
-      if (dialog.hasAttribute('hidden')) {
-        dialog.removeAttribute('hidden');
-      }
-      dialog.showModal();
+      dialog.showModal();   // abre el diálogo y añade [open]
     });
+
     const hideDialog = () => {
-      dialog.close();
-      dialog.setAttribute('hidden', '');
+      dialog.close();       // cierra el diálogo y quita [open]
     };
+
     close.addEventListener('click', hideDialog);
     dialog.addEventListener('cancel', hideDialog);
-    dialog.addEventListener('close', () => dialog.setAttribute('hidden', ''));
   </script>
 </body>
 </html>
