@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title data-i18n="title">Blog de Japanify – Aprende japonés con guías claras</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Explora guías prácticas de gramática, kanji y estudio de japonés creadas por Japanify para impulsar tu preparación del JLPT." />
+  <meta name="keywords" content="blog japonés, jlpt n5, gramática japonesa, kanji, consejos de estudio, japanify" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.shiruacademy.com/blog.html" />
+  <link rel="icon" href="logo.png" type="image/png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Blog de Japanify – Aprende japonés con guías claras" />
+  <meta property="og:description" content="Explora guías prácticas de gramática, kanji y estudio de japonés creadas por Japanify para impulsar tu preparación del JLPT." />
+  <meta property="og:url" content="https://www.shiruacademy.com/blog.html" />
+  <meta property="og:image" content="https://www.shiruacademy.com/logo.png" />
+  <meta property="og:locale" content="es_ES" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Blog de Japanify – Aprende japonés con guías claras" />
+  <meta name="twitter:description" content="Explora guías prácticas de gramática, kanji y estudio de japonés creadas por Japanify para impulsar tu preparación del JLPT." />
+  <meta name="twitter:image" content="https://www.shiruacademy.com/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "url": "https://www.shiruacademy.com/blog.html",
+      "name": "Blog de Japanify",
+      "description": "Explora guías prácticas de gramática, kanji y estudio de japonés creadas por Japanify para impulsar tu preparación del JLPT.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Japanify",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.shiruacademy.com/logo.png"
+        }
+      }
+    }
+  </script>
+  <style>
+    :root {
+      --bg:#faf5d8;
+      --surface:#ffffff;
+      --surface-soft:rgba(255,255,255,0.85);
+      --text:#141414;
+      --muted:#5a5d63;
+      --accent:#3c7262;
+      --accent-strong:#2b574c;
+      --accent-soft:rgba(60,114,98,0.15);
+      --highlight:#2980b9;
+      --radius-xl:32px;
+      --radius-lg:24px;
+      --radius-md:18px;
+      --radius-sm:12px;
+      --shadow-xl:0 36px 70px rgba(60,114,98,0.2);
+      --shadow-lg:0 24px 48px rgba(60,114,98,0.18);
+      --shadow-md:0 18px 38px rgba(60,114,98,0.16);
+      --shadow-sm:0 12px 28px rgba(60,114,98,0.12);
+    }
+    *, *::before, *::after {
+      box-sizing:border-box;
+    }
+    body {
+      margin:0;
+      font-family:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(1200px 600px at 12% -12%, rgba(60,114,98,0.16), transparent 70%),
+        radial-gradient(1200px 600px at 110% 110%, rgba(60,114,98,0.12), transparent 70%),
+        var(--bg);
+      color:var(--text);
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+    }
+    a {
+      color:inherit;
+    }
+    header.site-header {
+      position:sticky;
+      top:0;
+      z-index:20;
+      background:linear-gradient(180deg, var(--accent-strong), var(--accent));
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(0,0,0,0.18);
+    }
+    .site-nav {
+      max-width:1200px;
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:18px 24px;
+      gap:32px;
+    }
+    .brand {
+      display:flex;
+      align-items:center;
+      gap:14px;
+      font-weight:700;
+      font-size:20px;
+      letter-spacing:0.04em;
+    }
+    .brand img {
+      width:44px;
+      height:44px;
+      border-radius:50%;
+      box-shadow:0 12px 28px rgba(0,0,0,0.24);
+    }
+    .brand span {
+      color:#ffffff;
+    }
+    .nav-links {
+      display:flex;
+      gap:22px;
+      font-weight:500;
+      color:rgba(255,255,255,0.85);
+    }
+    .nav-links a {
+      text-decoration:none;
+      transition:color .2s ease;
+      position:relative;
+      padding-bottom:2px;
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      color:#ffffff;
+    }
+    .nav-links a.active::after {
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:-6px;
+      width:100%;
+      height:2px;
+      background:#ffffff;
+      opacity:0.8;
+    }
+    .nav-cta {
+      display:inline-flex;
+      align-items:center;
+      gap:12px;
+      padding:12px 20px;
+      background:#ffffff;
+      border-radius:999px;
+      font-weight:600;
+      color:var(--accent-strong);
+      text-decoration:none;
+      box-shadow:0 14px 30px rgba(0,0,0,0.22);
+      transition:transform .15s ease, box-shadow .2s ease, background .25s ease, color .25s ease;
+    }
+    .nav-cta:hover {
+      transform:translateY(-2px);
+      box-shadow:0 24px 45px rgba(0,0,0,0.28);
+    }
+    main {
+      width:100%;
+      max-width:1100px;
+      margin:0 auto;
+      padding:48px 24px 96px;
+      display:flex;
+      flex-direction:column;
+      gap:80px;
+    }
+    .hero {
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(280px,1fr));
+      gap:48px;
+      align-items:center;
+    }
+    .hero-copy {
+      display:flex;
+      flex-direction:column;
+      gap:20px;
+    }
+    .hero-eyebrow {
+      font-size:14px;
+      font-weight:600;
+      letter-spacing:0.12em;
+      text-transform:uppercase;
+      color:var(--accent);
+    }
+    .hero h1 {
+      margin:0;
+      font-size:clamp(38px, 4vw, 58px);
+      line-height:1.08;
+    }
+    .hero p {
+      margin:0;
+      font-size:18px;
+      line-height:1.7;
+      color:var(--muted);
+    }
+    .hero-card {
+      background:var(--surface);
+      border-radius:var(--radius-xl);
+      border:1px solid rgba(43,87,76,0.12);
+      padding:34px;
+      box-shadow:var(--shadow-xl);
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+    }
+    .hero-card h2 {
+      margin:0;
+      font-size:24px;
+    }
+    .hero-card ul {
+      margin:0;
+      padding:0;
+      list-style:none;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      color:var(--muted);
+    }
+    .hero-card li {
+      position:relative;
+      padding-left:28px;
+      line-height:1.6;
+    }
+    .hero-card li::before {
+      content:"→";
+      position:absolute;
+      left:0;
+      color:var(--accent-strong);
+      font-weight:600;
+    }
+    .articles {
+      display:flex;
+      flex-direction:column;
+      gap:36px;
+    }
+    .articles header {
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      max-width:720px;
+    }
+    .articles header h2 {
+      margin:0;
+      font-size:clamp(30px, 3.2vw, 40px);
+    }
+    .articles header p {
+      margin:0;
+      color:var(--muted);
+      font-size:18px;
+      line-height:1.7;
+    }
+    .article-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+      gap:32px;
+    }
+    .article-card {
+      background:var(--surface-soft);
+      border-radius:var(--radius-lg);
+      border:1px solid rgba(43,87,76,0.12);
+      box-shadow:var(--shadow-lg);
+      padding:32px;
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+      position:relative;
+      overflow:hidden;
+    }
+    .article-card::after {
+      content:"";
+      position:absolute;
+      inset:0;
+      border-radius:inherit;
+      pointer-events:none;
+      background:linear-gradient(180deg, rgba(60,114,98,0.08), transparent 55%);
+    }
+    .article-tag {
+      font-size:14px;
+      font-weight:600;
+      text-transform:uppercase;
+      letter-spacing:0.08em;
+      color:var(--accent);
+    }
+    .article-card h3 {
+      margin:0;
+      font-size:24px;
+      line-height:1.25;
+    }
+    .article-excerpt {
+      margin:0;
+      color:var(--muted);
+      line-height:1.7;
+    }
+    .article-meta {
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      color:var(--accent-strong);
+      font-weight:500;
+    }
+    .article-card a {
+      align-self:flex-start;
+      text-decoration:none;
+      font-weight:600;
+      color:var(--accent-strong);
+      background:var(--accent-soft);
+      padding:12px 18px;
+      border-radius:999px;
+      transition:background .2s ease, transform .2s ease, box-shadow .2s ease;
+      box-shadow:0 16px 32px rgba(60,114,98,0.18);
+    }
+    .article-card a:hover {
+      background:rgba(60,114,98,0.22);
+      transform:translateY(-2px);
+      box-shadow:0 24px 48px rgba(60,114,98,0.22);
+    }
+    .cta-banner {
+      background:linear-gradient(135deg, rgba(60,114,98,0.2), rgba(250,245,216,0.85));
+      border-radius:var(--radius-xl);
+      border:1px solid rgba(43,87,76,0.12);
+      padding:48px;
+      text-align:center;
+      box-shadow:var(--shadow-xl);
+      display:flex;
+      flex-direction:column;
+      gap:22px;
+    }
+    .cta-banner h2 {
+      margin:0;
+      font-size:clamp(28px, 3vw, 36px);
+    }
+    .cta-banner p {
+      margin:0;
+      color:var(--muted);
+      font-size:18px;
+      line-height:1.7;
+    }
+    .btn-group {
+      display:flex;
+      flex-wrap:wrap;
+      gap:16px;
+      justify-content:center;
+    }
+    .btn-primary, .btn-secondary {
+      border-radius:999px;
+      padding:16px 28px;
+      font-weight:600;
+      display:inline-flex;
+      align-items:center;
+      gap:12px;
+      text-decoration:none;
+      transition:transform .15s ease, box-shadow .25s ease, background .25s ease;
+    }
+    .btn-primary {
+      background:linear-gradient(135deg, var(--accent), var(--accent-strong));
+      color:#ffffff;
+      box-shadow:0 18px 36px rgba(60,114,98,0.26);
+    }
+    .btn-primary:hover {
+      transform:translateY(-2px);
+      box-shadow:0 28px 54px rgba(43,87,76,0.28);
+    }
+    .btn-secondary {
+      background:rgba(60,114,98,0.1);
+      color:var(--accent-strong);
+      border:1px solid rgba(60,114,98,0.2);
+    }
+    .btn-secondary:hover {
+      transform:translateY(-2px);
+      background:rgba(60,114,98,0.2);
+    }
+    footer {
+      margin-top:auto;
+      padding:36px 24px;
+      text-align:center;
+      color:rgba(0,0,0,0.6);
+      font-size:15px;
+    }
+    footer a {
+      color:inherit;
+    }
+    @media (max-width:960px) {
+      main {
+        gap:64px;
+        padding:36px 18px 72px;
+      }
+      .hero-card {
+        padding:28px;
+      }
+    }
+    @media (max-width:720px) {
+      .site-nav {
+        flex-direction:column;
+        align-items:flex-start;
+      }
+      .nav-links {
+        flex-wrap:wrap;
+      }
+      .btn-group {
+        flex-direction:column;
+      }
+      .btn-primary, .btn-secondary {
+        width:100%;
+        justify-content:center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="site-nav">
+      <div class="brand">
+        <img src="./logo.png" alt="Japanify logo" />
+        <span data-i18n="brand">Japanify</span>
+      </div>
+      <div class="nav-links">
+        <a href="index.html" data-i18n="navHome">Inicio</a>
+        <a href="index.html#features" data-i18n="navFeatures">Funcionalidades</a>
+        <a href="index.html#benefits" data-i18n="navBenefits">Beneficios</a>
+        <a href="blog.html" class="active" data-i18n="navBlog">Blog</a>
+      </div>
+      <a href="https://play.google.com/store/apps/details?id=com.shiruacademy.japanify" class="nav-cta" target="_blank" rel="noopener" data-i18n="navDownload">Descargar la app</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="hero-eyebrow" data-i18n="heroEyebrow">Blog de Japanify</span>
+        <h1 data-i18n="heroTitle">Guías prácticas de japonés hechas para hispanohablantes</h1>
+        <p data-i18n="heroSubtitle">Domina tus primeras frases, entiende el orden SOV y controla las partículas clave con artículos pensados para que avances sin abrumarte.</p>
+      </div>
+      <div class="hero-card">
+        <h2 data-i18n="heroHighlightsTitle">Qué encontrarás aquí</h2>
+        <ul>
+          <li data-i18n="heroHighlight1">Explicaciones paso a paso sin tecnicismos innecesarios.</li>
+          <li data-i18n="heroHighlight2">Ejemplos con lectura, traducción y contexto real.</li>
+          <li data-i18n="heroHighlight3">Ejercicios y llamadas a la acción para practicar en Japanify.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="articles">
+      <header>
+        <h2 data-i18n="articlesTitle">Últimas guías publicadas</h2>
+        <p data-i18n="articlesSubtitle">Cada entrada está diseñada como una lección independiente para que puedas estudiarla desde tu móvil y después reforzarla en la app.</p>
+      </header>
+      <div class="article-grid">
+        <article class="article-card">
+          <span class="article-tag" data-i18n="article7Tag">Motivación y kanji</span>
+          <h3 data-i18n="article7Title">Por qué Anki está matando tu motivación para aprender kanji</h3>
+          <p class="article-excerpt" data-i18n="article7Excerpt">Descubre por qué las flashcards pueden agotarte y cómo pasar a minijuegos con contexto real para disfrutar aprendiendo kanji.</p>
+          <div class="article-meta">
+            <span data-i18n="article7ReadTime">Lectura de 8 minutos</span>
+          </div>
+          <a href="blog/por-que-anki-arruina-tu-motivacion-kanji.html" data-i18n="articleReadMore">Leer guía completa</a>
+        </article>
+        <article class="article-card">
+          <span class="article-tag" data-i18n="article8Tag">Rutinas</span>
+          <h3 data-i18n="article8Title">Cómo aprender japonés en 10 minutos al día</h3>
+          <p class="article-excerpt" data-i18n="article8Excerpt">Aplica microaprendizaje con sesiones cortas, ejemplos concretos y herramientas pensadas para gente ocupada.</p>
+          <div class="article-meta">
+            <span data-i18n="article8ReadTime">Lectura de 7 minutos</span>
+          </div>
+          <a href="blog/como-aprender-japones-10-minutos.html" data-i18n="articleReadMore">Leer guía completa</a>
+        </article>
+        <article class="article-card">
+          <span class="article-tag" data-i18n="article9Tag">Herramientas</span>
+          <h3 data-i18n="article9Title">La verdad sobre Duolingo para el JLPT N5</h3>
+          <p class="article-excerpt" data-i18n="article9Excerpt">Entiende qué hace bien el búho verde, qué no cubre de la gramática N5 y cómo complementar su rutina.</p>
+          <div class="article-meta">
+            <span data-i18n="article9ReadTime">Lectura de 9 minutos</span>
+          </div>
+          <a href="blog/duolingo-sirve-para-n5.html" data-i18n="articleReadMore">Leer guía completa</a>
+        </article>
+        <article class="article-card">
+          <span class="article-tag" data-i18n="article1Tag">Gramática básica</span>
+          <h3 data-i18n="article1Title">Cómo formar tus primeras frases en japonés</h3>
+          <p class="article-excerpt" data-i18n="article1Excerpt">Aprende las dos fórmulas clave (X は Y です y X は Y を verbo) y combínalas como bloques de Lego.</p>
+          <div class="article-meta">
+            <span data-i18n="article1ReadTime">Lectura de 9 minutos</span>
+          </div>
+          <a href="blog/como-formar-tus-primeras-frases.html" data-i18n="articleReadMore">Leer guía completa</a>
+        </article>
+        <article class="article-card">
+          <span class="article-tag" data-i18n="article2Tag">Gramática intermedia</span>
+          <h3 data-i18n="article2Title">El secreto de la gramática japonesa</h3>
+          <p class="article-excerpt" data-i18n="article2Excerpt">Descubre el truco mental para pensar en bloques, colocar el verbo al final y dejar de pelearte con el orden SOV.</p>
+          <div class="article-meta">
+            <span data-i18n="article2ReadTime">Lectura de 8 minutos</span>
+          </div>
+          <a href="blog/el-secreto-del-orden-sov.html" data-i18n="articleReadMore">Leer guía completa</a>
+        </article>
+        <article class="article-card">
+          <span class="article-tag" data-i18n="article3Tag">Gramática esencial</span>
+          <h3 data-i18n="article3Title">Partículas wa, ga y wo sin complicaciones</h3>
+          <p class="article-excerpt" data-i18n="article3Excerpt">Entiende qué etiqueta aporta cada partícula, cuándo usarlas y cómo reforzarlas con práctica guiada.</p>
+          <div class="article-meta">
+            <span data-i18n="article3ReadTime">Lectura de 10 minutos</span>
+          </div>
+          <a href="blog/guia-particulas-wa-ga-wo.html" data-i18n="articleReadMore">Leer guía completa</a>
+        </article>
+        <article class="article-card">
+          <span class="article-tag" data-i18n="article4Tag">Preparación JLPT</span>
+          <h3 data-i18n="article4Title">¿Qué es el N5? Tu mapa para el primer JLPT</h3>
+          <p class="article-excerpt" data-i18n="article4Excerpt">Desglosa kanji, vocabulario y gramática del nivel inicial para estudiar con un plan claro y motivador.</p>
+          <div class="article-meta">
+            <span data-i18n="article4ReadTime">Lectura de 11 minutos</span>
+          </div>
+          <a href="blog/que-es-el-n5.html" data-i18n="articleReadMore">Leer guía completa</a>
+        </article>
+        <article class="article-card">
+          <span class="article-tag" data-i18n="article5Tag">Herramientas</span>
+          <h3 data-i18n="article5Title">Las mejores apps para aprender japonés</h3>
+          <p class="article-excerpt" data-i18n="article5Excerpt">Elige la app adecuada para crear hábito, memorizar, estudiar gramática, divertirte o hablar con nativos.</p>
+          <div class="article-meta">
+            <span data-i18n="article5ReadTime">Lectura de 9 minutos</span>
+          </div>
+          <a href="blog/mejores-apps-para-aprender-japones.html" data-i18n="articleReadMore">Leer guía completa</a>
+        </article>
+        <article class="article-card">
+          <span class="article-tag" data-i18n="article6Tag">Primeros pasos</span>
+          <h3 data-i18n="article6Title">Ya sé Hiragana y Katakana, ¿y ahora qué?</h3>
+          <p class="article-excerpt" data-i18n="article6Excerpt">Aprende a combinar gramática, kanji y vocabulario básico para avanzar del kana al nivel N5 sin caos.</p>
+          <div class="article-meta">
+            <span data-i18n="article6ReadTime">Lectura de 7 minutos</span>
+          </div>
+          <a href="blog/ya-se-hiragana-y-katakana.html" data-i18n="articleReadMore">Leer guía completa</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="cta-banner">
+      <h2 data-i18n="ctaTitle">Practica cada guía dentro de la app</h2>
+      <p data-i18n="ctaSubtitle">Refuerza fórmulas, orden SOV y partículas con minijuegos diseñados por profesores certificados y basados en situaciones reales.</p>
+      <div class="btn-group">
+        <a href="https://play.google.com/store/apps/details?id=com.shiruacademy.japanify" class="btn-primary" target="_blank" rel="noopener" data-i18n="ctaPrimaryCta">Descargar Japanify</a>
+        <a href="index.html#features" class="btn-secondary" data-i18n="ctaSecondaryCta">Ver funcionalidades de la app</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <a href="privacy-policy.html" data-i18n="privacy">Política de privacidad</a> · &copy; 2025 Japanify
+  </footer>
+
+  <script src="i18n.js"></script>
+  <script>
+    applyTranslations('blog');
+  </script>
+</body>
+</html>
