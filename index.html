@@ -53,13 +53,14 @@
       flex-direction:column;
       gap:120px;
     }
+    /* NAVBAR con fondo verde */
     header.site-header {
       position:sticky;
       top:0;
       z-index:20;
-      background:linear-gradient(180deg, rgba(250,245,216,0.95), rgba(250,245,216,0.8));
+      background:linear-gradient(180deg, var(--accent-strong), var(--accent));
       backdrop-filter:blur(12px);
-      border-bottom:1px solid rgba(43,87,76,0.08);
+      border-bottom:1px solid rgba(0,0,0,0.18);
     }
     .site-nav {
       max-width:1200px;
@@ -84,36 +85,40 @@
       border-radius:50%;
       box-shadow:0 12px 28px rgba(60,114,98,0.25);
     }
+    .brand span {
+      color:#ffffff;
+    }
     .nav-links {
       display:flex;
       gap:22px;
       font-weight:500;
-      color:var(--muted);
+      color:rgba(255,255,255,0.8);
     }
     .nav-links a {
       text-decoration:none;
       transition:color .2s ease;
     }
     .nav-links a:hover {
-      color:var(--accent);
+      color:#ffffff;
     }
     .nav-cta {
       display:inline-flex;
       align-items:center;
       gap:12px;
       padding:12px 20px;
-      background:linear-gradient(135deg, var(--accent), var(--accent-strong));
+      background:#ffffff;
       border-radius:999px;
       font-weight:600;
-      color:#ffffff;
+      color:var(--accent-strong);
       text-decoration:none;
-      box-shadow:0 14px 30px rgba(60,114,98,0.26);
-      transition:transform .15s ease, box-shadow .2s ease;
+      box-shadow:0 14px 30px rgba(0,0,0,0.25);
+      transition:transform .15s ease, box-shadow .2s ease, background .25s ease, color .25s ease;
     }
     .nav-cta:hover {
       transform:translateY(-2px);
-      box-shadow:0 24px 45px rgba(43,87,76,0.28);
+      box-shadow:0 24px 45px rgba(0,0,0,0.3);
     }
+
     .hero {
       display:grid;
       grid-template-columns:repeat(12, 1fr);
@@ -201,6 +206,15 @@
       background:linear-gradient(160deg, rgba(60,114,98,0.3), rgba(60,114,98,0));
       filter:blur(60px);
       border-radius:50%;
+    }
+    /* Imagen de la mascota en el hero */
+    .hero-pet-image {
+      position:relative;
+      width:120%;
+      max-width:560px;
+      height:auto;
+      display:block;
+      z-index:1;
     }
     .preview-card {
       position:relative;
@@ -344,6 +358,24 @@
       color:var(--success);
       font-size:18px;
     }
+
+    /* NUEVOS ESTILOS PARA LA IMAGEN DEL MÓVIL */
+    .showcase-visual {
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .showcase-mobile-image {
+      width:100%;
+      max-width:360px;
+      height:auto;
+      border-radius:36px;
+      border:1px solid rgba(43,87,76,0.16);
+      box-shadow:0 60px 120px rgba(60,114,98,0.25);
+      display:block;
+    }
+
     .device-mock {
       background:rgba(60,114,98,0.12);
       border-radius:36px;
@@ -568,18 +600,15 @@
       <div class="hero-copy">
         <span class="hero-eyebrow" data-i18n="heroEyebrow">Tu compañero diario de japonés</span>
         <h1 data-i18n="heroTitle">Domina el japonés con minijuegos inmersivos</h1>
-        <p data-i18n="heroSubtitle">Japanify combina historias interactivas, retos cortos y seguimiento inteligente del progreso para que aprender japonés sea tan entretenido como ver tu anime favorito.</p>
+        <p data-i18n="heroSubtitle">Japanify reúne minijuegos rápidos, práctica guiada y repaso inteligente de vocabulario y kanji para que estudiar japonés encaje fácil en tu día a día.</p>
         <div class="hero-actions">
           <a href="https://play.google.com/store/apps/details?id=com.shiruacademy.japanify" class="btn-primary" target="_blank" rel="noopener" data-i18n="heroPrimaryCta">Disponible en Google Play</a>
           <a href="#features" class="btn-secondary" data-i18n="heroSecondaryCta">Explorar funcionalidades</a>
         </div>
       </div>
       <div class="hero-visual">
-        <div class="preview-card">
-          <div class="hero-app-icon">
-            <img src="./logo.png" alt="Icono de Japanify" />
-          </div>
-        </div>
+        <!-- Imagen de la mascota en lugar de la tarjeta de lecciones -->
+        <img src="./pet.webp" alt="Mascota Japanify" class="hero-pet-image">
       </div>
     </section>
 
@@ -589,7 +618,7 @@
         <span data-i18n="heroStat2Label">De usuarios mejora en las primeras 4 semanas</span>
       </div>
       <div class="metric-card">
-        <strong data-i18n="heroStat3Value">4,8★</strong>
+        <strong data-i18n="heroStat3Value">5★</strong>
         <span data-i18n="heroStat3Label">Valoración media en Google Play</span>
       </div>
     </section>
@@ -597,20 +626,20 @@
     <section id="features">
       <div class="section-heading">
         <h2 data-i18n="featuresTitle">Todo lo que necesitas para avanzar</h2>
-        <p data-i18n="featuresSubtitle">Diseñamos Japanify junto a profesores certificados y estudiantes reales para que cada sesión sea breve, clara y memorable.</p>
+        <p data-i18n="featuresSubtitle">Diseñamos Japanify junto a profesores certificados y estudiantes reales para que cada sesión sea clara, motivadora y fácil de retomar.</p>
       </div>
       <div class="feature-grid">
         <div class="feature-card">
-          <strong data-i18n="feature1Title">Retos personalizados</strong>
-          <span data-i18n="feature1Desc">Un motor adaptativo elige ejercicios según tu desempeño para reforzar vocabulario, listening y gramática.</span>
+          <strong data-i18n="feature1Title">Minijuegos interactivos</strong>
+          <span data-i18n="feature1Desc">Practica vocabulario, lectura y escucha con quizzes, emparejar cartas y dictados interactivos.</span>
         </div>
         <div class="feature-card">
-          <strong data-i18n="feature2Title">Minijuegos diarios</strong>
-          <span data-i18n="feature2Desc">Sesiones de 5 minutos con dinámicas tipo quiz, combinación de cartas y dictados interactivos.</span>
+          <strong data-i18n="feature2Title">Lecciones estructuradas</strong>
+          <span data-i18n="feature2Desc">Sigue unidades organizadas por temas y nivel, con explicaciones claras y ejemplos prácticos.</span>
         </div>
         <div class="feature-card">
-          <strong data-i18n="feature3Title">Seguimiento inteligente</strong>
-          <span data-i18n="feature3Desc">Panel de progreso con metas semanales, recordatorios y reportes para mantener tu motivación alta.</span>
+          <strong data-i18n="feature3Title">Repetición espaciada de kana y kanji</strong>
+          <span data-i18n="feature3Desc">Repasa hiragana, katakana y kanji justo cuando los estás a punto de olvidar para fijarlos a largo plazo.</span>
         </div>
       </div>
     </section>
@@ -622,8 +651,8 @@
       </div>
       <div class="benefit-grid">
         <div class="benefit-card">
-          <strong data-i18n="benefit1Title">Comprende más anime y manga</strong>
-          <span data-i18n="benefit1Desc">Aprende expresiones auténticas que escucharás en tus series y comics favoritos.</span>
+          <strong data-i18n="benefit1Title">Mejora tu comprensión del japonés</strong>
+          <span data-i18n="benefit1Desc">Refuerza gramática y vocabulario con ejemplos claros y ejercicios basados en situaciones reales.</span>
         </div>
         <div class="benefit-card">
           <strong data-i18n="benefit2Title">Habla con más seguridad</strong>
@@ -631,7 +660,7 @@
         </div>
         <div class="benefit-card">
           <strong data-i18n="benefit3Title">Estudia sin perder motivación</strong>
-          <span data-i18n="benefit3Desc">Misiones cortas, recompensas diarias y recordatorios positivos mantienen tu ritmo.</span>
+          <span data-i18n="benefit3Desc">Sesiones cortas, recompensas diarias y recordatorios positivos mantienen tu ritmo.</span>
         </div>
       </div>
     </section>
@@ -639,74 +668,34 @@
     <section class="showcase">
       <div class="showcase-copy">
         <div class="section-heading">
-          <h2 data-i18n="showcaseTitle">Aprende con experiencias visuales y auditivas</h2>
-          <p data-i18n="showcaseSubtitle">Cada lección combina audios nativos, tarjetas visuales y mini misiones para reforzar lo que acabas de aprender.</p>
+          <h2 data-i18n="showcaseTitle">Domina los kanji paso a paso</h2>
+          <p data-i18n="showcaseSubtitle">Japanify te ayuda a entender el significado, la lectura y el uso real de los kanji con ejercicios guiados y repaso inteligente.</p>
         </div>
         <ul class="showcase-list">
-          <li data-i18n="showcaseBullet1">Escucha diálogos reales y repite con feedback instantáneo.</li>
-          <li data-i18n="showcaseBullet2">Practica kanji con trazos guiados y ejemplos memorables.</li>
-          <li data-i18n="showcaseBullet3">Desbloquea historias exclusivas al completar tus metas semanales.</li>
+          <li data-i18n="showcaseBullet1">Aprende kanji desde sus componentes básicos y significados clave.</li>
+          <li data-i18n="showcaseBullet2">Refuerza lecturas y vocabulario con minijuegos de reconocimiento y tarjetas.</li>
+          <li data-i18n="showcaseBullet3">Utiliza repaso espaciado para no olvidar los kanji que ya has estudiado.</li>
         </ul>
       </div>
-      <div class="device-mock">
-        <div class="device-screen">
-          <div class="device-row">
-            <strong data-i18n="mockLesson">Lección 3 · Saludarte</strong>
-            <span>80%</span>
-          </div>
-          <div class="device-row">
-            <div>
-              <strong data-i18n="mockPracticeTitle">Escucha y responde</strong>
-              <span data-i18n="mockPracticeDesc">Selecciona la traducción correcta para continuar la conversación.</span>
-            </div>
-            <div style="background:rgba(60,114,98,0.24); color:var(--accent); border-radius:16px; padding:10px 14px; font-weight:600;">3/5</div>
-          </div>
-          <div class="device-row" style="flex-direction:column; align-items:flex-start; gap:10px;">
-            <span data-i18n="mockChoicesLabel">Opciones:</span>
-            <div style="display:flex; flex-direction:column; gap:10px; width:100%;">
-              <div style="padding:12px 16px; background:rgba(60,114,98,0.12); border-radius:16px;">こんにちは、はじめまして。</div>
-              <div style="padding:12px 16px; background:rgba(60,114,98,0.08); border-radius:16px;">おやすみなさい。</div>
-              <div style="padding:12px 16px; background:rgba(60,114,98,0.08); border-radius:16px;">じゃあ、またね。</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <section class="difference">
-      <div class="section-heading">
-        <h2 data-i18n="differenceTitle">El diferencial Japanify</h2>
-        <p data-i18n="differenceSubtitle">La app combina pedagogía y entretenimiento para que estudiar japonés encaje en tu rutina.</p>
-      </div>
-      <div class="difference-grid">
-        <div class="difference-item">
-          <strong data-i18n="differenceHighlight1">Aprendizaje adaptativo</strong>
-          <span data-i18n="differenceHighlight1Desc">El algoritmo detecta tus errores frecuentes y reordena el contenido para reforzarlo antes de avanzar.</span>
-        </div>
-        <div class="difference-item">
-          <strong data-i18n="differenceHighlight2">Contenido en constante expansión</strong>
-          <span data-i18n="differenceHighlight2Desc">Nuevas unidades temáticas cada mes: viajes, cultura pop, negocios y certificaciones JLPT.</span>
-        </div>
-        <div class="difference-item">
-          <strong data-i18n="differenceHighlight3">Comunidad motivadora</strong>
-          <span data-i18n="differenceHighlight3Desc">Eventos en vivo, rankings amistosos y retos colaborativos con estudiantes de todo el mundo.</span>
-        </div>
+      <div class="showcase-visual">
+        <img src="./mobile.webp" alt="Pantalla de Japanify en el móvil" class="showcase-mobile-image">
       </div>
     </section>
 
     <section class="testimonials">
       <div class="section-heading">
         <h2 data-i18n="testimonialsTitle">Lo que dicen quienes ya aprenden con Japanify</h2>
-        <p data-i18n="testimonialsSubtitle">Historias reales de usuarios que transformaron su manera de estudiar japonés.</p>
+        <p data-i18n="testimonialsSubtitle">Opiniones de usuarios sobre su experiencia con la app.</p>
       </div>
       <div class="testimonials-grid">
         <div class="testimonial">
-          <q data-i18n="testimonial1Quote">Nunca antes había mantenido un hábito tan constante. Los minijuegos son adictivos y el feedback es súper claro.</q>
-          <span data-i18n="testimonial1Author">María G. · Estudiante de JLPT N4</span>
+          <q data-i18n="testimonial1Quote">Muy buena, te enseña desde cero y es fácil de aprender.</q>
+          <span data-i18n="testimonial1Author">Usuario de Japanify en Google Play</span>
         </div>
         <div class="testimonial">
-          <q data-i18n="testimonial2Quote">En tres meses pasé de memorizar listas a conversar con mis amigos japoneses. Las historias me mantienen enganchado.</q>
-          <span data-i18n="testimonial2Author">Luis T. · Aficionado al anime</span>
+          <q data-i18n="testimonial2Quote">Excelente. Muy buena app y divertida.</q>
+          <span data-i18n="testimonial2Author">Usuario de Japanify</span>
         </div>
       </div>
     </section>
@@ -740,7 +729,7 @@
 
     <section class="cta-banner">
       <h2 data-i18n="ctaTitle">Da el siguiente paso hacia tu fluidez en japonés</h2>
-      <p data-i18n="ctaSubtitle">Únete a miles de estudiantes que ya están aprendiendo con Japanify. Descarga la app y comienza tu primera misión gratuita hoy mismo.</p>
+      <p data-i18n="ctaSubtitle">Súmate a otros estudiantes que ya están aprendiendo con Japanify. Descarga la app y empieza a practicar hoy mismo.</p>
       <div class="btn-group">
         <a href="https://play.google.com/store/apps/details?id=com.shiruacademy.japanify" class="btn-primary" target="_blank" rel="noopener" data-i18n="ctaPrimaryCta">Descargar Japanify</a>
         <a href="#blog" class="btn-secondary" data-i18n="ctaSecondaryCta">Visitar el blog</a>
