@@ -4,9 +4,46 @@
   <meta charset="UTF-8" />
   <title data-i18n="title">Japanify – Aprende japonés con minijuegos</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Aprende japonés desde cero con Japanify, la app de minijuegos que te guía paso a paso en gramática, kanji y vocabulario hasta el JLPT N5." />
+  <meta name="keywords" content="aprender japonés, jlpt n5, kanji, hiragana, app para aprender japonés, japanify" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.shiruacademy.com/" />
+  <link rel="icon" href="logo.png" type="image/png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Japanify – Aprende japonés con minijuegos" />
+  <meta property="og:description" content="Aprende japonés desde cero con Japanify, la app de minijuegos que te guía paso a paso en gramática, kanji y vocabulario hasta el JLPT N5." />
+  <meta property="og:url" content="https://www.shiruacademy.com/" />
+  <meta property="og:image" content="https://www.shiruacademy.com/logo.png" />
+  <meta property="og:locale" content="es_ES" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Japanify – Aprende japonés con minijuegos" />
+  <meta name="twitter:description" content="Aprende japonés desde cero con Japanify, la app de minijuegos que te guía paso a paso en gramática, kanji y vocabulario hasta el JLPT N5." />
+  <meta name="twitter:image" content="https://www.shiruacademy.com/logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "url": "https://www.shiruacademy.com/",
+      "name": "Japanify",
+      "description": "Aprende japonés desde cero con Japanify, la app de minijuegos que te guía paso a paso en gramática, kanji y vocabulario hasta el JLPT N5.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Japanify",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.shiruacademy.com/logo.png"
+        }
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.shiruacademy.com/?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+  </script>
   <style>
     :root {
       --bg:#faf5d8;
@@ -540,6 +577,25 @@
     dialog::backdrop {
       background:rgba(60,114,98,0.25);
       backdrop-filter:blur(4px);
+    }
+    #portfolioDialog {
+      max-width:420px;
+      width:calc(100% - 48px);
+      display:flex;
+      flex-direction:column;
+      gap:20px;
+      text-align:center;
+    }
+    #portfolioDialog p {
+      margin:0;
+      line-height:1.6;
+    }
+    #closeDialog {
+      margin:0 auto;
+      border:none;
+      align-self:center;
+      min-width:180px;
+      justify-content:center;
     }
     @media (max-width:960px) {
       .page {
