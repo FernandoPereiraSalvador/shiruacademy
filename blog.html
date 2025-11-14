@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title data-i18n="title">Blog de Japanify – Aprende japonés con guías claras</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#faf5d8;
+      --bg-soft:#f3ebc2;
+      --surface:#ffffff;
+      --surface-soft:rgba(255,255,255,0.82);
+      --text:#161616;
+      --muted:#585858;
+      --accent:#3c7262;
+      --accent-strong:#2b574c;
+      --accent-soft:rgba(60,114,98,0.12);
+      --success:#63a67f;
+      --radius-xl:32px;
+      --radius-lg:24px;
+      --radius-md:18px;
+      --radius-sm:12px;
+      --shadow-xl:0 30px 70px rgba(60,114,98,.2);
+      --shadow-lg:0 24px 48px rgba(60,114,98,.18);
+      --shadow-md:0 18px 38px rgba(60,114,98,.18);
+      --shadow-sm:0 10px 22px rgba(60,114,98,.12);
+    }
+    *, *::before, *::after {
+      box-sizing:border-box;
+    }
+    body {
+      margin:0;
+      font-family:'Inter', system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(60,114,98,0.15), transparent 70%),
+        radial-gradient(1200px 600px at 110% 110%, rgba(60,114,98,0.12), transparent 70%),
+        var(--bg);
+      color:var(--text);
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+    }
+    a {
+      color:inherit;
+    }
+    header.site-header {
+      position:sticky;
+      top:0;
+      z-index:20;
+      background:linear-gradient(180deg, var(--accent-strong), var(--accent));
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(0,0,0,0.18);
+    }
+    .site-nav {
+      max-width:1180px;
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:18px 24px;
+      gap:32px;
+    }
+    .brand {
+      display:flex;
+      align-items:center;
+      gap:14px;
+      font-weight:700;
+      font-size:20px;
+      letter-spacing:0.04em;
+    }
+    .brand img {
+      width:44px;
+      height:44px;
+      border-radius:50%;
+      box-shadow:0 12px 28px rgba(60,114,98,0.25);
+    }
+    .brand span {
+      color:#ffffff;
+    }
+    .nav-links {
+      display:flex;
+      gap:22px;
+      font-weight:500;
+      color:rgba(255,255,255,0.85);
+    }
+    .nav-links a {
+      text-decoration:none;
+      transition:color .2s ease;
+      position:relative;
+      padding-bottom:2px;
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      color:#ffffff;
+    }
+    .nav-links a.active::after {
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:-6px;
+      width:100%;
+      height:2px;
+      background:#ffffff;
+      opacity:0.7;
+    }
+    .nav-cta {
+      display:inline-flex;
+      align-items:center;
+      gap:12px;
+      padding:12px 20px;
+      background:#ffffff;
+      border-radius:999px;
+      font-weight:600;
+      color:var(--accent-strong);
+      text-decoration:none;
+      box-shadow:0 14px 30px rgba(0,0,0,0.25);
+      transition:transform .15s ease, box-shadow .2s ease, background .25s ease, color .25s ease;
+    }
+    .nav-cta:hover {
+      transform:translateY(-2px);
+      box-shadow:0 24px 45px rgba(0,0,0,0.3);
+    }
+    main {
+      width:100%;
+      max-width:1100px;
+      margin:0 auto;
+      padding:48px 24px 90px;
+      display:flex;
+      flex-direction:column;
+      gap:80px;
+    }
+    .hero {
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(280px,1fr));
+      gap:48px;
+      align-items:center;
+    }
+    .hero-copy {
+      display:flex;
+      flex-direction:column;
+      gap:20px;
+    }
+    .hero-eyebrow {
+      font-size:14px;
+      font-weight:600;
+      letter-spacing:0.12em;
+      text-transform:uppercase;
+      color:var(--accent);
+    }
+    .hero h1 {
+      margin:0;
+      font-size:clamp(38px, 4vw, 58px);
+      line-height:1.08;
+    }
+    .hero p {
+      margin:0;
+      font-size:18px;
+      line-height:1.7;
+      color:var(--muted);
+    }
+    .hero-card {
+      background:var(--surface);
+      border-radius:var(--radius-xl);
+      border:1px solid rgba(43,87,76,0.12);
+      padding:32px;
+      box-shadow:var(--shadow-xl);
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+    }
+    .hero-card h2 {
+      margin:0;
+      font-size:24px;
+    }
+    .hero-card ul {
+      margin:0;
+      padding:0;
+      list-style:none;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+    .hero-card li {
+      position:relative;
+      padding-left:28px;
+      color:var(--muted);
+      line-height:1.6;
+    }
+    .hero-card li::before {
+      content:"→";
+      position:absolute;
+      left:0;
+      color:var(--accent-strong);
+      font-weight:600;
+    }
+    .hero-card a {
+      color:var(--accent-strong);
+      font-weight:600;
+      text-decoration:none;
+    }
+    .hero-card a:hover {
+      text-decoration:underline;
+    }
+    .post-list {
+      display:flex;
+      flex-direction:column;
+      gap:60px;
+    }
+    article.post {
+      background:var(--surface-soft);
+      border-radius:var(--radius-lg);
+      border:1px solid rgba(43,87,76,0.14);
+      box-shadow:var(--shadow-lg);
+      padding:48px clamp(24px, 4vw, 60px);
+      display:flex;
+      flex-direction:column;
+      gap:28px;
+    }
+    .post header {
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+    .post header h2 {
+      margin:0;
+      font-size:clamp(30px, 3.5vw, 42px);
+      line-height:1.15;
+    }
+    .post-meta {
+      display:flex;
+      flex-wrap:wrap;
+      gap:16px;
+      font-size:14px;
+      color:var(--muted);
+    }
+    .post-content {
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+      color:var(--muted);
+      line-height:1.8;
+      font-size:18px;
+    }
+    .post-content h3 {
+      color:var(--text);
+      margin:28px 0 8px;
+      font-size:24px;
+    }
+    .post-content h4 {
+      color:var(--text);
+      margin:20px 0 6px;
+      font-size:20px;
+    }
+    .post-content strong {
+      color:var(--text);
+    }
+    .post-content ul, .post-content ol {
+      margin:0;
+      padding-left:24px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .highlight-box {
+      background:rgba(60,114,98,0.08);
+      border-radius:var(--radius-md);
+      border:1px solid rgba(60,114,98,0.18);
+      padding:18px 22px;
+      font-size:17px;
+      line-height:1.6;
+      color:var(--text);
+    }
+    .cta-banner {
+      background:linear-gradient(135deg, rgba(60,114,98,0.22), rgba(250,245,216,0.75));
+      border-radius:var(--radius-xl);
+      border:1px solid rgba(43,87,76,0.14);
+      padding:48px;
+      text-align:center;
+      box-shadow:var(--shadow-xl);
+      display:flex;
+      flex-direction:column;
+      gap:22px;
+    }
+    .cta-banner h2 {
+      margin:0;
+      font-size:clamp(28px, 3vw, 38px);
+    }
+    .cta-banner p {
+      margin:0;
+      color:var(--muted);
+      font-size:18px;
+      line-height:1.7;
+    }
+    .btn-group {
+      display:flex;
+      flex-wrap:wrap;
+      gap:16px;
+      justify-content:center;
+    }
+    .btn-primary, .btn-secondary {
+      border-radius:999px;
+      padding:16px 28px;
+      font-weight:600;
+      display:inline-flex;
+      align-items:center;
+      gap:12px;
+      text-decoration:none;
+      transition:transform .15s ease, box-shadow .25s ease, background .25s ease;
+    }
+    .btn-primary {
+      background:linear-gradient(135deg, var(--accent), var(--accent-strong));
+      color:#ffffff;
+      box-shadow:0 18px 36px rgba(60,114,98,0.26);
+    }
+    .btn-primary:hover {
+      transform:translateY(-2px);
+      box-shadow:0 28px 54px rgba(43,87,76,0.28);
+    }
+    .btn-secondary {
+      background:rgba(60,114,98,0.08);
+      color:var(--accent-strong);
+      border:1px solid rgba(60,114,98,0.2);
+    }
+    .btn-secondary:hover {
+      transform:translateY(-2px);
+      background:rgba(60,114,98,0.16);
+    }
+    footer {
+      margin-top:auto;
+      padding:36px 24px;
+      text-align:center;
+      color:rgba(0,0,0,0.6);
+      font-size:15px;
+    }
+    footer a {
+      color:inherit;
+    }
+    @media (max-width:960px) {
+      main {
+        gap:64px;
+        padding:36px 18px 72px;
+      }
+      article.post {
+        padding:36px 24px;
+      }
+    }
+    @media (max-width:720px) {
+      .site-nav {
+        flex-direction:column;
+        align-items:flex-start;
+      }
+      .nav-links {
+        flex-wrap:wrap;
+      }
+      .btn-group {
+        flex-direction:column;
+      }
+      .btn-primary, .btn-secondary {
+        width:100%;
+        justify-content:center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="site-nav">
+      <div class="brand">
+        <img src="./logo.png" alt="Japanify logo" />
+        <span data-i18n="brand">Japanify</span>
+      </div>
+      <div class="nav-links">
+        <a href="index.html" data-i18n="navHome">Inicio</a>
+        <a href="index.html#features" data-i18n="navFeatures">Funcionalidades</a>
+        <a href="index.html#benefits" data-i18n="navBenefits">Beneficios</a>
+        <a href="blog.html" class="active" data-i18n="navBlog">Blog</a>
+      </div>
+      <a href="https://play.google.com/store/apps/details?id=com.shiruacademy.japanify" class="nav-cta" target="_blank" rel="noopener" data-i18n="navDownload">Descargar la app</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="hero-eyebrow" data-i18n="heroEyebrow">Blog de Japanify</span>
+        <h1 data-i18n="heroTitle">Construye japonés real con guías pensadas para hispanohablantes</h1>
+        <p data-i18n="heroSubtitle">Aprende a formar frases, entender el orden SOV y dominar las partículas básicas con artículos paso a paso escritos por el equipo pedagógico de Japanify.</p>
+      </div>
+      <div class="hero-card">
+        <h2 data-i18n="tocTitle">Explora los artículos</h2>
+        <ul>
+          <li><a href="#primeras-frases" data-i18n="tocArticle1">Cómo formar tus primeras frases en japonés</a></li>
+          <li><a href="#orden-sov" data-i18n="tocArticle2">El secreto del orden SOV</a></li>
+          <li><a href="#particulas" data-i18n="tocArticle3">Guía sencilla de partículas は, が y を</a></li>
+        </ul>
+        <p class="highlight-box" data-i18n="tocNote">Cada guía termina con ejercicios prácticos y un enlace directo a Japanify para seguir entrenando.</p>
+      </div>
+    </section>
+
+    <section class="post-list">
+      <article class="post" id="primeras-frases">
+        <header>
+          <span class="post-meta" data-i18n="article1Meta">Gramática básica · Lectura de 9 minutos</span>
+          <h2>Cómo Formar tus Primeras Frases en Japonés (Sin Odiar la Gramática)</h2>
+        </header>
+        <div class="post-content">
+          <p>La palabra <strong>“Gramática”</strong> asusta. Suena a libros de texto polvorientos, a reglas raras, a profesores señalando con una vara la pizarra.</p>
+          <p>Si ahora mismo sabes <strong>Hiragana</strong>, algunas palabras sueltas, pero en cuanto oyes “gramática” tu cerebro dice: <em>“no, por favor, eso no”</em>… te entiendo perfectamente.</p>
+          <p>Pero, ¿y si te digo algo? Para formar tus <strong>primeras frases útiles en japonés</strong> no necesitas “estudiar gramática” como en el colegio. Solo necesitas aprender un par de <strong>fórmulas muy simples</strong>, como si fueran <strong>recetas</strong> o <strong>bloques de Lego</strong>.</p>
+          <p>Hoy vamos a armar esos primeros Legos juntos. Sin miedo, sin tecnicismos, paso a paso.</p>
+          <hr />
+          <h3>1. La Fórmula Mágica #1 – La Frase “A es B” (X wa Y desu)</h3>
+          <p>Esta es, probablemente, la estructura <strong>más importante</strong> de todo el japonés. Con ella puedes presentarte, decir qué es algo, de dónde es alguien… muchísimo.</p>
+          <p>La fórmula es:</p>
+          <blockquote><strong>X wa Y desu</strong><br />(A es B)</blockquote>
+          <p>Vamos a verla como si fueran <strong>tres bloques de Lego</strong>:</p>
+          <h4>Bloque 1: [Quién / Qué] + は (<em>wa</em>)</h4>
+          <p>Es el <strong>tema</strong> de la frase. Se puede entender como “Hablando de…”.</p>
+          <ul>
+            <li>わたしは (<em>watashi wa</em>) → “Hablando de mí / Yo…”</li>
+            <li>これは (<em>kore wa</em>) → “Hablando de esto…”</li>
+            <li>田中さんは (<em>Tanaka-san wa</em>) → “Hablando del Sr. Tanaka…”</li>
+          </ul>
+          <h4>Bloque 2: [Qué es] (sustantivo)</h4>
+          <p>Es la “identidad”: estudiante, japonés, libro, profesor…</p>
+          <ul>
+            <li>学生 (<em>gakusei</em>) → estudiante</li>
+            <li>本 (<em>hon</em>) → libro</li>
+            <li>日本人 (<em>nihonjin</em>) → japonés (persona)</li>
+          </ul>
+          <h4>Bloque 3: です (<em>desu</em>)</h4>
+          <p>Es el “es / soy / eres / son” <strong>educado</strong> que cierra la frase. No te líes con tiempos todavía. Solo piensa: <em>desu</em> = el ladrillo final que hace que la frase suene educada y completa.</p>
+          <p>Juntando los bloques, tenemos:</p>
+          <p><strong>Ejemplo 1</strong><br />
+          わたしは学生です。<br /><em>watashi wa gakusei desu</em><br />“Yo soy estudiante.”</p>
+          <p><strong>Ejemplo 2</strong><br />
+          これは本です。<br /><em>kore wa hon desu</em><br />“Esto es un libro.”</p>
+          <p><strong>Ejemplo 3</strong><br />
+          田中さんは日本人です。<br /><em>Tanaka-san wa nihonjin desu</em><br />“El Sr. Tanaka es japonés.”</p>
+          <p>Si entiendes esta fórmula, <strong>ya puedes decir muchísimo</strong>. Y fíjate: no hemos hablado de 20 reglas gramaticales. Solo de <strong>3 bloques</strong>.</p>
+          <h3>2. La Fórmula Mágica #2 – La Frase de Acción “A hace B” (X wa Y o Verbo)</h3>
+          <p>Vamos con la segunda gran estructura: cuando quieres decir que <strong>alguien hace algo</strong>.</p>
+          <p>La fórmula es:</p>
+          <blockquote><strong>X wa Y を verbo</strong><br />(A hace B)</blockquote>
+          <p>Otra vez, lo vemos como <strong>tres bloques</strong>:</p>
+          <ol>
+            <li><strong>Bloque 1:</strong> [Quién] + は (<em>wa</em>)</li>
+            <li><strong>Bloque 2:</strong> [Qué] + を (<em>o</em>)</li>
+            <li><strong>Bloque 3:</strong> [Verbo] (al final)</li>
+          </ol>
+          <p>Muy importante: <strong>El verbo siempre va al final.</strong> Es el ladrillo final que cierra la estructura de acción.</p>
+          <p><strong>Ejemplo 1</strong><br />
+          わたしはごはんを食べます。<br /><em>watashi wa gohan o tabemasu</em><br />“Yo como arroz / comida.”</p>
+          <p><strong>Ejemplo 2</strong><br />
+          マリアさんは映画を見ます。<br /><em>Maria-san wa eiga o mimasu</em><br />“María ve una película.”</p>
+          <p><strong>Ejemplo 3</strong><br />
+          わたしは水を飲みます。<br /><em>watashi wa mizu o nomimasu</em><br />“Yo bebo agua.”</p>
+          <p>Con esta segunda fórmula ya puedes decir qué comes, qué ves, qué bebes, qué estudias. Y de nuevo, no hemos ido a una lista infinita de reglas.</p>
+          <h3>3. El Siguiente Paso (¡Ya Sabes Gramática!)</h3>
+          <p>Con estas dos fórmulas has aprendido gran parte del <strong>esqueleto del japonés</strong>. Todo lo demás (adjetivos, lugares, tiempo) son simplemente <strong>más bloques</strong> que se añaden.</p>
+          <div class="highlight-box">
+            <strong>Recuerda:</strong> casi todas las frases básicas encajan en uno de estos patrones:
+            <ul>
+              <li>Alguien <strong>es</strong> algo → X は Y です</li>
+              <li>Alguien <strong>hace</strong> algo → X は Y を verbo</li>
+            </ul>
+          </div>
+          <p>Si puedes ver la gramática como <strong>bloques</strong> y <strong>recetas</strong>, deja de ser ese monstruo llamado “gramática” y se convierte en un juego de construir.</p>
+          <h3>4. De “Sé la Fórmula” a “Me Sale Automático”</h3>
+          <p>El truco no es <strong>saber</strong> estas fórmulas. El truco es que tu cerebro las use <strong>en automático</strong>. Muchas apps te tiran frases al azar o 50 reglas de golpe. Tú solo querías algo simple.</p>
+          <p>Por eso diseñé <strong>Japanify</strong> justo con esta idea: no empezar con una tormenta de reglas, sino con <strong>fórmulas claras</strong> y <strong>bloques ordenados</strong>, como los que acabas de ver.</p>
+          <ul>
+            <li>Empieza con la fórmula X は Y です y practícala con ejemplos y minijuegos.</li>
+            <li>Luego pasas a X は Y を verbo con ejercicios guiados.</li>
+          </ul>
+          <p>Es una <strong>ruta paso a paso</strong>, como un entrenador que te dice qué trabajar cada día.</p>
+          <h3>5. Tu Primer Pasito Hoy</h3>
+          <p>Si has leído hasta aquí, ya no eres “principiante total”. Ahora toca practicar hasta que estas fórmulas salgan solas. Puedes empezar hoy mismo con la versión gratuita de Japanify.</p>
+          <p><a href="https://play.google.com/store/apps/details?id=com.shiruacademy.japanify" target="_blank" rel="noopener">Descarga Japanify en Google Play</a> y empieza a practicar con lecciones y minijuegos diseñados para que pases del miedo a la gramática a disfrutar de construir frases.</p>
+        </div>
+      </article>
+
+      <article class="post" id="orden-sov">
+        <header>
+          <span class="post-meta" data-i18n="article2Meta">Gramática intermedia · Lectura de 8 minutos</span>
+          <h2>El Secreto de la Gramática Japonesa: Por Qué “Sujeto-Objeto-Verbo” No Es Tan Difícil</h2>
+        </header>
+        <div class="post-content">
+          <p>Imagina que intentas decir “Yo como una manzana” en japonés… y de repente tu cerebro te suelta algo como <strong>“Yo manzana como”</strong>. Te quedas mirando la frase pensando: ¿por qué está todo al revés?</p>
+          <p>Si sientes ese pequeño mareo mental cada vez que intentas montar una frase, es totalmente normal. No es que seas malo con los idiomas, es que tu cerebro lleva toda la vida funcionando con otro orden.</p>
+          <p>La buena noticia es que no es <em>difícil</em>, es <strong>diferente</strong>. Y el mayor enemigo no es el japonés, sino el hábito de traducir <strong>palabra por palabra</strong>. Hoy verás un truco mental para que el orden japonés <strong>SOV</strong> deje de sentirse como un rompecabezas.</p>
+          <hr />
+          <h3>1. Por Qué Tu Cerebro Sufre (El Choque SVO vs. SOV)</h3>
+          <p>En español usamos normalmente el orden <strong>SVO (Sujeto–Verbo–Objeto)</strong>: “Yo como manzanas”. En japonés, el orden básico es <strong>SOV (Sujeto–Objeto–Verbo)</strong>: わたしはりんごを食べます。</p>
+          <p>Quédate con esta idea, porque es la <strong>regla de oro</strong>:</p>
+          <div class="highlight-box"><strong>En japonés, el verbo SIEMPRE va al final.</strong></div>
+          <p>Con ejemplos sencillos verás que el patrón se repite en cualquier frase básica.</p>
+          <h3>2. El “Secreto”: No Traduzcas Palabras, Mueve “Bloques”</h3>
+          <p>El error más común es intentar traducir palabra por palabra. La clave está en pensar en <strong>bloques de información</strong>. Gracias a las <strong>partículas</strong> (como は y を), el japonés marca qué función tiene cada bloque en la frase.</p>
+          <p>Visualízalo así:</p>
+          <ul>
+            <li>[Sujeto/Tema]＋[Objeto]＋[Verbo]</li>
+            <li>わたしは ＋ りんごを ＋ 食べます</li>
+          </ul>
+          <p>Las partículas actúan como etiquetas: は señala el tema, を señala la “víctima” del verbo. Incluso puedes mover bloques siempre que mantengas el verbo al final y las partículas pegadas.</p>
+          <h3>3. Cómo Entrenar tu Cerebro para Pensar en SOV</h3>
+          <p>Leer teoría no es suficiente. Tu cerebro solo cambia cuando <strong>practicas</strong>. El ejercicio más potente es reordenar bloques: te damos las palabras mezcladas y tienes que colocarlas como en japonés.</p>
+          <p>Ejemplo:</p>
+          <p class="highlight-box">わたしは / 食べます / りんごを → わたしはりんごを食べます。</p>
+          <p>Repitiendo este tipo de ejercicios, el orden SOV deja de ser raro y se vuelve familiar.</p>
+          <h3>4. De la Teoría a la Práctica: Japanify como Atajo</h3>
+          <p>Muchas apps se quedan en traducir o elegir la opción correcta. En <strong>Japanify</strong> incluimos minijuegos de <strong>“construir oraciones”</strong> para que reordenes bloques con partículas y fijes el patrón SOV sin darte cuenta.</p>
+          <ul>
+            <li>Recibes bloques etiquetados con は, を, が…</li>
+            <li>Tienes que cerrar la frase colocando el verbo al final.</li>
+            <li>Ves de inmediato si tu orden es natural o no.</li>
+          </ul>
+          <p>Así tu cerebro reconfigura un “modo japonés” separado del español.</p>
+          <h3>5. Tu Siguiente Paso</h3>
+          <p>Ya entiendes el problema y tienes una forma nueva de mirar el japonés: el orden es otro sistema, las partículas son etiquetas y necesitas práctica guiada.</p>
+          <p>Empieza hoy con los minijuegos de reordenar palabras descargando <a href="https://play.google.com/store/apps/details?id=com.shiruacademy.japanify" target="_blank" rel="noopener">Japanify en Google Play</a>. Pocas sesiones bastan para que el orden SOV se convierta en tu nueva normalidad.</p>
+        </div>
+      </article>
+
+      <article class="post" id="particulas">
+        <header>
+          <span class="post-meta" data-i18n="article3Meta">Gramática esencial · Lectura de 10 minutos</span>
+          <h2>La Guía Más Sencilla de Partículas Japonesas: Qué son <em>wa</em> (は), <em>ga</em> (が) y <em>wo</em> (を)</h2>
+        </header>
+        <div class="post-content">
+          <p>Si alguna vez has pensado “Entiendo los kanas… pero en cuanto salen は y が mi cerebro hace cortocircuito”, te prometo que no estás solo. Las partículas son, probablemente, la parte más frustrante del japonés.</p>
+          <p>En esta guía verás que no son palabras mágicas imposibles, sino <strong>etiquetas</strong> que le pegas a las partes de la frase. Si cambias esa forma de pensar, <em>wa</em>, <em>ga</em> y <em>wo</em> empiezan a tener sentido.</p>
+          <hr />
+          <h3>1. ¿Qué es una “partícula” realmente?</h3>
+          <p>En español usamos <strong>preposiciones</strong> que van antes de la palabra (“voy <em>a</em> casa”). En japonés ocurre lo contrario: las marcas importantes van <strong>después</strong>. Por eso hablamos de <strong>post-posiciones</strong> o, más simple, partículas.</p>
+          <p>Piensa en ellas como <strong>post-its</strong> que indican la función de cada bloque:</p>
+          <ul>
+            <li>Este es el <strong>tema</strong> → は</li>
+            <li>Este es el <strong>sujeto nuevo/importante</strong> → が</li>
+            <li>Esta es la <strong>víctima del verbo</strong> → を</li>
+          </ul>
+          <h3>2. El Gran Combate: <em>wa</em> (は) vs <em>ga</em> (が)</h3>
+          <p>Imagina una obra de teatro. El <strong>FOCO DEL ESCENARIO</strong> señala de qué estamos hablando en este momento; el <strong>ACTOR</strong> es quien hace la acción o trae información nueva.</p>
+          <p>En japonés:</p>
+          <ul>
+            <li><strong>は (wa)</strong> = foco del escenario → el <strong>tema</strong> de la frase.</li>
+            <li><strong>が (ga)</strong> = actor → el <strong>sujeto</strong>, normalmente información nueva o importante.</li>
+          </ul>
+          <p>Ejemplos:</p>
+          <ul>
+            <li>わたしは学生です。 → “En cuanto a mí, soy estudiante.”</li>
+            <li>ねこが好きです。 → “Los que me gustan son los gatos.”</li>
+            <li>このケーキはわたしが作りました。 → “Este pastel, lo hice yo.”</li>
+          </ul>
+          <p>Quédate con la metáfora: <strong>は</strong> enciende la luz sobre el tema, <strong>が</strong> destaca quién actúa.</p>
+          <h3>3. El Sencillo: <em>wo</em> (を) – la “víctima del verbo”</h3>
+          <p><em>Wo</em> se pronuncia simplemente “o” y marca el <strong>objeto directo</strong>, es decir, la “víctima” de la acción.</p>
+          <ul>
+            <li>パンを食べます。 → “Como pan.”</li>
+            <li>日本語を勉強します。 → “Estudio japonés.”</li>
+            <li>映画を見ます。 → “Veo una película.”</li>
+          </ul>
+          <p>Pregúntate: “¿Qué cosa sufre la acción?” Esa palabra lleva を.</p>
+          <h3>4. Y ahora, ¿cómo hago para que no se me olvide mañana?</h3>
+          <p>Puedes leer esta explicación veinte veces… y aun así sentir dentro de una semana que se te olvidó todo. No es culpa tuya: la teoría sin práctica guiada se evapora.</p>
+          <p>Necesitas <strong>repetición útil</strong> y contexto real para que tu cerebro lo asimile. Memorizar “wa = tema” no te ayuda cuando ves una frase larga si no lo has aplicado antes.</p>
+          <h3>5. Cómo Japanify te ayuda con <em>wa</em>, <em>ga</em> y <em>wo</em></h3>
+          <p>Cuando diseñé <strong>Japanify</strong>, pensé justo en este problema: no solo darte la teoría, sino ayudarte a <strong>usar</strong> las partículas en frases reales.</p>
+          <ul>
+            <li>Lecciones paso a paso que introducen cada partícula con ejemplos claros.</li>
+            <li>Minijuegos para ordenar palabras, completar huecos y reconocer funciones.</li>
+            <li>Actividades de lectura rápida para identificar qué etiqueta lleva cada bloque.</li>
+          </ul>
+          <h3>6. Tu siguiente paso</h3>
+          <p>Ya sabes que las partículas son etiquetas y que は ilumina el tema, が destaca al actor y を señala el objeto directo. Ahora toca practicar.</p>
+          <p>Puedes probar la versión gratuita de <a href="https://play.google.com/store/apps/details?id=com.shiruacademy.japanify" target="_blank" rel="noopener">Japanify en Google Play</a> y dejar que los minijuegos hagan que は, が y を se sientan naturales.</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="cta-banner">
+      <h2 data-i18n="ctaTitle">Practica lo que leíste con los minijuegos de Japanify</h2>
+      <p data-i18n="ctaSubtitle">Refuerza fórmulas, orden SOV y partículas con ejercicios interactivos que convierten cada guía en resultados reales.</p>
+      <div class="btn-group">
+        <a href="https://play.google.com/store/apps/details?id=com.shiruacademy.japanify" class="btn-primary" target="_blank" rel="noopener" data-i18n="ctaPrimaryCta">Descargar Japanify</a>
+        <a href="index.html#features" class="btn-secondary" data-i18n="ctaSecondaryCta">Ver funcionalidades de la app</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <a href="privacy-policy.html" data-i18n="privacy">Política de privacidad</a> · &copy; 2025 Japanify
+  </footer>
+
+  <script src="i18n.js"></script>
+  <script>
+    applyTranslations('blog');
+  </script>
+</body>
+</html>
