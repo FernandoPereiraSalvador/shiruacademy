@@ -546,6 +546,118 @@
       text-decoration:underline;
     }
 
+    /* Ajustes responsivos */
+    @media (max-width:1080px) {
+      .page {
+        padding:18px 18px 64px;
+        gap:90px;
+      }
+      .site-nav {
+        padding:14px 18px;
+        gap:18px;
+      }
+      .hero {
+        grid-template-columns:repeat(12, 1fr);
+        gap:28px;
+        text-align:center;
+      }
+      .hero-copy,
+      .hero-visual {
+        grid-column:span 12;
+      }
+      .hero-copy {
+        align-items:center;
+      }
+      .hero-actions {
+        justify-content:center;
+      }
+      .hero-pet-image {
+        width:100%;
+        max-width:440px;
+      }
+      .preview-card {
+        padding:36px;
+        max-width:320px;
+      }
+      section {
+        gap:18px;
+      }
+      .section-heading {
+        align-items:center;
+        text-align:center;
+      }
+    }
+
+    @media (max-width:760px) {
+      body {
+        background:var(--bg);
+      }
+      .site-nav {
+        flex-direction:column;
+        align-items:flex-start;
+      }
+      .nav-links {
+        flex-wrap:wrap;
+        gap:14px;
+      }
+      .nav-cta {
+        width:100%;
+        justify-content:center;
+      }
+      .page {
+        padding:18px 14px 56px;
+        gap:72px;
+      }
+      .hero {
+        padding-top:48px;
+      }
+      .hero-copy {
+        gap:18px;
+      }
+      .hero h1 {
+        font-size:clamp(32px, 9vw, 40px);
+      }
+      .hero p {
+        font-size:16px;
+        line-height:1.6;
+      }
+      .hero-actions {
+        flex-direction:column;
+      }
+      .btn-primary, .btn-secondary {
+        width:100%;
+        justify-content:center;
+      }
+      .preview-card {
+        width:100%;
+        max-width:none;
+      }
+      .showcase, .cta-banner {
+        padding:32px 24px;
+      }
+      .section-heading p,
+      .blog-card p,
+      .benefit-card span,
+      .feature-card span {
+        font-size:16px;
+      }
+      .metrics,
+      .feature-grid,
+      .benefit-grid,
+      .blog-grid,
+      .difference-grid,
+      .testimonials-grid {
+        gap:16px;
+      }
+      .testimonial {
+        font-size:16px;
+        padding:24px;
+      }
+      .cta-banner h2 {
+        font-size:clamp(26px, 7vw, 34px);
+      }
+    }
+
     /* BOTÓN PORTFOLIO FLOTANTE */
     .portfolio-btn {
       position:fixed;
