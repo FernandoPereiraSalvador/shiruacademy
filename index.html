@@ -117,11 +117,15 @@
       letter-spacing:0.04em;
     }
     .brand img {
-      width:44px;
-      height:44px;
-      border-radius:50%;
-      box-shadow:0 12px 28px rgba(60,114,98,0.25);
-    }
+  width:44px;
+  height:44px;
+  border-radius:14px;              /* <- cuadrado redondeado */
+  box-shadow:0 12px 28px rgba(60,114,98,0.25);
+  object-fit:cover;
+  background:#fff;                 /* <- por si el PNG tiene transparencia */
+  padding:4px;                     /* <- efecto “icono” */
+}
+
     .brand span {
       color:#ffffff;
     }
