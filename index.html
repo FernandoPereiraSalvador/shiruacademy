@@ -764,6 +764,16 @@
         justify-content:center;
       }
     }
+    /* Instagram needs wider cards, embeds have big min width */
+.instagram-grid{
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+}
+
+@media (max-width: 900px){
+  .instagram-grid{
+    grid-template-columns: 1fr; /* 1 columna en pantallas medianas/pequeñas */
+  }
+}
   </style>
 </head>
 <body>
@@ -776,7 +786,7 @@
       <div class="nav-links">
         <a href="#features" data-i18n="navFeatures">Funcionalidades</a>
         <a href="#benefits" data-i18n="navBenefits">Beneficios</a>
-        <a href="blog.html" data-i18n="navBlog">Blog</a>
+        <a href="#blog" data-i18n="navBlog">Blog</a>
       </div>
       <a href="https://play.google.com/store/apps/details?id=com.shiruacademy.japanify" class="nav-cta" target="_blank" rel="noopener" data-i18n="navDownload">Descargar la app</a>
     </nav>
@@ -889,28 +899,16 @@
 
     <section class="blog" id="blog">
       <div class="section-heading">
-        <h2 data-i18n="blogTitle">Blog: aprende más allá de la app</h2>
-        <p data-i18n="blogSubtitle">Consejos de estudio, guías gramaticales y recursos gratuitos para acompañar tu camino hacia la fluidez.</p>
+        <h2 id="socialTitle">Instagram</h2>
+        <p id="socialSubtitle">Posts cortos con trucos, vocabulario y gramática básica.</p>
       </div>
-      <div class="blog-grid">
-        <div class="blog-card">
-          <h3 data-i18n="blogPost1Title">Cómo formar tus primeras frases en japonés</h3>
-          <p data-i18n="blogPost1Excerpt">Aprende las dos fórmulas clave (X wa Y desu y X wa Y o verbo) y úsalo como bloques de Lego.</p>
-          <a href="blog/como-formar-tus-primeras-frases.html" data-i18n="blogReadMore">Leer artículo</a>
-        </div>
-        <div class="blog-card">
-          <h3 data-i18n="blogPost2Title">El orden SOV ya no da miedo</h3>
-          <p data-i18n="blogPost2Excerpt">Descubre el truco mental para pensar en bloques y acostumbrarte al verbo al final sin sufrir.</p>
-          <a href="blog/el-secreto-del-orden-sov.html" data-i18n="blogReadMore">Leer artículo</a>
-        </div>
-        <div class="blog-card">
-          <h3 data-i18n="blogPost3Title">Partículas wa, ga y wo sin complicaciones</h3>
-          <p data-i18n="blogPost3Excerpt">Entiende qué etiqueta aporta cada partícula y cómo usarlas sin memorizar reglas infinitas.</p>
-          <a href="blog/guia-particulas-wa-ga-wo.html" data-i18n="blogReadMore">Leer artículo</a>
-        </div>
-      </div>
-      <div class="blog-actions">
-        <a href="blog.html" class="btn-secondary" data-i18n="blogButton">Ver todos los artículos</a>
+
+      <div id="instagramFeed" class="blog-grid instagram-grid"></div>
+
+      <div class="blog-actions" style="margin-top: 18px;">
+        <a id="instagramProfileLink" class="btn-secondary" href="https://www.instagram.com/japanify_es/" target="_blank" rel="noopener noreferrer">
+          Ver perfil en Instagram
+        </a>
       </div>
     </section>
 
@@ -918,14 +916,13 @@
       <h2 data-i18n="ctaTitle">Da el siguiente paso hacia tu fluidez en japonés</h2>
       <p data-i18n="ctaSubtitle">Súmate a otros estudiantes que ya están aprendiendo con Japanify. Descarga la app y empieza a practicar hoy mismo.</p>
       <div class="btn-group">
-        <a href="https://play.google.com/store/apps/details?id=com.shiruacademy.japanify" class="btn-primary" target="_blank" rel="noopener" data-i18n="ctaPrimaryCta">Descargar Japanify</a>
-        <a href="blog.html" class="btn-secondary" data-i18n="ctaSecondaryCta">Visitar el blog</a>
+        <a href="https://play.google.com/store/apps/details?id=com.shiruacademy.japanify" class="nav-cta" target="_blank" rel="noopener" data-i18n="navDownload">Descargar Japanify</a>
       </div>
     </section>
   </main>
 
   <footer>
-    <a href="privacy-policy.html" data-i18n="privacy">Política de privacidad</a> · &copy; 2025 Japanify
+    <a href="privacy-policy.html" data-i18n="privacy">Política de privacidad</a> · &copy; 2026 Japanify
   </footer>
 
   <!-- Botón flotante portafolio + diálogo -->
@@ -944,6 +941,66 @@
   <script>
     applyTranslations('index');
 
+    // --- Instagram embeds (ES/EN) ---
+    const lang = (document.documentElement.lang || navigator.language || 'en').toLowerCase();
+    const isSpanish = lang.startsWith('es');
+
+    const profileUrl = isSpanish
+      ? 'https://www.instagram.com/japanify_es/'
+      : 'https://www.instagram.com/japanify_en/';
+
+    const postsEs = [
+      'https://www.instagram.com/p/DVJcFxVjJsl/',
+      'https://www.instagram.com/p/DVJd8rPDIxK/',
+      'https://www.instagram.com/p/DVJeJuWDK2K/',
+      'https://www.instagram.com/p/DVJeSvhDCXp/',
+      'https://www.instagram.com/p/DVJkmeyDHH0/',
+      'https://www.instagram.com/p/DVJmfRpDKQN/'
+    ];
+
+    const postsEn = [
+      'https://www.instagram.com/p/DVJcxNgDa3q/',
+      'https://www.instagram.com/p/DVJerM1jepg/',
+      'https://www.instagram.com/p/DVJe9QyjSCa/',
+      'https://www.instagram.com/p/DVJfNVTDXJI/',
+      'https://www.instagram.com/p/DVJk4utDfnX/',
+      'https://www.instagram.com/p/DVJmzoBjWYT/'
+    ];
+
+    // Actualiza textos según idioma (sin tocar tu i18n.js)
+    const subEl = document.getElementById('socialSubtitle');
+    const btnEl = document.getElementById('instagramProfileLink');
+    if (subEl) subEl.textContent = isSpanish
+      ? 'Posts cortos con trucos, vocabulario y gramática básica.'
+      : 'Short posts with tips, vocabulary and basic grammar.';
+    if (btnEl) {
+      btnEl.href = profileUrl;
+      btnEl.textContent = isSpanish ? 'Ver perfil en Instagram' : 'View Instagram profile';
+    }
+
+    const posts = isSpanish ? postsEs : postsEn;
+    const feed = document.getElementById('instagramFeed');
+    if (feed) {
+      feed.innerHTML = posts.map(url => `
+        <div class="blog-card">
+          <blockquote class="instagram-media"
+            data-instgrm-permalink="${url}"
+            data-instgrm-version="14"
+            style="margin:0; width:100%;">
+          </blockquote>
+        </div>
+      `).join('');
+    }
+
+    // Procesa embeds cuando el script de Instagram esté listo
+    const tryProcess = () => {
+      if (window.instgrm?.Embeds?.process) window.instgrm.Embeds.process();
+      else setTimeout(tryProcess, 300);
+    };
+    tryProcess();
+    // --- /Instagram embeds ---
+
+
     const btn    = document.getElementById('portfolioBtn');
     const dialog = document.getElementById('portfolioDialog');
     const close  = document.getElementById('closeDialog');
@@ -959,5 +1016,6 @@
     close.addEventListener('click', hideDialog);
     dialog.addEventListener('cancel', hideDialog);
   </script>
+  <script async src="https://www.instagram.com/embed.js"></script>
 </body>
 </html>
