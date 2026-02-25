@@ -21,6 +21,9 @@ const translations = {
       heroStat3Value: "5★",
       heroStat3Label: "Valoración media en Google Play",
 
+      videoTitle: "Mira Japanify en acción",
+      videoSubtitle: "Un recorrido rápido por los minijuegos, la gramática y el repaso inteligente.",
+
       featuresTitle: "Todo lo que necesitas para avanzar",
       featuresSubtitle: "Diseñamos Japanify junto a profesores certificados y estudiantes reales para que cada sesión sea clara, motivadora y fácil de retomar.",
       feature1Title: "Minijuegos interactivos",
@@ -169,6 +172,9 @@ const translations = {
       heroStat2Label: "Users improve within the first 4 weeks",
       heroStat3Value: "4.8★",
       heroStat3Label: "Average rating on Google Play",
+
+      videoTitle: "Watch Japanify in action",
+      videoSubtitle: "A quick tour of mini-games, grammar, and smart spaced review.",
 
       featuresTitle: "Everything you need to move forward",
       featuresSubtitle: "We designed Japanify with certified teachers and real students so every session is clear, motivating, and easy to come back to.",
