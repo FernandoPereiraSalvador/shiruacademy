@@ -1117,6 +1117,75 @@
       }
     }
 
+
+    .language-select-wrap{
+      position:relative;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding:6px 10px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:rgba(255,255,255,.68);
+      box-shadow:0 10px 24px rgba(80,45,26,.05);
+      color:var(--muted);
+      font-size:14px;
+      font-weight:800;
+    }
+
+    .language-select-wrap span{
+      font-size:15px;
+      line-height:1;
+    }
+
+    .language-select{
+      appearance:none;
+      border:none;
+      outline:none;
+      background:transparent;
+      color:var(--ink);
+      font:inherit;
+      cursor:pointer;
+      padding:4px 22px 4px 2px;
+    }
+
+    .language-select-wrap::after{
+      content:"⌄";
+      position:absolute;
+      right:10px;
+      top:50%;
+      transform:translateY(-56%);
+      color:var(--muted);
+      pointer-events:none;
+      font-size:14px;
+    }
+
+    .nav-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    @media (max-width:720px){
+      .nav-actions{
+        width:100%;
+        flex-direction:column;
+        align-items:stretch;
+      }
+
+      .language-select-wrap{
+        width:100%;
+        justify-content:center;
+      }
+
+      .language-select{
+        width:100%;
+        text-align:center;
+      }
+    }
+
   </style>
 </head>
 
@@ -1131,10 +1200,24 @@
       <div class="nav-links">
         <a href="#features" data-i18n="navFeatures">Funcionalidades</a>
         <a href="#benefits" data-i18n="navBenefits">Beneficios</a>
-        <a href="#instagram">Instagram</a>
+        <a href="#instagram" data-i18n="navInstagram">Instagram</a>
       </div>
 
-      <a href="https://play.google.com/store/apps/details?id=com.shiruacademy.japanify" class="nav-cta" target="_blank" rel="noopener" data-i18n="navDownload">Descargar la app</a>
+      <div class="nav-actions">
+        <label class="language-select-wrap" for="languageSelect" aria-label="Seleccionar idioma">
+          <span aria-hidden="true">🌐</span>
+          <select id="languageSelect" class="language-select">
+            <option value="es-ES">Español</option>
+            <option value="en-GB">English</option>
+            <option value="fr-FR">Français</option>
+            <option value="ko-KR">한국어</option>
+            <option value="zh-CN">简体中文</option>
+            <option value="de-DE">Deutsch</option>
+            <option value="ru-RU">Русский</option>
+          </select>
+        </label>
+        <a href="https://play.google.com/store/apps/details?id=com.shiruacademy.japanify" class="nav-cta" target="_blank" rel="noopener" data-i18n="navDownload">Descargar la app</a>
+      </div>
     </nav>
   </header>
 
@@ -1159,7 +1242,7 @@
         </div>
         <div class="floating-card float-b">
           <strong>毎日</strong>
-          <span>Practica japonés un poco cada día</span>
+          <span data-i18n="dailyPracticeLabel">Practica japonés un poco cada día</span>
         </div>
       </div>
     </section>
@@ -1177,7 +1260,7 @@
 
     <section id="features">
       <div class="section-heading center">
-        <span class="section-kicker">Japanify preview</span>
+        <span class="section-kicker" data-i18n="previewLabel">Japanify preview</span>
         <h2 data-i18n="videoTitle">Mira Japanify en acción</h2>
         <p data-i18n="videoSubtitle">Un recorrido rápido por los minijuegos, la gramática y el repaso inteligente.</p>
       </div>
@@ -1244,7 +1327,7 @@
 
     <section class="showcase">
       <div class="section-heading">
-        <span class="section-kicker">Kanji y vocabulario</span>
+        <span class="section-kicker" data-i18n="kanjiVocabLabel">Kanji y vocabulario</span>
         <h2 data-i18n="showcaseTitle">Domina los kanji paso a paso</h2>
         <p data-i18n="showcaseSubtitle">Japanify te ayuda a entender el significado, la lectura y el uso real de los kanji con ejercicios guiados y repaso inteligente.</p>
         <ul class="showcase-list">
@@ -1301,8 +1384,8 @@
 
     <section id="instagram" class="social-section">
       <div class="section-heading center">
-        <h2 id="socialTitle">Aprende japonés también en Instagram</h2>
-        <p id="socialSubtitle">Posts cortos con trucos, vocabulario y gramática básica.</p>
+        <h2 id="socialTitle" data-i18n="socialTitle">Aprende japonés también en Instagram</h2>
+        <p id="socialSubtitle" data-i18n="socialSubtitle">Posts cortos con trucos, vocabulario y gramática básica.</p>
       </div>
 
       <div id="instagramFeed" class="blog-grid instagram-grid"></div>
@@ -1334,65 +1417,612 @@
   <dialog id="promoDialog">
     <div class="promo-modal">
       <button class="promo-close" id="closePromoDialog" aria-label="Cerrar promoción">×</button>
-      <div class="promo-badge">Código de bienvenida</div>
-      <h2>90 días de Japanify Premium</h2>
-      <p>Usa este código promocional durante las próximas 24 horas y empieza a practicar japonés con todas las funciones premium.</p>
+      <div class="promo-badge" data-i18n="promoBadge">Código de bienvenida</div>
+      <h2 data-i18n="promoTitle">90 días de Japanify Premium</h2>
+      <p data-i18n="promoText">Usa este código promocional durante las próximas 24 horas y empieza a practicar japonés con todas las funciones premium.</p>
 
       <div class="promo-code-box">
-        <span class="promo-code-label">Tu código</span>
+        <span class="promo-code-label" data-i18n="promoCodeLabel">Tu código</span>
         <strong class="promo-code" id="promoCodeText">SHIRU90</strong>
       </div>
 
       <div class="promo-countdown" aria-label="Tiempo restante de la oferta">
         <div class="promo-time-part">
           <strong id="promoDays">00</strong>
-          <span>Días</span>
+          <span data-i18n="promoDaysLabel">Días</span>
         </div>
         <div class="promo-time-part">
           <strong id="promoHours">23</strong>
-          <span>Horas</span>
+          <span data-i18n="promoHoursLabel">Horas</span>
         </div>
         <div class="promo-time-part">
           <strong id="promoMinutes">59</strong>
-          <span>Min</span>
+          <span data-i18n="promoMinutesLabel">Min</span>
         </div>
         <div class="promo-time-part">
           <strong id="promoSeconds">59</strong>
-          <span>Seg</span>
+          <span data-i18n="promoSecondsLabel">Seg</span>
         </div>
       </div>
 
       <div class="promo-actions">
-        <button class="btn-primary" id="copyPromoCode" type="button">Copiar código</button>
-        <a class="btn-secondary" href="https://play.google.com/store/apps/details?id=com.shiruacademy.japanify" target="_blank" rel="noopener">Ir a Google Play</a>
+        <button class="btn-primary" id="copyPromoCode" type="button" data-i18n="promoCopyButton">Copiar código</button>
+        <a class="btn-secondary" href="https://play.google.com/store/apps/details?id=com.shiruacademy.japanify" target="_blank" rel="noopener" data-i18n="promoGooglePlay">Ir a Google Play</a>
       </div>
 
       <div class="promo-copy-feedback" id="promoCopyFeedback" aria-live="polite"></div>
-      <p class="promo-small">Si cierras esta ventana, puedes volver a abrir el código desde el botón flotante.</p>
+      <p class="promo-small" data-i18n="promoSmall">Si cierras esta ventana, puedes volver a abrir el código desde el botón flotante.</p>
     </div>
   </dialog>
 
   <script src="i18n.js"></script>
   <script>
-    if (typeof applyTranslations === 'function') applyTranslations('index');
+    const siteTranslations = {
+      "es-ES": {
+            "title": "Japanify – Aprende japonés con minijuegos",
+            "metaDescription": "Aprende japonés desde cero con Japanify, la app de minijuegos que te guía paso a paso en gramática, kanji y vocabulario hasta el JLPT N5.",
+            "brand": "Japanify",
+            "navFeatures": "Funcionalidades",
+            "navBenefits": "Beneficios",
+            "navInstagram": "Instagram",
+            "navDownload": "Descargar la app",
+            "heroTitle": "Domina el japonés con minijuegos inmersivos",
+            "heroSubtitle": "Japanify reúne minijuegos rápidos, práctica guiada y repaso inteligente de vocabulario y kanji para que estudiar japonés encaje fácil en tu día a día.",
+            "heroPrimaryCta": "Disponible en Google Play",
+            "heroSecondaryCta": "Explorar funcionalidades",
+            "heroStat2Value": "92%",
+            "heroStat2Label": "De usuarios mejora en las primeras 4 semanas",
+            "heroStat3Value": "5★",
+            "heroStat3Label": "Valoración media en Google Play",
+            "dailyPracticeLabel": "Practica japonés un poco cada día",
+            "previewLabel": "Japanify preview",
+            "videoTitle": "Mira Japanify en acción",
+            "videoSubtitle": "Un recorrido rápido por los minijuegos, la gramática y el repaso inteligente.",
+            "feature1Title": "Minijuegos interactivos",
+            "feature1Desc": "Practica vocabulario, lectura y escucha con quizzes, emparejar cartas y dictados interactivos.",
+            "feature2Title": "Lecciones estructuradas",
+            "feature2Desc": "Sigue unidades organizadas por temas y nivel, con explicaciones claras y ejemplos prácticos.",
+            "feature3Title": "Repetición espaciada de kana y kanji",
+            "feature3Desc": "Repasa hiragana, katakana y kanji justo cuando estás a punto de olvidarlos para fijarlos a largo plazo.",
+            "benefitsTitle": "Beneficios que sentirás desde el primer día",
+            "benefitsSubtitle": "El enfoque práctico de Japanify reduce la frustración inicial y crea hábitos consistentes de estudio.",
+            "benefit1Title": "Mejora tu comprensión del japonés",
+            "benefit1Desc": "Refuerza gramática y vocabulario con ejemplos claros y ejercicios basados en situaciones reales.",
+            "benefit2Title": "Habla con más seguridad",
+            "benefit2Desc": "Practica pronunciación y respuestas rápidas con ejercicios guiados por voz.",
+            "benefit3Title": "Estudia sin perder motivación",
+            "benefit3Desc": "Sesiones cortas, recompensas diarias y recordatorios positivos mantienen tu ritmo.",
+            "kanjiVocabLabel": "Kanji y vocabulario",
+            "showcaseTitle": "Domina los kanji paso a paso",
+            "showcaseSubtitle": "Japanify te ayuda a entender el significado, la lectura y el uso real de los kanji con ejercicios guiados y repaso inteligente.",
+            "showcaseBullet1": "Aprende kanji desde sus componentes básicos y significados clave.",
+            "showcaseBullet2": "Refuerza lecturas y vocabulario con minijuegos de reconocimiento y tarjetas.",
+            "showcaseBullet3": "Utiliza repaso espaciado para no olvidar los kanji que ya has estudiado.",
+            "differenceTitle": "El diferencial Japanify",
+            "differenceSubtitle": "La app combina pedagogía y entretenimiento para que estudiar japonés encaje en tu rutina.",
+            "differenceHighlight1": "Aprendizaje adaptativo",
+            "differenceHighlight1Desc": "El algoritmo detecta tus errores frecuentes y reordena el contenido para reforzarlo antes de avanzar.",
+            "differenceHighlight2": "Contenido en constante expansión",
+            "differenceHighlight2Desc": "Nuevas unidades temáticas cada mes: viajes, cultura pop, negocios y certificaciones JLPT.",
+            "differenceHighlight3": "Comunidad motivadora",
+            "differenceHighlight3Desc": "Eventos en vivo, rankings amistosos y retos colaborativos con estudiantes de todo el mundo.",
+            "testimonialsTitle": "Lo que dicen quienes ya aprenden con Japanify",
+            "testimonialsSubtitle": "Opiniones de usuarios sobre su experiencia con la app.",
+            "testimonial1Quote": "Muy buena, te enseña desde cero y es fácil de aprender.",
+            "testimonial1Author": "Usuario de Japanify en Google Play",
+            "testimonial2Quote": "Excelente. Muy buena app y divertida.",
+            "testimonial2Author": "Usuario de Japanify",
+            "socialTitle": "Aprende japonés también en Instagram",
+            "socialSubtitle": "Posts cortos con trucos, vocabulario y gramática básica.",
+            "instagramButton": "Ver perfil en Instagram",
+            "ctaTitle": "Da el siguiente paso hacia tu fluidez en japonés",
+            "ctaSubtitle": "Súmate a otros estudiantes que ya están aprendiendo con Japanify. Descarga la app y empieza a practicar hoy mismo.",
+            "ctaPrimaryCta": "Descargar Japanify",
+            "privacy": "Política de privacidad",
+            "promoBadge": "Código de bienvenida",
+            "promoTitle": "90 días de Japanify Premium",
+            "promoText": "Usa este código promocional durante las próximas 24 horas y empieza a practicar japonés con todas las funciones premium.",
+            "promoCodeLabel": "Tu código",
+            "promoDaysLabel": "Días",
+            "promoHoursLabel": "Horas",
+            "promoMinutesLabel": "Min",
+            "promoSecondsLabel": "Seg",
+            "promoCopyButton": "Copiar código",
+            "promoGooglePlay": "Ir a Google Play",
+            "promoSmall": "Si cierras esta ventana, puedes volver a abrir el código desde el botón flotante.",
+            "promoCopied": "Código copiado: SHIRU90",
+            "promoManual": "Copia manualmente el código: SHIRU90"
+      },
+      "en-GB": {
+            "title": "Japanify – Learn Japanese with mini-games",
+            "metaDescription": "Learn Japanese from scratch with Japanify, the mini-game app that guides you step by step through grammar, kanji, and vocabulary up to JLPT N5.",
+            "brand": "Japanify",
+            "navFeatures": "Features",
+            "navBenefits": "Benefits",
+            "navInstagram": "Instagram",
+            "navDownload": "Download the app",
+            "heroTitle": "Master Japanese with immersive mini-games",
+            "heroSubtitle": "Japanify brings together quick mini-games, guided practice, and smart vocabulary and kanji review so Japanese fits naturally into your day.",
+            "heroPrimaryCta": "Available on Google Play",
+            "heroSecondaryCta": "Explore features",
+            "heroStat2Value": "92%",
+            "heroStat2Label": "Users improve in the first 4 weeks",
+            "heroStat3Value": "5★",
+            "heroStat3Label": "Average rating on Google Play",
+            "dailyPracticeLabel": "Practise Japanese a little every day",
+            "previewLabel": "Japanify preview",
+            "videoTitle": "Watch Japanify in action",
+            "videoSubtitle": "A quick tour of the mini-games, grammar, and smart review.",
+            "feature1Title": "Interactive mini-games",
+            "feature1Desc": "Practise vocabulary, reading, and listening with quizzes, matching cards, and interactive dictation.",
+            "feature2Title": "Structured lessons",
+            "feature2Desc": "Follow units organised by topic and level, with clear explanations and practical examples.",
+            "feature3Title": "Spaced repetition for kana and kanji",
+            "feature3Desc": "Review hiragana, katakana, and kanji just before you forget them so they stick long term.",
+            "benefitsTitle": "Benefits you’ll feel from day one",
+            "benefitsSubtitle": "Japanify’s practical approach reduces early frustration and helps you build a consistent study habit.",
+            "benefit1Title": "Improve your Japanese comprehension",
+            "benefit1Desc": "Strengthen grammar and vocabulary with clear examples and exercises based on real situations.",
+            "benefit2Title": "Speak with more confidence",
+            "benefit2Desc": "Practise pronunciation and fast responses with guided voice exercises.",
+            "benefit3Title": "Study without losing motivation",
+            "benefit3Desc": "Short sessions, daily rewards, and positive reminders help you keep your rhythm.",
+            "kanjiVocabLabel": "Kanji and vocabulary",
+            "showcaseTitle": "Master kanji step by step",
+            "showcaseSubtitle": "Japanify helps you understand kanji meaning, readings, and real usage with guided exercises and smart review.",
+            "showcaseBullet1": "Learn kanji from their basic components and key meanings.",
+            "showcaseBullet2": "Reinforce readings and vocabulary with recognition mini-games and cards.",
+            "showcaseBullet3": "Use spaced review so you don’t forget the kanji you have already studied.",
+            "differenceTitle": "The Japanify difference",
+            "differenceSubtitle": "The app combines teaching and entertainment so Japanese study fits your routine.",
+            "differenceHighlight1": "Adaptive learning",
+            "differenceHighlight1Desc": "The algorithm detects your frequent mistakes and reorders content to reinforce it before you move on.",
+            "differenceHighlight2": "Constantly expanding content",
+            "differenceHighlight2Desc": "New thematic units every month: travel, pop culture, business, and JLPT certifications.",
+            "differenceHighlight3": "Motivating community",
+            "differenceHighlight3Desc": "Live events, friendly rankings, and collaborative challenges with learners around the world.",
+            "testimonialsTitle": "What learners say about Japanify",
+            "testimonialsSubtitle": "User opinions about their experience with the app.",
+            "testimonial1Quote": "Very good, it teaches you from scratch and is easy to learn with.",
+            "testimonial1Author": "Japanify user on Google Play",
+            "testimonial2Quote": "Excellent. A very good and fun app.",
+            "testimonial2Author": "Japanify user",
+            "socialTitle": "Learn Japanese on Instagram too",
+            "socialSubtitle": "Short posts with tips, vocabulary, and basic grammar.",
+            "instagramButton": "View Instagram profile",
+            "ctaTitle": "Take the next step toward Japanese fluency",
+            "ctaSubtitle": "Join other students already learning with Japanify. Download the app and start practising today.",
+            "ctaPrimaryCta": "Download Japanify",
+            "privacy": "Privacy policy",
+            "promoBadge": "Welcome code",
+            "promoTitle": "90 days of Japanify Premium",
+            "promoText": "Use this promotional code in the next 24 hours and start practising Japanese with all premium features.",
+            "promoCodeLabel": "Your code",
+            "promoDaysLabel": "Days",
+            "promoHoursLabel": "Hours",
+            "promoMinutesLabel": "Min",
+            "promoSecondsLabel": "Sec",
+            "promoCopyButton": "Copy code",
+            "promoGooglePlay": "Go to Google Play",
+            "promoSmall": "If you close this window, you can reopen the code from the floating button.",
+            "promoCopied": "Code copied: SHIRU90",
+            "promoManual": "Copy the code manually: SHIRU90"
+      },
+      "fr-FR": {
+            "title": "Japanify – Apprends le japonais avec des mini-jeux",
+            "metaDescription": "Apprends le japonais depuis zéro avec Japanify, l’application de mini-jeux qui te guide pas à pas en grammaire, kanji et vocabulaire jusqu’au JLPT N5.",
+            "brand": "Japanify",
+            "navFeatures": "Fonctionnalités",
+            "navBenefits": "Avantages",
+            "navInstagram": "Instagram",
+            "navDownload": "Télécharger l’app",
+            "heroTitle": "Maîtrise le japonais avec des mini-jeux immersifs",
+            "heroSubtitle": "Japanify réunit des mini-jeux rapides, de la pratique guidée et une révision intelligente du vocabulaire et des kanji pour intégrer le japonais à ton quotidien.",
+            "heroPrimaryCta": "Disponible sur Google Play",
+            "heroSecondaryCta": "Découvrir les fonctionnalités",
+            "heroStat2Value": "92%",
+            "heroStat2Label": "Des utilisateurs progressent durant les 4 premières semaines",
+            "heroStat3Value": "5★",
+            "heroStat3Label": "Note moyenne sur Google Play",
+            "dailyPracticeLabel": "Pratique un peu le japonais chaque jour",
+            "previewLabel": "Japanify preview",
+            "videoTitle": "Découvre Japanify en action",
+            "videoSubtitle": "Un aperçu rapide des mini-jeux, de la grammaire et de la révision intelligente.",
+            "feature1Title": "Mini-jeux interactifs",
+            "feature1Desc": "Pratique le vocabulaire, la lecture et l’écoute avec des quiz, des cartes à associer et des dictées interactives.",
+            "feature2Title": "Leçons structurées",
+            "feature2Desc": "Suis des unités organisées par thème et niveau, avec des explications claires et des exemples pratiques.",
+            "feature3Title": "Répétition espacée des kana et kanji",
+            "feature3Desc": "Révise hiragana, katakana et kanji au bon moment pour les retenir durablement.",
+            "benefitsTitle": "Des bénéfices dès le premier jour",
+            "benefitsSubtitle": "L’approche pratique de Japanify réduit la frustration initiale et t’aide à créer une vraie habitude d’étude.",
+            "benefit1Title": "Améliore ta compréhension du japonais",
+            "benefit1Desc": "Renforce grammaire et vocabulaire avec des exemples clairs et des exercices inspirés de situations réelles.",
+            "benefit2Title": "Parle avec plus d’assurance",
+            "benefit2Desc": "Travaille la prononciation et les réponses rapides avec des exercices vocaux guidés.",
+            "benefit3Title": "Étudie sans perdre ta motivation",
+            "benefit3Desc": "Sessions courtes, récompenses quotidiennes et rappels positifs t’aident à garder le rythme.",
+            "kanjiVocabLabel": "Kanji et vocabulaire",
+            "showcaseTitle": "Maîtrise les kanji étape par étape",
+            "showcaseSubtitle": "Japanify t’aide à comprendre le sens, les lectures et l’usage réel des kanji avec des exercices guidés et une révision intelligente.",
+            "showcaseBullet1": "Apprends les kanji à partir de leurs composants et sens clés.",
+            "showcaseBullet2": "Renforce lectures et vocabulaire avec des mini-jeux de reconnaissance et des cartes.",
+            "showcaseBullet3": "Utilise la répétition espacée pour ne pas oublier les kanji étudiés.",
+            "differenceTitle": "Ce qui rend Japanify différent",
+            "differenceSubtitle": "L’app combine pédagogie et divertissement pour faire entrer le japonais dans ta routine.",
+            "differenceHighlight1": "Apprentissage adaptatif",
+            "differenceHighlight1Desc": "L’algorithme repère tes erreurs fréquentes et réorganise le contenu pour les renforcer avant d’avancer.",
+            "differenceHighlight2": "Contenu en expansion constante",
+            "differenceHighlight2Desc": "De nouvelles unités thématiques chaque mois : voyage, pop culture, business et JLPT.",
+            "differenceHighlight3": "Communauté motivante",
+            "differenceHighlight3Desc": "Événements en direct, classements amicaux et défis collaboratifs avec des apprenants du monde entier.",
+            "testimonialsTitle": "Ce que disent les apprenants de Japanify",
+            "testimonialsSubtitle": "Avis d’utilisateurs sur leur expérience avec l’app.",
+            "testimonial1Quote": "Très bonne app, elle enseigne depuis zéro et facilite l’apprentissage.",
+            "testimonial1Author": "Utilisateur de Japanify sur Google Play",
+            "testimonial2Quote": "Excellente. Une très bonne app, amusante.",
+            "testimonial2Author": "Utilisateur de Japanify",
+            "socialTitle": "Apprends aussi le japonais sur Instagram",
+            "socialSubtitle": "Posts courts avec astuces, vocabulaire et grammaire de base.",
+            "instagramButton": "Voir le profil Instagram",
+            "ctaTitle": "Passe à l’étape suivante vers la fluidité en japonais",
+            "ctaSubtitle": "Rejoins les étudiants qui apprennent déjà avec Japanify. Télécharge l’app et commence à pratiquer aujourd’hui.",
+            "ctaPrimaryCta": "Télécharger Japanify",
+            "privacy": "Politique de confidentialité",
+            "promoBadge": "Code de bienvenue",
+            "promoTitle": "90 jours de Japanify Premium",
+            "promoText": "Utilise ce code promotionnel dans les prochaines 24 heures et commence à pratiquer le japonais avec toutes les fonctions premium.",
+            "promoCodeLabel": "Ton code",
+            "promoDaysLabel": "Jours",
+            "promoHoursLabel": "Heures",
+            "promoMinutesLabel": "Min",
+            "promoSecondsLabel": "Sec",
+            "promoCopyButton": "Copier le code",
+            "promoGooglePlay": "Aller sur Google Play",
+            "promoSmall": "Si tu fermes cette fenêtre, tu peux rouvrir le code avec le bouton flottant.",
+            "promoCopied": "Code copié : SHIRU90",
+            "promoManual": "Copie le code manuellement : SHIRU90"
+      },
+      "de-DE": {
+            "title": "Japanify – Japanisch lernen mit Minispielen",
+            "metaDescription": "Lerne Japanisch von Grund auf mit Japanify, der Minispiel-App, die dich Schritt für Schritt durch Grammatik, Kanji und Wortschatz bis JLPT N5 führt.",
+            "brand": "Japanify",
+            "navFeatures": "Funktionen",
+            "navBenefits": "Vorteile",
+            "navInstagram": "Instagram",
+            "navDownload": "App herunterladen",
+            "heroTitle": "Meistere Japanisch mit immersiven Minispielen",
+            "heroSubtitle": "Japanify verbindet schnelle Minispiele, geführtes Üben und intelligente Wiederholung von Wortschatz und Kanji, damit Japanisch leicht in deinen Alltag passt.",
+            "heroPrimaryCta": "Verfügbar bei Google Play",
+            "heroSecondaryCta": "Funktionen ansehen",
+            "heroStat2Value": "92%",
+            "heroStat2Label": "Nutzer verbessern sich in den ersten 4 Wochen",
+            "heroStat3Value": "5★",
+            "heroStat3Label": "Durchschnittsbewertung bei Google Play",
+            "dailyPracticeLabel": "Übe jeden Tag ein wenig Japanisch",
+            "previewLabel": "Japanify preview",
+            "videoTitle": "Sieh Japanify in Aktion",
+            "videoSubtitle": "Ein schneller Rundgang durch Minispiele, Grammatik und intelligente Wiederholung.",
+            "feature1Title": "Interaktive Minispiele",
+            "feature1Desc": "Übe Wortschatz, Lesen und Hören mit Quizzen, Kartenpaaren und interaktiven Diktaten.",
+            "feature2Title": "Strukturierte Lektionen",
+            "feature2Desc": "Folge Einheiten nach Thema und Niveau mit klaren Erklärungen und praktischen Beispielen.",
+            "feature3Title": "Spaced Repetition für Kana und Kanji",
+            "feature3Desc": "Wiederhole Hiragana, Katakana und Kanji genau dann, wenn du sie fast vergessen würdest.",
+            "benefitsTitle": "Vorteile ab dem ersten Tag",
+            "benefitsSubtitle": "Der praktische Ansatz von Japanify reduziert Anfangsfrust und hilft dir, eine konstante Lernroutine aufzubauen.",
+            "benefit1Title": "Verbessere dein Japanischverständnis",
+            "benefit1Desc": "Stärke Grammatik und Wortschatz mit klaren Beispielen und realistischen Übungen.",
+            "benefit2Title": "Sprich sicherer",
+            "benefit2Desc": "Übe Aussprache und schnelle Antworten mit geführten Sprachübungen.",
+            "benefit3Title": "Lerne ohne Motivationsverlust",
+            "benefit3Desc": "Kurze Sessions, tägliche Belohnungen und positive Erinnerungen halten dich im Rhythmus.",
+            "kanjiVocabLabel": "Kanji und Wortschatz",
+            "showcaseTitle": "Meistere Kanji Schritt für Schritt",
+            "showcaseSubtitle": "Japanify hilft dir, Bedeutung, Lesungen und echten Gebrauch von Kanji mit geführten Übungen und smarter Wiederholung zu verstehen.",
+            "showcaseBullet1": "Lerne Kanji über Grundbestandteile und zentrale Bedeutungen.",
+            "showcaseBullet2": "Festige Lesungen und Wortschatz mit Erkennungs-Minispielen und Karten.",
+            "showcaseBullet3": "Nutze verteilte Wiederholung, damit du gelernte Kanji nicht vergisst.",
+            "differenceTitle": "Der Japanify-Unterschied",
+            "differenceSubtitle": "Die App kombiniert Pädagogik und Unterhaltung, damit Japanischlernen in deinen Alltag passt.",
+            "differenceHighlight1": "Adaptives Lernen",
+            "differenceHighlight1Desc": "Der Algorithmus erkennt häufige Fehler und ordnet Inhalte neu, um sie vor dem Weitergehen zu festigen.",
+            "differenceHighlight2": "Ständig wachsender Inhalt",
+            "differenceHighlight2Desc": "Neue thematische Einheiten jeden Monat: Reisen, Popkultur, Business und JLPT.",
+            "differenceHighlight3": "Motivierende Community",
+            "differenceHighlight3Desc": "Live-Events, freundliche Ranglisten und gemeinsame Challenges mit Lernenden weltweit.",
+            "testimonialsTitle": "Was Lernende über Japanify sagen",
+            "testimonialsSubtitle": "Nutzermeinungen zur Erfahrung mit der App.",
+            "testimonial1Quote": "Sehr gut, sie bringt dir alles von Grund auf bei und ist leicht zu lernen.",
+            "testimonial1Author": "Japanify-Nutzer bei Google Play",
+            "testimonial2Quote": "Ausgezeichnet. Eine sehr gute und unterhaltsame App.",
+            "testimonial2Author": "Japanify-Nutzer",
+            "socialTitle": "Lerne Japanisch auch auf Instagram",
+            "socialSubtitle": "Kurze Posts mit Tipps, Wortschatz und Basisgrammatik.",
+            "instagramButton": "Instagram-Profil ansehen",
+            "ctaTitle": "Mach den nächsten Schritt zu flüssigerem Japanisch",
+            "ctaSubtitle": "Schließe dich Lernenden an, die bereits mit Japanify üben. Lade die App herunter und beginne heute.",
+            "ctaPrimaryCta": "Japanify herunterladen",
+            "privacy": "Datenschutzerklärung",
+            "promoBadge": "Willkommenscode",
+            "promoTitle": "90 Tage Japanify Premium",
+            "promoText": "Nutze diesen Promo-Code innerhalb der nächsten 24 Stunden und übe Japanisch mit allen Premium-Funktionen.",
+            "promoCodeLabel": "Dein Code",
+            "promoDaysLabel": "Tage",
+            "promoHoursLabel": "Std",
+            "promoMinutesLabel": "Min",
+            "promoSecondsLabel": "Sek",
+            "promoCopyButton": "Code kopieren",
+            "promoGooglePlay": "Zu Google Play",
+            "promoSmall": "Wenn du dieses Fenster schließt, kannst du den Code über den schwebenden Button erneut öffnen.",
+            "promoCopied": "Code kopiert: SHIRU90",
+            "promoManual": "Kopiere den Code manuell: SHIRU90"
+      },
+      "ko-KR": {
+            "title": "Japanify – 미니게임으로 일본어 배우기",
+            "metaDescription": "Japanify는 문법, 한자, 어휘를 JLPT N5까지 단계별로 안내하는 일본어 미니게임 앱입니다.",
+            "brand": "Japanify",
+            "navFeatures": "기능",
+            "navBenefits": "장점",
+            "navInstagram": "Instagram",
+            "navDownload": "앱 다운로드",
+            "heroTitle": "몰입형 미니게임으로 일본어를 익히세요",
+            "heroSubtitle": "Japanify는 짧은 미니게임, 가이드 연습, 스마트 어휘·한자 복습을 모아 일본어 공부를 매일 쉽게 이어가게 해줍니다.",
+            "heroPrimaryCta": "Google Play에서 이용 가능",
+            "heroSecondaryCta": "기능 살펴보기",
+            "heroStat2Value": "92%",
+            "heroStat2Label": "사용자가 첫 4주 안에 실력 향상",
+            "heroStat3Value": "5★",
+            "heroStat3Label": "Google Play 평균 평점",
+            "dailyPracticeLabel": "매일 조금씩 일본어를 연습하세요",
+            "previewLabel": "Japanify preview",
+            "videoTitle": "Japanify를 영상으로 확인하세요",
+            "videoSubtitle": "미니게임, 문법, 스마트 복습을 빠르게 둘러보세요.",
+            "feature1Title": "인터랙티브 미니게임",
+            "feature1Desc": "퀴즈, 카드 매칭, 받아쓰기 게임으로 어휘, 읽기, 듣기를 연습하세요.",
+            "feature2Title": "체계적인 레슨",
+            "feature2Desc": "주제와 레벨별로 정리된 유닛을 따라가며 명확한 설명과 예문으로 공부하세요.",
+            "feature3Title": "가나와 한자 간격 반복",
+            "feature3Desc": "히라가나, 가타카나, 한자를 잊기 직전에 복습해 오래 기억하세요.",
+            "benefitsTitle": "첫날부터 느껴지는 장점",
+            "benefitsSubtitle": "Japanify의 실전 중심 방식은 초반 부담을 줄이고 꾸준한 학습 습관을 만들어 줍니다.",
+            "benefit1Title": "일본어 이해력 향상",
+            "benefit1Desc": "명확한 예문과 실제 상황 기반 연습으로 문법과 어휘를 강화하세요.",
+            "benefit2Title": "더 자신 있게 말하기",
+            "benefit2Desc": "음성 연습으로 발음과 빠른 응답을 훈련하세요.",
+            "benefit3Title": "동기 잃지 않고 공부하기",
+            "benefit3Desc": "짧은 세션, 일일 보상, 긍정적인 리마인더가 학습 흐름을 유지해 줍니다.",
+            "kanjiVocabLabel": "한자와 어휘",
+            "showcaseTitle": "한자를 단계별로 익히세요",
+            "showcaseSubtitle": "Japanify는 가이드 연습과 스마트 복습으로 한자의 의미, 읽는 법, 실제 쓰임을 이해하도록 돕습니다.",
+            "showcaseBullet1": "기본 구성 요소와 핵심 의미부터 한자를 배웁니다.",
+            "showcaseBullet2": "인식 미니게임과 카드로 읽기와 어휘를 강화합니다.",
+            "showcaseBullet3": "간격 반복으로 이미 공부한 한자를 잊지 않게 합니다.",
+            "differenceTitle": "Japanify만의 차이",
+            "differenceSubtitle": "학습과 재미를 결합해 일본어 공부가 일상에 자연스럽게 들어오도록 합니다.",
+            "differenceHighlight1": "적응형 학습",
+            "differenceHighlight1Desc": "알고리즘이 자주 틀리는 부분을 감지하고 다음 단계 전 다시 강화합니다.",
+            "differenceHighlight2": "계속 늘어나는 콘텐츠",
+            "differenceHighlight2Desc": "여행, 팝컬처, 비즈니스, JLPT 등 새로운 주제 유닛이 매달 추가됩니다.",
+            "differenceHighlight3": "동기부여 커뮤니티",
+            "differenceHighlight3Desc": "라이브 이벤트, 친근한 랭킹, 전 세계 학습자와 함께하는 챌린지를 제공합니다.",
+            "testimonialsTitle": "Japanify 학습자들의 후기",
+            "testimonialsSubtitle": "앱 사용 경험에 대한 사용자 의견입니다.",
+            "testimonial1Quote": "아주 좋아요. 처음부터 가르쳐 주고 배우기 쉽습니다.",
+            "testimonial1Author": "Google Play Japanify 사용자",
+            "testimonial2Quote": "훌륭해요. 아주 좋고 재미있는 앱입니다.",
+            "testimonial2Author": "Japanify 사용자",
+            "socialTitle": "Instagram에서도 일본어를 배워보세요",
+            "socialSubtitle": "팁, 어휘, 기본 문법을 담은 짧은 게시물.",
+            "instagramButton": "Instagram 프로필 보기",
+            "ctaTitle": "일본어 실력 향상을 위한 다음 단계",
+            "ctaSubtitle": "이미 Japanify로 공부하는 학습자들과 함께하세요. 앱을 다운로드하고 오늘부터 연습하세요.",
+            "ctaPrimaryCta": "Japanify 다운로드",
+            "privacy": "개인정보 처리방침",
+            "promoBadge": "환영 코드",
+            "promoTitle": "Japanify Premium 90일",
+            "promoText": "앞으로 24시간 안에 이 프로모션 코드를 사용하고 모든 프리미엄 기능으로 일본어를 연습하세요.",
+            "promoCodeLabel": "코드",
+            "promoDaysLabel": "일",
+            "promoHoursLabel": "시간",
+            "promoMinutesLabel": "분",
+            "promoSecondsLabel": "초",
+            "promoCopyButton": "코드 복사",
+            "promoGooglePlay": "Google Play로 이동",
+            "promoSmall": "창을 닫아도 플로팅 버튼에서 코드를 다시 열 수 있습니다.",
+            "promoCopied": "코드 복사됨: SHIRU90",
+            "promoManual": "수동으로 코드를 복사하세요: SHIRU90"
+      },
+      "zh-CN": {
+            "title": "Japanify – 用小游戏学习日语",
+            "metaDescription": "从零开始用 Japanify 学日语，这款小游戏应用会一步步带你学习语法、汉字和词汇，直到 JLPT N5。",
+            "brand": "Japanify",
+            "navFeatures": "功能",
+            "navBenefits": "优势",
+            "navInstagram": "Instagram",
+            "navDownload": "下载应用",
+            "heroTitle": "用沉浸式小游戏掌握日语",
+            "heroSubtitle": "Japanify 结合快速小游戏、引导练习和智能词汇/汉字复习，让日语学习轻松融入你的日常。",
+            "heroPrimaryCta": "已上线 Google Play",
+            "heroSecondaryCta": "查看功能",
+            "heroStat2Value": "92%",
+            "heroStat2Label": "用户在前 4 周取得进步",
+            "heroStat3Value": "5★",
+            "heroStat3Label": "Google Play 平均评分",
+            "dailyPracticeLabel": "每天练一点日语",
+            "previewLabel": "Japanify preview",
+            "videoTitle": "看看 Japanify 如何使用",
+            "videoSubtitle": "快速了解小游戏、语法和智能复习。",
+            "feature1Title": "互动小游戏",
+            "feature1Desc": "通过测验、配对卡片和互动听写练习词汇、阅读和听力。",
+            "feature2Title": "结构化课程",
+            "feature2Desc": "按主题和等级学习单元，配有清晰讲解和实用例句。",
+            "feature3Title": "假名和汉字的间隔重复",
+            "feature3Desc": "在快要遗忘前复习平假名、片假名和汉字，帮助长期记忆。",
+            "benefitsTitle": "从第一天就能感受到的好处",
+            "benefitsSubtitle": "Japanify 的实用方法减少入门挫败感，并帮助你建立稳定学习习惯。",
+            "benefit1Title": "提升日语理解力",
+            "benefit1Desc": "通过清晰例句和真实场景练习巩固语法与词汇。",
+            "benefit2Title": "更自信地开口",
+            "benefit2Desc": "通过语音引导练习发音和快速回答。",
+            "benefit3Title": "学习不再容易失去动力",
+            "benefit3Desc": "短时学习、每日奖励和积极提醒帮助你保持节奏。",
+            "kanjiVocabLabel": "汉字与词汇",
+            "showcaseTitle": "一步步掌握汉字",
+            "showcaseSubtitle": "Japanify 通过引导练习和智能复习，帮助你理解汉字的含义、读法和实际用法。",
+            "showcaseBullet1": "从基本部件和核心含义开始学习汉字。",
+            "showcaseBullet2": "通过识别小游戏和卡片强化读音与词汇。",
+            "showcaseBullet3": "使用间隔复习，避免忘记已经学过的汉字。",
+            "differenceTitle": "Japanify 的不同之处",
+            "differenceSubtitle": "应用结合教学与娱乐，让日语学习自然融入你的日常。",
+            "differenceHighlight1": "自适应学习",
+            "differenceHighlight1Desc": "算法会识别你的常见错误，并在继续学习前重新安排内容进行强化。",
+            "differenceHighlight2": "持续扩展的内容",
+            "differenceHighlight2Desc": "每月新增主题单元：旅行、流行文化、商务和 JLPT。",
+            "differenceHighlight3": "激励型社区",
+            "differenceHighlight3Desc": "直播活动、友好排行榜以及与全球学习者一起完成挑战。",
+            "testimonialsTitle": "学习者如何评价 Japanify",
+            "testimonialsSubtitle": "用户对应用体验的评价。",
+            "testimonial1Quote": "非常好，从零开始教，学起来很容易。",
+            "testimonial1Author": "Google Play 上的 Japanify 用户",
+            "testimonial2Quote": "很棒。非常好玩又实用的应用。",
+            "testimonial2Author": "Japanify 用户",
+            "socialTitle": "也可以在 Instagram 学日语",
+            "socialSubtitle": "包含技巧、词汇和基础语法的短帖。",
+            "instagramButton": "查看 Instagram 主页",
+            "ctaTitle": "迈出日语流利度的下一步",
+            "ctaSubtitle": "加入正在使用 Japanify 学习的学生。下载应用，今天就开始练习。",
+            "ctaPrimaryCta": "下载 Japanify",
+            "privacy": "隐私政策",
+            "promoBadge": "欢迎码",
+            "promoTitle": "90 天 Japanify Premium",
+            "promoText": "请在接下来的 24 小时内使用此优惠码，解锁全部高级功能练习日语。",
+            "promoCodeLabel": "你的代码",
+            "promoDaysLabel": "天",
+            "promoHoursLabel": "小时",
+            "promoMinutesLabel": "分",
+            "promoSecondsLabel": "秒",
+            "promoCopyButton": "复制代码",
+            "promoGooglePlay": "前往 Google Play",
+            "promoSmall": "如果关闭此窗口，可以通过悬浮按钮重新打开代码。",
+            "promoCopied": "代码已复制：SHIRU90",
+            "promoManual": "请手动复制代码：SHIRU90"
+      },
+      "ru-RU": {
+            "title": "Japanify – учи японский с мини-играми",
+            "metaDescription": "Изучай японский с нуля с Japanify: приложение с мини-играми ведёт тебя шаг за шагом по грамматике, кандзи и лексике до JLPT N5.",
+            "brand": "Japanify",
+            "navFeatures": "Функции",
+            "navBenefits": "Преимущества",
+            "navInstagram": "Instagram",
+            "navDownload": "Скачать приложение",
+            "heroTitle": "Освой японский с иммерсивными мини-играми",
+            "heroSubtitle": "Japanify объединяет быстрые мини-игры, практику с подсказками и умное повторение слов и кандзи, чтобы японский легко вошёл в твой день.",
+            "heroPrimaryCta": "Доступно в Google Play",
+            "heroSecondaryCta": "Посмотреть функции",
+            "heroStat2Value": "92%",
+            "heroStat2Label": "Пользователи улучшают результат за первые 4 недели",
+            "heroStat3Value": "5★",
+            "heroStat3Label": "Средняя оценка в Google Play",
+            "dailyPracticeLabel": "Практикуй японский понемногу каждый день",
+            "previewLabel": "Japanify preview",
+            "videoTitle": "Посмотри Japanify в действии",
+            "videoSubtitle": "Короткий обзор мини-игр, грамматики и умного повторения.",
+            "feature1Title": "Интерактивные мини-игры",
+            "feature1Desc": "Тренируй лексику, чтение и аудирование с викторинами, карточками и интерактивными диктантами.",
+            "feature2Title": "Структурированные уроки",
+            "feature2Desc": "Проходи уроки по темам и уровням с понятными объяснениями и практическими примерами.",
+            "feature3Title": "Интервальное повторение каны и кандзи",
+            "feature3Desc": "Повторяй хирагану, катакану и кандзи в нужный момент, чтобы запоминать надолго.",
+            "benefitsTitle": "Преимущества с первого дня",
+            "benefitsSubtitle": "Практический подход Japanify снижает начальную фрустрацию и помогает выстроить стабильную привычку.",
+            "benefit1Title": "Улучшай понимание японского",
+            "benefit1Desc": "Закрепляй грамматику и лексику с ясными примерами и упражнениями из реальных ситуаций.",
+            "benefit2Title": "Говори увереннее",
+            "benefit2Desc": "Практикуй произношение и быстрые ответы с голосовыми упражнениями.",
+            "benefit3Title": "Учись без потери мотивации",
+            "benefit3Desc": "Короткие занятия, ежедневные награды и позитивные напоминания помогают держать темп.",
+            "kanjiVocabLabel": "Кандзи и лексика",
+            "showcaseTitle": "Осваивай кандзи шаг за шагом",
+            "showcaseSubtitle": "Japanify помогает понять значение, чтения и реальное использование кандзи через упражнения и умное повторение.",
+            "showcaseBullet1": "Изучай кандзи через базовые компоненты и ключевые значения.",
+            "showcaseBullet2": "Закрепляй чтения и лексику мини-играми на распознавание и карточками.",
+            "showcaseBullet3": "Используй интервальное повторение, чтобы не забывать изученные кандзи.",
+            "differenceTitle": "Чем Japanify отличается",
+            "differenceSubtitle": "Приложение сочетает обучение и развлечения, чтобы японский вписался в твою рутину.",
+            "differenceHighlight1": "Адаптивное обучение",
+            "differenceHighlight1Desc": "Алгоритм находит частые ошибки и перестраивает контент, чтобы закрепить их перед следующим шагом.",
+            "differenceHighlight2": "Постоянно растущий контент",
+            "differenceHighlight2Desc": "Новые тематические блоки каждый месяц: путешествия, поп-культура, бизнес и JLPT.",
+            "differenceHighlight3": "Мотивирующее сообщество",
+            "differenceHighlight3Desc": "Живые события, дружеские рейтинги и совместные челленджи с учениками со всего мира.",
+            "testimonialsTitle": "Что говорят ученики Japanify",
+            "testimonialsSubtitle": "Отзывы пользователей об опыте в приложении.",
+            "testimonial1Quote": "Очень хорошее приложение, учит с нуля и с ним легко заниматься.",
+            "testimonial1Author": "Пользователь Japanify в Google Play",
+            "testimonial2Quote": "Отлично. Очень хорошее и весёлое приложение.",
+            "testimonial2Author": "Пользователь Japanify",
+            "socialTitle": "Учи японский также в Instagram",
+            "socialSubtitle": "Короткие посты с советами, лексикой и базовой грамматикой.",
+            "instagramButton": "Открыть профиль Instagram",
+            "ctaTitle": "Сделай следующий шаг к свободному японскому",
+            "ctaSubtitle": "Присоединяйся к ученикам, которые уже занимаются с Japanify. Скачай приложение и начни сегодня.",
+            "ctaPrimaryCta": "Скачать Japanify",
+            "privacy": "Политика конфиденциальности",
+            "promoBadge": "Приветственный код",
+            "promoTitle": "90 дней Japanify Premium",
+            "promoText": "Используй этот промокод в течение следующих 24 часов и начни практиковать японский со всеми премиум-функциями.",
+            "promoCodeLabel": "Твой код",
+            "promoDaysLabel": "Дни",
+            "promoHoursLabel": "Часы",
+            "promoMinutesLabel": "Мин",
+            "promoSecondsLabel": "Сек",
+            "promoCopyButton": "Скопировать код",
+            "promoGooglePlay": "Перейти в Google Play",
+            "promoSmall": "Если закрыть окно, код можно снова открыть через плавающую кнопку.",
+            "promoCopied": "Код скопирован: SHIRU90",
+            "promoManual": "Скопируй код вручную: SHIRU90"
+      }
+};
 
-    // --- Instagram embeds (ES/EN) ---
-    const lang = (document.documentElement.lang || navigator.language || 'en').toLowerCase();
-    const isSpanish = lang.startsWith('es');
+    const supportedLocales = ['es-ES', 'en-GB', 'fr-FR', 'ko-KR', 'zh-CN', 'de-DE', 'ru-RU'];
+    const languageStorageKey = 'japanify_site_language';
 
-    // --- YouTube promo video (ES/EN) ---
-    const videoEn = 'https://www.youtube.com/embed/kopksIYuOzM';
-    const videoEs = 'https://www.youtube.com/embed/2rxV00pIBgg';
+    const localeToHtmlLang = {
+      'es-ES': 'es',
+      'en-GB': 'en',
+      'fr-FR': 'fr',
+      'ko-KR': 'ko',
+      'zh-CN': 'zh-CN',
+      'de-DE': 'de',
+      'ru-RU': 'ru'
+    };
 
-    const promoVideo = document.getElementById('promoVideo');
-    if (promoVideo) {
-      promoVideo.src = isSpanish ? videoEs : videoEn;
-    }
-    // --- /YouTube promo video (ES/EN) ---
+    const resolveBrowserLocale = () => {
+      const savedLocale = localStorage.getItem(languageStorageKey);
+      if (supportedLocales.includes(savedLocale)) return savedLocale;
 
-    const profileUrl = isSpanish
-      ? 'https://www.instagram.com/japanify_es/'
-      : 'https://www.instagram.com/japanify_en/';
+      const browserLanguages = navigator.languages && navigator.languages.length
+        ? navigator.languages
+        : [navigator.language || navigator.userLanguage || 'en'];
+
+      for (const rawLang of browserLanguages) {
+        const lang = String(rawLang).toLowerCase();
+        if (lang.startsWith('es')) return 'es-ES';
+        if (lang.startsWith('en')) return 'en-GB';
+        if (lang.startsWith('fr')) return 'fr-FR';
+        if (lang.startsWith('ko')) return 'ko-KR';
+        if (lang.startsWith('zh')) return 'zh-CN';
+        if (lang.startsWith('de')) return 'de-DE';
+        if (lang.startsWith('ru')) return 'ru-RU';
+      }
+
+      return 'en-GB';
+    };
+
+    let currentLocale = resolveBrowserLocale();
+
+    const getCurrentDict = () => siteTranslations[currentLocale] || siteTranslations['en-GB'];
 
     const postsEs = [
       'https://www.instagram.com/p/DVJcFxVjJsl/',
@@ -1412,36 +2042,101 @@
       'https://www.instagram.com/p/DVJmzoBjWYT/'
     ];
 
-    const subEl = document.getElementById('socialSubtitle');
-    const btnEl = document.getElementById('instagramProfileLink');
-    if (subEl) subEl.textContent = isSpanish
-      ? 'Posts cortos con trucos, vocabulario y gramática básica.'
-      : 'Short posts with tips, vocabulary and basic grammar.';
-    if (btnEl) {
-      btnEl.href = profileUrl;
-      btnEl.textContent = isSpanish ? 'Ver perfil en Instagram' : 'View Instagram profile';
-    }
+    const videoEn = 'https://www.youtube.com/embed/kopksIYuOzM';
+    const videoEs = 'https://www.youtube.com/embed/2rxV00pIBgg';
 
-    const posts = isSpanish ? postsEs : postsEn;
-    const feed = document.getElementById('instagramFeed');
-    if (feed) {
-      feed.innerHTML = posts.map(url => `
-        <div class="blog-card">
-          <blockquote class="instagram-media"
-            data-instgrm-permalink="${url}"
-            data-instgrm-version="14"
-            style="margin:0; width:100%;">
-          </blockquote>
-        </div>
-      `).join('');
-    }
+    const getIsSpanishContent = () => currentLocale === 'es-ES';
 
-    const tryProcess = () => {
-      if (window.instgrm?.Embeds?.process) window.instgrm.Embeds.process();
-      else setTimeout(tryProcess, 300);
+    const getInstagramProfileUrl = () => getIsSpanishContent()
+      ? 'https://www.instagram.com/japanify_es/'
+      : 'https://www.instagram.com/japanify_en/';
+
+    const renderInstagramFeed = () => {
+      const btnEl = document.getElementById('instagramProfileLink');
+      if (btnEl) {
+        btnEl.href = getInstagramProfileUrl();
+      }
+
+      const posts = getIsSpanishContent() ? postsEs : postsEn;
+      const feed = document.getElementById('instagramFeed');
+      if (feed) {
+        feed.innerHTML = posts.map(url => `
+          <div class="blog-card">
+            <blockquote class="instagram-media"
+              data-instgrm-permalink="${url}"
+              data-instgrm-version="14"
+              style="margin:0; width:100%;">
+            </blockquote>
+          </div>
+        `).join('');
+      }
+
+      const tryProcess = () => {
+        if (window.instgrm?.Embeds?.process) window.instgrm.Embeds.process();
+        else setTimeout(tryProcess, 300);
+      };
+      tryProcess();
     };
-    tryProcess();
-    // --- /Instagram embeds ---
+
+    const updateLanguageDependentEmbeds = () => {
+      const promoVideo = document.getElementById('promoVideo');
+      if (promoVideo) {
+        promoVideo.src = getIsSpanishContent() ? videoEs : videoEn;
+      }
+      renderInstagramFeed();
+    };
+
+    const applySiteTranslations = (locale) => {
+      currentLocale = supportedLocales.includes(locale) ? locale : 'en-GB';
+      const dict = getCurrentDict();
+
+      document.documentElement.lang = localeToHtmlLang[currentLocale] || 'en';
+
+      document.querySelectorAll('[data-i18n]').forEach((el) => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key]) {
+          el.innerHTML = dict[key];
+        }
+      });
+
+      document.title = dict.title || siteTranslations['en-GB'].title;
+
+      const descriptionMeta = document.querySelector('meta[name="description"]');
+      if (descriptionMeta && dict.metaDescription) {
+        descriptionMeta.setAttribute('content', dict.metaDescription);
+      }
+
+      const ogTitle = document.querySelector('meta[property="og:title"]');
+      const ogDescription = document.querySelector('meta[property="og:description"]');
+      const twitterTitle = document.querySelector('meta[name="twitter:title"]');
+      const twitterDescription = document.querySelector('meta[name="twitter:description"]');
+
+      if (ogTitle && dict.title) ogTitle.setAttribute('content', dict.title);
+      if (ogDescription && dict.metaDescription) ogDescription.setAttribute('content', dict.metaDescription);
+      if (twitterTitle && dict.title) twitterTitle.setAttribute('content', dict.title);
+      if (twitterDescription && dict.metaDescription) twitterDescription.setAttribute('content', dict.metaDescription);
+
+      const languageSelect = document.getElementById('languageSelect');
+      if (languageSelect) languageSelect.value = currentLocale;
+
+      updateLanguageDependentEmbeds();
+    };
+
+    const setSiteLanguage = (locale) => {
+      const nextLocale = supportedLocales.includes(locale) ? locale : 'en-GB';
+      localStorage.setItem(languageStorageKey, nextLocale);
+      applySiteTranslations(nextLocale);
+    };
+
+    const languageSelect = document.getElementById('languageSelect');
+    if (languageSelect) {
+      languageSelect.addEventListener('change', (event) => {
+        setSiteLanguage(event.target.value);
+      });
+    }
+
+    applySiteTranslations(currentLocale);
+
     // --- SHIRU90 welcome promo ---
     const promoCode = 'SHIRU90';
     const promoDurationMs = 24 * 60 * 60 * 1000;
@@ -1524,9 +2219,9 @@
       copyPromoCode.addEventListener('click', async () => {
         try {
           await navigator.clipboard.writeText(promoCode);
-          if (promoCopyFeedback) promoCopyFeedback.textContent = 'Código copiado: SHIRU90';
+          if (promoCopyFeedback) promoCopyFeedback.textContent = getCurrentDict().promoCopied || 'Code copied: SHIRU90';
         } catch (error) {
-          if (promoCopyFeedback) promoCopyFeedback.textContent = 'Copia manualmente el código: SHIRU90';
+          if (promoCopyFeedback) promoCopyFeedback.textContent = getCurrentDict().promoManual || 'Copy the code manually: SHIRU90';
         }
       });
     }
