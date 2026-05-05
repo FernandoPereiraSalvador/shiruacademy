@@ -856,6 +856,267 @@
       border:1px solid rgba(30,41,59,0.08);
     }
 
+
+    /* PROMO SHIRU90 */
+    .promo-floating-btn{
+      position:fixed;
+      right:24px;
+      bottom:24px;
+      z-index:70;
+      min-width:118px;
+      min-height:58px;
+      border:none;
+      border-radius:999px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:2px;
+      color:#fff;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      box-shadow:0 22px 48px rgba(226,77,59,.28);
+      cursor:pointer;
+      transition:transform .2s ease, box-shadow .2s ease;
+      padding:10px 16px;
+      font-family:inherit;
+    }
+
+    .promo-floating-btn:hover{
+      transform:translateY(-3px);
+      box-shadow:0 28px 60px rgba(226,77,59,.34);
+    }
+
+    .promo-floating-btn strong{
+      font-size:15px;
+      letter-spacing:.06em;
+      line-height:1;
+    }
+
+    .promo-floating-btn span{
+      font-size:11px;
+      font-weight:800;
+      opacity:.9;
+      line-height:1.1;
+    }
+
+    #promoDialog{
+      border:none;
+      border-radius:30px;
+      padding:0;
+      color:var(--ink);
+      background:#fff;
+      box-shadow:0 34px 90px rgba(24,32,29,.28);
+      width:min(470px,calc(100% - 32px));
+      overflow:hidden;
+    }
+
+    #promoDialog::backdrop{
+      background:rgba(24,32,29,.34);
+      backdrop-filter:blur(6px);
+    }
+
+    .promo-modal{
+      position:relative;
+      padding:30px;
+      text-align:center;
+      background:
+        radial-gradient(420px 240px at 18% -8%, rgba(255,138,61,.28), transparent 70%),
+        radial-gradient(380px 240px at 110% 10%, rgba(47,125,104,.16), transparent 70%),
+        linear-gradient(180deg,#fff,#fff8ef);
+    }
+
+    .promo-close{
+      position:absolute;
+      top:14px;
+      right:14px;
+      width:36px;
+      height:36px;
+      border:none;
+      border-radius:50%;
+      background:rgba(24,32,29,.07);
+      color:var(--ink);
+      font-size:22px;
+      line-height:1;
+      cursor:pointer;
+      display:grid;
+      place-items:center;
+    }
+
+    .promo-badge{
+      width:max-content;
+      margin:0 auto 14px;
+      padding:8px 12px;
+      border-radius:999px;
+      color:var(--accent-dark);
+      background:rgba(47,125,104,.1);
+      border:1px solid rgba(47,125,104,.14);
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .promo-modal h2{
+      margin:0;
+      font-size:clamp(28px,5vw,40px);
+      letter-spacing:-.055em;
+      line-height:1.02;
+    }
+
+    .promo-modal p{
+      margin:12px auto 0;
+      color:var(--muted);
+      line-height:1.62;
+      max-width:370px;
+      font-weight:650;
+    }
+
+    .promo-code-box{
+      margin:22px auto 16px;
+      padding:16px;
+      border-radius:22px;
+      background:#fff;
+      border:1px dashed rgba(226,77,59,.42);
+      box-shadow:0 16px 36px rgba(80,45,26,.1);
+    }
+
+    .promo-code-label{
+      display:block;
+      margin-bottom:8px;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .promo-code{
+      display:block;
+      font-size:clamp(30px,8vw,42px);
+      font-weight:900;
+      letter-spacing:.08em;
+      color:var(--accent);
+      line-height:1;
+    }
+
+    .promo-countdown{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:8px;
+      margin:18px 0 22px;
+    }
+
+    .promo-time-part{
+      padding:12px 8px;
+      border-radius:16px;
+      background:rgba(24,32,29,.055);
+      border:1px solid rgba(24,32,29,.07);
+    }
+
+    .promo-time-part strong{
+      display:block;
+      font-size:23px;
+      letter-spacing:-.04em;
+      color:var(--accent-dark);
+    }
+
+    .promo-time-part span{
+      display:block;
+      margin-top:2px;
+      color:var(--muted);
+      font-size:10px;
+      font-weight:900;
+      letter-spacing:.07em;
+      text-transform:uppercase;
+    }
+
+    .promo-actions{
+      display:flex;
+      gap:10px;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+
+    .promo-copy-feedback{
+      min-height:20px;
+      margin-top:12px;
+      color:var(--accent-3);
+      font-size:13px;
+      font-weight:800;
+    }
+
+    .promo-small{
+      margin-top:8px !important;
+      font-size:12px;
+      color:rgba(101,113,108,.88) !important;
+      font-weight:650 !important;
+    }
+
+    @media (max-width:720px){
+      .promo-floating-btn{
+        right:16px;
+        bottom:16px;
+        min-width:106px;
+      }
+
+      .promo-modal{
+        padding:28px 18px 22px;
+      }
+
+      .promo-countdown{
+        gap:6px;
+      }
+
+      .promo-time-part strong{
+        font-size:19px;
+      }
+
+      .promo-actions{
+        flex-direction:column;
+      }
+
+      .promo-actions .btn-primary,
+      .promo-actions .btn-secondary{
+        width:100%;
+      }
+    }
+
+
+    #promoDialog.promo-opening .promo-modal{
+      animation:promoModalIn .42s cubic-bezier(.2,.9,.2,1) both;
+    }
+
+    #promoDialog.promo-opening::backdrop{
+      animation:promoBackdropIn .42s ease both;
+    }
+
+    @keyframes promoModalIn{
+      from{
+        opacity:0;
+        transform:translateY(18px) scale(.96);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+      }
+    }
+
+    @keyframes promoBackdropIn{
+      from{
+        opacity:0;
+      }
+      to{
+        opacity:1;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      #promoDialog.promo-opening .promo-modal,
+      #promoDialog.promo-opening::backdrop{
+        animation:none;
+      }
+    }
+
   </style>
 </head>
 
@@ -1065,12 +1326,50 @@
   <footer>
     <a href="privacy-policy.html" data-i18n="privacy">Política de privacidad</a> · &copy; 2026 Japanify
   </footer>
+  <button class="promo-floating-btn" id="promoBtn" aria-label="Ver código promocional SHIRU90">
+    <strong>SHIRU90</strong>
+    <span id="promoFloatingTimer">24:00:00</span>
+  </button>
 
-  <button class="portfolio-btn" id="portfolioBtn" aria-label="Abrir portfolio">💻</button>
+  <dialog id="promoDialog">
+    <div class="promo-modal">
+      <button class="promo-close" id="closePromoDialog" aria-label="Cerrar promoción">×</button>
+      <div class="promo-badge">Código de bienvenida</div>
+      <h2>90 días de Japanify Premium</h2>
+      <p>Usa este código promocional durante las próximas 24 horas y empieza a practicar japonés con todas las funciones premium.</p>
 
-  <dialog id="portfolioDialog">
-    <p data-i18n="portfolioPrompt">Visita mi portafolio<br><a href="https://fernandopereirasalvador.com" target="_blank" rel="noopener">fernandopereirasalvador.com</a></p>
-    <button class="btn-primary" id="closeDialog" data-i18n="close">Cerrar</button>
+      <div class="promo-code-box">
+        <span class="promo-code-label">Tu código</span>
+        <strong class="promo-code" id="promoCodeText">SHIRU90</strong>
+      </div>
+
+      <div class="promo-countdown" aria-label="Tiempo restante de la oferta">
+        <div class="promo-time-part">
+          <strong id="promoDays">00</strong>
+          <span>Días</span>
+        </div>
+        <div class="promo-time-part">
+          <strong id="promoHours">23</strong>
+          <span>Horas</span>
+        </div>
+        <div class="promo-time-part">
+          <strong id="promoMinutes">59</strong>
+          <span>Min</span>
+        </div>
+        <div class="promo-time-part">
+          <strong id="promoSeconds">59</strong>
+          <span>Seg</span>
+        </div>
+      </div>
+
+      <div class="promo-actions">
+        <button class="btn-primary" id="copyPromoCode" type="button">Copiar código</button>
+        <a class="btn-secondary" href="https://play.google.com/store/apps/details?id=com.shiruacademy.japanify" target="_blank" rel="noopener">Ir a Google Play</a>
+      </div>
+
+      <div class="promo-copy-feedback" id="promoCopyFeedback" aria-live="polite"></div>
+      <p class="promo-small">Si cierras esta ventana, puedes volver a abrir el código desde el botón flotante.</p>
+    </div>
   </dialog>
 
   <script src="i18n.js"></script>
@@ -1143,22 +1442,101 @@
     };
     tryProcess();
     // --- /Instagram embeds ---
+    // --- SHIRU90 welcome promo ---
+    const promoCode = 'SHIRU90';
+    const promoDurationMs = 24 * 60 * 60 * 1000;
+    const promoStartKey = 'japanify_shiru90_started_at';
+    const promoSeenSessionKey = 'japanify_shiru90_seen_this_session';
 
-    const portfolioBtn = document.getElementById('portfolioBtn');
-    const portfolioDialog = document.getElementById('portfolioDialog');
-    const closeDialog = document.getElementById('closeDialog');
+    const promoBtn = document.getElementById('promoBtn');
+    const promoDialog = document.getElementById('promoDialog');
+    const closePromoDialog = document.getElementById('closePromoDialog');
+    const copyPromoCode = document.getElementById('copyPromoCode');
+    const promoCopyFeedback = document.getElementById('promoCopyFeedback');
 
-    if (portfolioBtn && portfolioDialog) {
-      portfolioBtn.addEventListener('click', () => portfolioDialog.showModal());
+    let promoStartedAt = Number(localStorage.getItem(promoStartKey));
+    if (!promoStartedAt || Number.isNaN(promoStartedAt)) {
+      promoStartedAt = Date.now();
+      localStorage.setItem(promoStartKey, String(promoStartedAt));
     }
 
-    if (closeDialog && portfolioDialog) {
-      closeDialog.addEventListener('click', () => portfolioDialog.close());
+    const formatTwoDigits = value => String(value).padStart(2, '0');
+
+    const updatePromoCountdown = () => {
+      const endAt = promoStartedAt + promoDurationMs;
+      const remaining = Math.max(0, endAt - Date.now());
+
+      const totalSeconds = Math.floor(remaining / 1000);
+      const days = Math.floor(totalSeconds / 86400);
+      const hours = Math.floor((totalSeconds % 86400) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+
+      const promoDays = document.getElementById('promoDays');
+      const promoHours = document.getElementById('promoHours');
+      const promoMinutes = document.getElementById('promoMinutes');
+      const promoSeconds = document.getElementById('promoSeconds');
+      const promoFloatingTimer = document.getElementById('promoFloatingTimer');
+
+      if (promoDays) promoDays.textContent = formatTwoDigits(days);
+      if (promoHours) promoHours.textContent = formatTwoDigits(hours);
+      if (promoMinutes) promoMinutes.textContent = formatTwoDigits(minutes);
+      if (promoSeconds) promoSeconds.textContent = formatTwoDigits(seconds);
+      if (promoFloatingTimer) {
+        promoFloatingTimer.textContent = `${formatTwoDigits(hours + days * 24)}:${formatTwoDigits(minutes)}:${formatTwoDigits(seconds)}`;
+      }
+    };
+
+    updatePromoCountdown();
+    setInterval(updatePromoCountdown, 1000);
+
+    const openPromoDialog = () => {
+      if (promoDialog && typeof promoDialog.showModal === 'function' && !promoDialog.open) {
+        promoDialog.classList.remove('promo-opening');
+        promoDialog.showModal();
+        requestAnimationFrame(() => {
+          promoDialog.classList.add('promo-opening');
+        });
+      }
+    };
+
+    const closePromo = () => {
+      if (promoDialog && promoDialog.open) {
+        promoDialog.close();
+        promoDialog.classList.remove('promo-opening');
+      }
+      sessionStorage.setItem(promoSeenSessionKey, 'true');
+    };
+
+    if (promoBtn) {
+      promoBtn.addEventListener('click', openPromoDialog);
     }
 
-    if (portfolioDialog) {
-      portfolioDialog.addEventListener('cancel', () => portfolioDialog.close());
+    if (closePromoDialog) {
+      closePromoDialog.addEventListener('click', closePromo);
     }
+
+    if (promoDialog) {
+      promoDialog.addEventListener('cancel', closePromo);
+    }
+
+    if (copyPromoCode) {
+      copyPromoCode.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(promoCode);
+          if (promoCopyFeedback) promoCopyFeedback.textContent = 'Código copiado: SHIRU90';
+        } catch (error) {
+          if (promoCopyFeedback) promoCopyFeedback.textContent = 'Copia manualmente el código: SHIRU90';
+        }
+      });
+    }
+
+    window.addEventListener('load', () => {
+      if (!sessionStorage.getItem(promoSeenSessionKey)) {
+        setTimeout(openPromoDialog, 1000);
+      }
+    });
+    // --- /SHIRU90 welcome promo ---
   </script>
   <script async src="https://www.instagram.com/embed.js" onload="window.instgrm?.Embeds?.process && window.instgrm.Embeds.process();"></script>
 </body>
