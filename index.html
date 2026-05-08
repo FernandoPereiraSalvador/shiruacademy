@@ -775,7 +775,12 @@
       .nav-links{
         width:100%;
         overflow-x:auto;
-        justify-content:flex-start;
+        justify-content:center;
+      }
+      .nav-links a{
+        flex:1;
+        text-align:center;
+        padding:10px 8px;
       }
       .nav-cta{width:100%}
       .hero h1{font-size:clamp(38px,12vw,54px)}
@@ -814,33 +819,95 @@
       align-items:center;
     }
 
-    /* Instagram needs wider cards, embeds have big min width */
-    .instagram-grid{
-      grid-template-columns:repeat(auto-fit, minmax(360px, 1fr));
-      align-items:start;
-    }
+    /* Instagram desktop */
+.instagram-grid{
+  grid-template-columns:repeat(auto-fit, minmax(360px, 1fr));
+  align-items:start;
+}
 
-    .instagram-grid .blog-card{
-      padding:14px;
-      background:rgba(255,255,255,.88);
-      overflow:hidden;
-    }
+.instagram-grid .blog-card{
+  padding:14px;
+  background:rgba(255,255,255,.88);
+  overflow:hidden;
+}
 
-    @media (max-width:900px){
-      .instagram-grid{
-        grid-template-columns:1fr;
-      }
-    }
+/* Evita que los embeds de Instagram rompan el ancho */
+.instagram-grid .instagram-media,
+.instagram-grid .instagram-media-rendered{
+  width:100% !important;
+  max-width:100% !important;
+  min-width:0 !important;
+  margin:0 !important;
+}
 
-    @media (max-width:480px){
-      .instagram-grid .blog-card{
-        padding:10px;
-      }
-    }
+.instagram-grid iframe{
+  max-width:100% !important;
+}
 
+/* Controles del carrusel: ocultos en ordenador */
+.instagram-carousel-controls{
+  display:none;
+}
 
+/* Instagram móvil: galería de uno en uno */
+@media (max-width:720px){
+  .social-section{
+    overflow:hidden;
+  }
 
-    .embed-local-note {
+  .instagram-grid{
+    display:flex;
+    grid-template-columns:none;
+    gap:0;
+    width:100%;
+    max-width:390px;
+    margin:0 auto;
+    overflow:hidden;
+  }
+
+  .instagram-grid .blog-card{
+    flex:0 0 100%;
+    width:100%;
+    padding:10px;
+    transform:translateX(calc(var(--instagram-slide, 0) * -100%));
+    transition:transform .32s ease;
+  }
+
+  .instagram-carousel-controls{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    margin-top:14px;
+  }
+
+  .instagram-carousel-btn{
+    width:42px;
+    height:42px;
+    border:none;
+    border-radius:50%;
+    cursor:pointer;
+    display:grid;
+    place-items:center;
+    color:#fff;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    box-shadow:0 14px 30px rgba(226,77,59,.2);
+    font-size:20px;
+    font-weight:900;
+  }
+
+  .instagram-carousel-btn:active{
+    transform:scale(.96);
+  }
+
+  .instagram-carousel-counter{
+    color:var(--muted);
+    font-size:14px;
+    font-weight:800;
+  }
+}
+
+  .embed-local-note {
       display:none;
       margin:14px auto 0;
       max-width:760px;
@@ -1387,6 +1454,12 @@
       </div>
 
       <div id="instagramFeed" class="blog-grid instagram-grid"></div>
+
+      <div class="instagram-carousel-controls" aria-label="Galería de publicaciones de Instagram">
+        <button class="instagram-carousel-btn" id="instagramPrev" type="button" aria-label="Publicación anterior">‹</button>
+        <span class="instagram-carousel-counter" id="instagramCounter">1 / 1</span>
+        <button class="instagram-carousel-btn" id="instagramNext" type="button" aria-label="Publicación siguiente">›</button>
+      </div>
 
       <div class="blog-actions">
         <a id="instagramProfileLink" class="btn-secondary" href="https://www.instagram.com/japanify_es/" target="_blank" rel="noopener noreferrer">
@@ -2049,30 +2122,57 @@
       ? 'https://www.instagram.com/japanify_es/'
       : 'https://www.instagram.com/japanify_en/';
 
+    let instagramCurrentSlide = 0;
+let instagramTotalSlides = 0;
+
+const updateInstagramCarousel = () => {
+  const feed = document.getElementById('instagramFeed');
+  const counter = document.getElementById('instagramCounter');
+
+  if (!feed || instagramTotalSlides === 0) return;
+
+  if (instagramCurrentSlide < 0) instagramCurrentSlide = instagramTotalSlides - 1;
+  if (instagramCurrentSlide >= instagramTotalSlides) instagramCurrentSlide = 0;
+
+  feed.style.setProperty('--instagram-slide', instagramCurrentSlide);
+
+  if (counter) {
+    counter.textContent = `${instagramCurrentSlide + 1} / ${instagramTotalSlides}`;
+  }
+};
+
     const renderInstagramFeed = () => {
       const btnEl = document.getElementById('instagramProfileLink');
       if (btnEl) {
         btnEl.href = getInstagramProfileUrl();
+        btnEl.textContent = getCurrentDict().instagramButton || btnEl.textContent;
       }
 
       const posts = getIsSpanishContent() ? postsEs : postsEn;
       const feed = document.getElementById('instagramFeed');
+
+      instagramCurrentSlide = 0;
+      instagramTotalSlides = posts.length;
+
       if (feed) {
         feed.innerHTML = posts.map(url => `
           <div class="blog-card">
             <blockquote class="instagram-media"
               data-instgrm-permalink="${url}"
               data-instgrm-version="14"
-              style="margin:0; width:100%;">
+              style="margin:0; width:100%; min-width:0;">
             </blockquote>
           </div>
         `).join('');
+
+        updateInstagramCarousel();
       }
 
       const tryProcess = () => {
         if (window.instgrm?.Embeds?.process) window.instgrm.Embeds.process();
         else setTimeout(tryProcess, 300);
       };
+
       tryProcess();
     };
 
@@ -2133,6 +2233,23 @@
       });
     }
 
+    const instagramPrev = document.getElementById('instagramPrev');
+    const instagramNext = document.getElementById('instagramNext');
+
+    if (instagramPrev) {
+      instagramPrev.addEventListener('click', () => {
+        instagramCurrentSlide -= 1;
+        updateInstagramCarousel();
+      });
+    }
+
+    if (instagramNext) {
+      instagramNext.addEventListener('click', () => {
+        instagramCurrentSlide += 1;
+        updateInstagramCarousel();
+      });
+    }
+
     applySiteTranslations(currentLocale);
 
     // --- SHIRU90 welcome promo ---
@@ -2156,8 +2273,14 @@
     const formatTwoDigits = value => String(value).padStart(2, '0');
 
     const updatePromoCountdown = () => {
-      const endAt = promoStartedAt + promoDurationMs;
-      const remaining = Math.max(0, endAt - Date.now());
+    const endAt = promoStartedAt + promoDurationMs;
+    let remaining = endAt - Date.now();
+
+    if (remaining <= 0) {
+      promoStartedAt = Date.now();
+      localStorage.setItem(promoStartKey, String(promoStartedAt));
+      remaining = promoDurationMs;
+    }
 
       const totalSeconds = Math.floor(remaining / 1000);
       const days = Math.floor(totalSeconds / 86400);
