@@ -229,14 +229,21 @@
       font-size:clamp(42px,6vw,76px);
       letter-spacing:-.07em;
       line-height:.96;
-      max-width:760px;
+      max-width:810px;
+      padding-right:.32em;
+      margin-right:-.18em;
+      overflow:visible;
     }
 
     .hero h1 span{
+      display:inline-block;
       background:linear-gradient(135deg,var(--accent),var(--accent-2));
       -webkit-background-clip:text;
       background-clip:text;
       color:transparent;
+      padding-right:.26em;
+      margin-right:-.26em;
+      overflow:visible;
     }
 
     .hero p{
@@ -1253,10 +1260,409 @@
       }
     }
 
+  
+
+    /* SAKURA SCENE V1 ------------------------------------------------------ */
+    body{
+      background:
+        radial-gradient(900px 520px at 6% -8%, rgba(255,183,197,.34), transparent 72%),
+        radial-gradient(760px 460px at 92% 8%, rgba(255,226,235,.54), transparent 68%),
+        radial-gradient(900px 600px at 50% 110%, rgba(47,125,104,.10), transparent 70%),
+        linear-gradient(180deg,#fff8fb 0%, #fff1f5 38%, #fffaf2 100%);
+    }
+
+    body::before{
+      opacity:.22;
+      background-image:
+        linear-gradient(rgba(226,77,59,.026) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(226,77,59,.026) 1px, transparent 1px);
+    }
+
+    .site-header,
+    .page,
+    footer,
+    .promo-floating-btn,
+    dialog{
+      position:relative;
+    }
+
+    .site-header{z-index:80}
+    .page{z-index:5}
+    footer{z-index:5}
+
+    .sakura-scene{
+      position:fixed;
+      inset:0;
+      z-index:2;
+      pointer-events:none;
+      overflow:hidden;
+    }
+
+    .sakura-scene::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 82% 8%, rgba(255,213,225,.42), transparent 26%),
+        radial-gradient(circle at 12% 18%, rgba(255,255,255,.60), transparent 22%),
+        linear-gradient(180deg, rgba(255,255,255,.18), transparent 45%);
+      opacity:.95;
+    }
+
+    .sakura-branch{
+      position:absolute;
+      top:-72px;
+      right:-84px;
+      width:min(690px,58vw);
+      height:340px;
+      filter:drop-shadow(0 24px 35px rgba(80,45,26,.12));
+      opacity:.96;
+      transform-origin:top right;
+      animation:branchFloat 7s ease-in-out infinite alternate;
+    }
+
+    .sakura-branch-left{
+      position:absolute;
+      top:58px;
+      left:-120px;
+      width:min(430px,42vw);
+      height:230px;
+      opacity:.36;
+      transform:scaleX(-1) rotate(-5deg);
+      filter:blur(.2px) drop-shadow(0 18px 28px rgba(80,45,26,.08));
+    }
+
+    .petal{
+      position:absolute;
+      top:-8vh;
+      left:var(--x);
+      width:var(--s);
+      height:calc(var(--s) * 1.34);
+      border-radius:80% 0 80% 0;
+      background:linear-gradient(135deg, #fff7fb 0%, #ffd6e3 45%, #f5a8bd 100%);
+      opacity:var(--o,.78);
+      transform:rotate(var(--r));
+      box-shadow:0 6px 14px rgba(226,77,59,.09);
+      animation:petalFall var(--d) linear var(--delay) infinite;
+    }
+
+    .petal::after{
+      content:"";
+      position:absolute;
+      left:28%;
+      top:12%;
+      width:38%;
+      height:72%;
+      border-radius:50%;
+      border-left:1px solid rgba(226,77,59,.13);
+      transform:rotate(-18deg);
+    }
+
+    .hero-blob{
+      background:
+        radial-gradient(circle at 34% 22%, rgba(255,255,255,.95), transparent 24%),
+        radial-gradient(circle at 70% 26%, rgba(255,214,227,.75), transparent 24%),
+        linear-gradient(145deg, rgba(255,183,197,.58), rgba(255,138,61,.12) 48%, rgba(47,125,104,.16));
+    }
+
+    .hero::before{
+      content:"日本語";
+      position:absolute;
+      z-index:0;
+      left:-18px;
+      top:28px;
+      font-size:clamp(72px,12vw,190px);
+      font-weight:900;
+      letter-spacing:-.09em;
+      color:rgba(226,77,59,.045);
+      pointer-events:none;
+    }
+
+    .hero-copy,
+    .hero-visual{
+      position:relative;
+      z-index:2;
+    }
+
+    .feature-card,
+    .benefit-card,
+    .difference-item,
+    .testimonial,
+    .blog-card,
+    .metric-card,
+    .showcase,
+    .video-card{
+      backdrop-filter:blur(16px);
+    }
+
+    @keyframes petalFall{
+      0%{
+        transform:translate3d(0,-10vh,0) rotate(var(--r));
+        opacity:0;
+      }
+      8%{opacity:var(--o,.78)}
+      45%{
+        transform:translate3d(calc(var(--drift) * .45),50vh,0) rotate(calc(var(--r) + 180deg));
+      }
+      100%{
+        transform:translate3d(var(--drift),112vh,0) rotate(calc(var(--r) + 420deg));
+        opacity:0;
+      }
+    }
+
+    @keyframes branchFloat{
+      from{transform:rotate(-1.2deg) translateY(0)}
+      to{transform:rotate(1.2deg) translateY(6px)}
+    }
+
+    @media (max-width:720px){
+      .sakura-branch{
+        width:520px;
+        right:-180px;
+        top:-86px;
+        opacity:.78;
+      }
+      .sakura-branch-left{display:none}
+      .petal:nth-of-type(n+25){display:none}
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .petal,
+      .sakura-branch{animation:none}
+      .petal{display:none}
+    }
+
+
+    /* Animación de entrada Sakura */
+    .site-header{
+      opacity:0;
+      transform:translateY(-16px);
+      animation:japanifyHeaderIn .75s ease-out .15s forwards;
+    }
+
+    .sakura-scene::before{
+      animation:sakuraGlowIn 1.4s ease-out both;
+    }
+
+    .sakura-branch{
+      opacity:0;
+      transform:translate(34px,-26px) rotate(-5deg) scale(.96);
+      animation:
+        sakuraBranchIn 1.05s cubic-bezier(.18,.9,.22,1) .1s forwards,
+        branchFloat 7s ease-in-out 1.25s infinite alternate;
+    }
+
+    .sakura-branch-left{
+      opacity:0;
+      animation:sakuraBranchLeftIn 1s cubic-bezier(.18,.9,.22,1) .35s forwards;
+    }
+
+    .hero::before{
+      opacity:0;
+      transform:translateY(12px) scale(.98);
+      animation:softKanjiIn .9s ease-out .45s forwards;
+    }
+
+    .hero-copy h1,
+    .hero-copy p,
+    .hero-actions{
+      opacity:0;
+      transform:translateY(22px);
+      animation:heroTextIn .82s cubic-bezier(.18,.9,.22,1) forwards;
+    }
+
+    .hero-copy h1{animation-delay:.46s}
+    .hero-copy p{animation-delay:.62s}
+    .hero-actions{animation-delay:.78s}
+
+    .hero-blob{
+      opacity:0;
+      transform:scale(.88) rotate(-4deg);
+      animation:heroBlobIn .95s cubic-bezier(.18,.9,.22,1) .55s forwards;
+    }
+
+    .hero-pet-image{
+      opacity:0;
+      transform:translateY(36px) scale(.94);
+      animation:petMascotIn 1s cubic-bezier(.18,.9,.22,1) .7s forwards;
+    }
+
+    .floating-card{
+      opacity:0;
+      transform:translateY(18px) scale(.94);
+      animation:floatingCardIn .74s cubic-bezier(.18,.9,.22,1) forwards;
+    }
+
+    .float-a{animation-delay:1.02s}
+    .float-b{animation-delay:1.14s}
+
+    .metrics{
+      opacity:0;
+      transform:translateY(18px);
+      animation:sectionSoftIn .9s ease-out 1.18s forwards;
+    }
+
+    @keyframes japanifyHeaderIn{
+      to{opacity:1;transform:translateY(0)}
+    }
+
+    @keyframes sakuraGlowIn{
+      from{opacity:0;filter:blur(8px)}
+      to{opacity:.95;filter:blur(0)}
+    }
+
+    @keyframes sakuraBranchIn{
+      to{opacity:.96;transform:translate(0,0) rotate(-1.2deg) scale(1)}
+    }
+
+    @keyframes sakuraBranchLeftIn{
+      from{opacity:0;transform:scaleX(-1) rotate(-10deg) translate(-28px,-12px)}
+      to{opacity:.36;transform:scaleX(-1) rotate(-5deg) translate(0,0)}
+    }
+
+    @keyframes softKanjiIn{
+      to{opacity:1;transform:translateY(0) scale(1)}
+    }
+
+    @keyframes heroTextIn{
+      to{opacity:1;transform:translateY(0)}
+    }
+
+    @keyframes heroBlobIn{
+      to{opacity:1;transform:scale(1) rotate(0deg)}
+    }
+
+    @keyframes petMascotIn{
+      0%{opacity:0;transform:translateY(36px) scale(.94)}
+      70%{opacity:1;transform:translateY(7px) scale(1.015)}
+      100%{opacity:1;transform:translateY(14px) scale(1)}
+    }
+
+    @keyframes floatingCardIn{
+      to{opacity:1;transform:translateY(0) scale(1)}
+    }
+
+    @keyframes sectionSoftIn{
+      to{opacity:1;transform:translateY(0)}
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .site-header,
+      .sakura-scene::before,
+      .sakura-branch,
+      .sakura-branch-left,
+      .hero::before,
+      .hero-copy h1,
+      .hero-copy p,
+      .hero-actions,
+      .hero-blob,
+      .hero-pet-image,
+      .floating-card,
+      .metrics{
+        opacity:1;
+        transform:none;
+        animation:none;
+      }
+
+      .hero-pet-image{transform:translateY(14px)}
+      .sakura-branch-left{transform:scaleX(-1) rotate(-5deg)}
+    }
+
+
+
+    /* FIX: el efecto sakura no debe romper el botón flotante de promo */
+    .promo-floating-btn{
+      position:fixed !important;
+      right:24px;
+      bottom:24px;
+      z-index:120;
+    }
+
+    #promoDialog{
+      position:fixed;
+      z-index:130;
+    }
+
+    @media (max-width:720px){
+      .promo-floating-btn{
+        right:16px;
+        bottom:16px;
+      }
+    }
+
   </style>
 </head>
 
 <body>
+
+  <div class="sakura-scene" aria-hidden="true">
+    <svg class="sakura-branch" viewBox="0 0 720 360" preserveAspectRatio="xMidYMid meet">
+      <path d="M718 58 C600 74 520 104 438 146 C350 190 292 205 200 214" fill="none" stroke="#7b3b28" stroke-width="24" stroke-linecap="round"/>
+      <path d="M612 78 C560 56 520 45 465 44" fill="none" stroke="#7b3b28" stroke-width="13" stroke-linecap="round"/>
+      <path d="M508 110 C455 91 408 82 350 83" fill="none" stroke="#7b3b28" stroke-width="11" stroke-linecap="round"/>
+      <path d="M414 154 C356 135 300 128 236 134" fill="none" stroke="#7b3b28" stroke-width="10" stroke-linecap="round"/>
+      <path d="M320 188 C276 173 235 170 188 181" fill="none" stroke="#7b3b28" stroke-width="8" stroke-linecap="round"/>
+      <g fill="#ffd5e1" opacity=".98">
+        <circle cx="568" cy="56" r="20"/><circle cx="537" cy="76" r="16"/><circle cx="502" cy="50" r="14"/>
+        <circle cx="465" cy="106" r="22"/><circle cx="423" cy="96" r="15"/><circle cx="384" cy="121" r="18"/>
+        <circle cx="340" cy="153" r="21"/><circle cx="302" cy="142" r="15"/><circle cx="270" cy="168" r="17"/>
+        <circle cx="224" cy="198" r="19"/><circle cx="184" cy="208" r="13"/><circle cx="620" cy="114" r="15"/>
+      </g>
+      <g fill="#ffb4c7" opacity=".72">
+        <circle cx="590" cy="91" r="11"/><circle cx="446" cy="62" r="10"/><circle cx="365" cy="91" r="9"/>
+        <circle cx="296" cy="194" r="10"/><circle cx="238" cy="126" r="8"/><circle cx="660" cy="66" r="12"/>
+      </g>
+      <g fill="#ffffff" opacity=".72">
+        <circle cx="548" cy="48" r="6"/><circle cx="456" cy="128" r="7"/><circle cx="316" cy="132" r="6"/><circle cx="212" cy="184" r="5"/>
+      </g>
+    </svg>
+
+    <svg class="sakura-branch-left" viewBox="0 0 520 260" preserveAspectRatio="xMidYMid meet">
+      <path d="M510 70 C415 82 335 112 250 150 C170 186 110 196 24 198" fill="none" stroke="#7b3b28" stroke-width="18" stroke-linecap="round"/>
+      <path d="M380 105 C328 82 276 75 220 82" fill="none" stroke="#7b3b28" stroke-width="9" stroke-linecap="round"/>
+      <g fill="#ffd5e1"><circle cx="360" cy="82" r="18"/><circle cx="305" cy="116" r="16"/><circle cx="244" cy="142" r="18"/><circle cx="176" cy="170" r="14"/></g>
+    </svg>
+    <span class="petal" style="--x:3%;--s:12px;--drift:-90px;--d:12s;--delay:-0.73s;--r:-26deg;--o:0.62"></span>
+    <span class="petal" style="--x:7%;--s:8px;--drift:120px;--d:14s;--delay:-1.46s;--r:44deg;--o:0.72"></span>
+    <span class="petal" style="--x:12%;--s:14px;--drift:-140px;--d:16s;--delay:-2.19s;--r:-58deg;--o:0.56"></span>
+    <span class="petal" style="--x:16%;--s:9px;--drift:60px;--d:18s;--delay:-2.92s;--r:12deg;--o:0.82"></span>
+    <span class="petal" style="--x:21%;--s:11px;--drift:-70px;--d:13s;--delay:-3.65s;--r:70deg;--o:0.66"></span>
+    <span class="petal" style="--x:25%;--s:13px;--drift:150px;--d:15s;--delay:-4.38s;--r:-34deg;--o:0.48"></span>
+    <span class="petal" style="--x:30%;--s:7px;--drift:-110px;--d:17s;--delay:-5.11s;--r:95deg;--o:0.62"></span>
+    <span class="petal" style="--x:34%;--s:12px;--drift:95px;--d:10s;--delay:-5.84s;--r:18deg;--o:0.72"></span>
+    <span class="petal" style="--x:39%;--s:10px;--drift:-130px;--d:12s;--delay:-6.57s;--r:-26deg;--o:0.56"></span>
+    <span class="petal" style="--x:43%;--s:10px;--drift:70px;--d:14s;--delay:-7.30s;--r:44deg;--o:0.82"></span>
+    <span class="petal" style="--x:48%;--s:12px;--drift:-60px;--d:16s;--delay:-8.03s;--r:-58deg;--o:0.66"></span>
+    <span class="petal" style="--x:52%;--s:8px;--drift:80px;--d:18s;--delay:-8.76s;--r:12deg;--o:0.48"></span>
+    <span class="petal" style="--x:57%;--s:14px;--drift:-90px;--d:13s;--delay:-9.49s;--r:70deg;--o:0.62"></span>
+    <span class="petal" style="--x:61%;--s:9px;--drift:120px;--d:15s;--delay:-10.22s;--r:-34deg;--o:0.72"></span>
+    <span class="petal" style="--x:66%;--s:11px;--drift:-140px;--d:17s;--delay:-10.95s;--r:95deg;--o:0.56"></span>
+    <span class="petal" style="--x:70%;--s:13px;--drift:60px;--d:10s;--delay:-1.68s;--r:18deg;--o:0.82"></span>
+    <span class="petal" style="--x:75%;--s:7px;--drift:-70px;--d:12s;--delay:-0.41s;--r:-26deg;--o:0.66"></span>
+    <span class="petal" style="--x:79%;--s:12px;--drift:150px;--d:14s;--delay:-13.14s;--r:44deg;--o:0.48"></span>
+    <span class="petal" style="--x:84%;--s:10px;--drift:-110px;--d:16s;--delay:-13.87s;--r:-58deg;--o:0.62"></span>
+    <span class="petal" style="--x:88%;--s:10px;--drift:95px;--d:18s;--delay:-14.60s;--r:12deg;--o:0.72"></span>
+    <span class="petal" style="--x:93%;--s:12px;--drift:-130px;--d:13s;--delay:-2.33s;--r:70deg;--o:0.56"></span>
+    <span class="petal" style="--x:97%;--s:8px;--drift:70px;--d:15s;--delay:-1.06s;--r:-34deg;--o:0.82"></span>
+    <span class="petal" style="--x:5%;--s:14px;--drift:-60px;--d:17s;--delay:-16.79s;--r:95deg;--o:0.66"></span>
+    <span class="petal" style="--x:14%;--s:9px;--drift:80px;--d:10s;--delay:-7.52s;--r:18deg;--o:0.48"></span>
+    <span class="petal" style="--x:28%;--s:11px;--drift:-90px;--d:12s;--delay:-6.25s;--r:-26deg;--o:0.62"></span>
+    <span class="petal" style="--x:36%;--s:13px;--drift:120px;--d:14s;--delay:-4.98s;--r:44deg;--o:0.72"></span>
+    <span class="petal" style="--x:44%;--s:7px;--drift:-140px;--d:16s;--delay:-3.71s;--r:-58deg;--o:0.56"></span>
+    <span class="petal" style="--x:55%;--s:12px;--drift:60px;--d:18s;--delay:-2.44s;--r:12deg;--o:0.82"></span>
+    <span class="petal" style="--x:63%;--s:10px;--drift:-70px;--d:13s;--delay:-8.17s;--r:70deg;--o:0.66"></span>
+    <span class="petal" style="--x:72%;--s:10px;--drift:150px;--d:15s;--delay:-6.90s;--r:-34deg;--o:0.48"></span>
+    <span class="petal" style="--x:82%;--s:12px;--drift:-110px;--d:17s;--delay:-5.63s;--r:95deg;--o:0.62"></span>
+    <span class="petal" style="--x:91%;--s:8px;--drift:95px;--d:10s;--delay:-3.36s;--r:18deg;--o:0.72"></span>
+    <span class="petal" style="--x:10%;--s:14px;--drift:-130px;--d:12s;--delay:-0.09s;--r:-26deg;--o:0.56"></span>
+    <span class="petal" style="--x:19%;--s:9px;--drift:70px;--d:14s;--delay:-10.82s;--r:44deg;--o:0.82"></span>
+    <span class="petal" style="--x:33%;--s:11px;--drift:-60px;--d:16s;--delay:-9.55s;--r:-58deg;--o:0.66"></span>
+    <span class="petal" style="--x:46%;--s:13px;--drift:80px;--d:18s;--delay:-8.28s;--r:12deg;--o:0.48"></span>
+    <span class="petal" style="--x:59%;--s:7px;--drift:-90px;--d:13s;--delay:-1.01s;--r:70deg;--o:0.62"></span>
+    <span class="petal" style="--x:68%;--s:12px;--drift:120px;--d:15s;--delay:-12.74s;--r:-34deg;--o:0.72"></span>
+    <span class="petal" style="--x:77%;--s:10px;--drift:-140px;--d:17s;--delay:-11.47s;--r:95deg;--o:0.56"></span>
+    <span class="petal" style="--x:86%;--s:10px;--drift:60px;--d:10s;--delay:-9.20s;--r:18deg;--o:0.82"></span>
+  </div>
   <header class="site-header">
     <nav class="site-nav">
       <a class="brand" href="#inicio" aria-label="Japanify inicio">
