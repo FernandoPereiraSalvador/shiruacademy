@@ -16,8 +16,6 @@ const translations = {
       heroPrimaryCta: "Disponible en Google Play",
       heroSecondaryCta: "Explorar funcionalidades",
 
-      heroStat2Value: "92%",
-      heroStat2Label: "De usuarios mejora en las primeras 4 semanas",
       heroStat3Value: "5★",
       heroStat3Label: "Valoración media en Google Play",
 
@@ -53,15 +51,6 @@ const translations = {
       mockPracticeTitle: "Escucha y responde",
       mockPracticeDesc: "Selecciona la traducción correcta para continuar la conversación.",
       mockChoicesLabel: "Opciones:",
-
-      differenceTitle: "El diferencial Japanify",
-      differenceSubtitle: "La app combina pedagogía y entretenimiento para que estudiar japonés encaje en tu rutina.",
-      differenceHighlight1: "Aprendizaje adaptativo",
-      differenceHighlight1Desc: "El algoritmo detecta tus errores frecuentes y reordena el contenido para reforzarlo antes de avanzar.",
-      differenceHighlight2: "Contenido en constante expansión",
-      differenceHighlight2Desc: "Nuevas unidades temáticas cada mes: viajes, cultura pop, negocios y certificaciones JLPT.",
-      differenceHighlight3: "Comunidad motivadora",
-      differenceHighlight3Desc: "Eventos en vivo, rankings amistosos y retos colaborativos con estudiantes de todo el mundo.",
 
       testimonialsTitle: "Lo que dicen quienes ya aprenden con Japanify",
       testimonialsSubtitle: "Opiniones de usuarios sobre su experiencia con la app.",
@@ -168,8 +157,6 @@ const translations = {
       heroPrimaryCta: "Available on Google Play",
       heroSecondaryCta: "Explore features",
 
-      heroStat2Value: "92%",
-      heroStat2Label: "Users improve within the first 4 weeks",
       heroStat3Value: "4.8★",
       heroStat3Label: "Average rating on Google Play",
 
@@ -205,15 +192,6 @@ const translations = {
       mockPracticeTitle: "Listen and reply",
       mockPracticeDesc: "Select the correct translation to continue the conversation.",
       mockChoicesLabel: "Options:",
-
-      differenceTitle: "The Japanify difference",
-      differenceSubtitle: "The app blends pedagogy and entertainment so learning Japanese fits your routine.",
-      differenceHighlight1: "Adaptive learning",
-      differenceHighlight1Desc: "The algorithm spots your common mistakes and reorders content to reinforce them before moving on.",
-      differenceHighlight2: "Constantly growing content",
-      differenceHighlight2Desc: "New topic-based units every month: travel, pop culture, business, and JLPT prep.",
-      differenceHighlight3: "Motivating community",
-      differenceHighlight3Desc: "Live events, friendly leaderboards, and collaborative challenges with learners worldwide.",
 
       testimonialsTitle: "What learners say about Japanify",
       testimonialsSubtitle: "User opinions about their experience with the app.",
@@ -320,8 +298,6 @@ const translations = {
       heroPrimaryCta: "Erhältlich bei Google Play",
       heroSecondaryCta: "Funktionen entdecken",
 
-      heroStat2Value: "92%",
-      heroStat2Label: "Der Großteil der Nutzer verbessert sich in den ersten 4 Wochen",
       heroStat3Value: "5★",
       heroStat3Label: "Durchschnittsbewertung bei Google Play",
 
@@ -354,15 +330,6 @@ const translations = {
       mockPracticeTitle: "Hören und antworten",
       mockPracticeDesc: "Wähle die richtige Übersetzung, um das Gespräch fortzusetzen.",
       mockChoicesLabel: "Optionen:",
-
-      differenceTitle: "Der Japanify-Unterschied",
-      differenceSubtitle: "Die App verbindet Didaktik und Unterhaltung, damit Japanischlernen in deinen Alltag passt.",
-      differenceHighlight1: "Adaptives Lernen",
-      differenceHighlight1Desc: "Der Algorithmus erkennt häufige Fehler und ordnet Inhalte neu, um sie zu verstärken, bevor du weitergehst.",
-      differenceHighlight2: "Ständig wachsender Inhalt",
-      differenceHighlight2Desc: "Jeden Monat neue thematische Einheiten: Reisen, Popkultur, Business und JLPT-Vorbereitung.",
-      differenceHighlight3: "Motivierende Community",
-      differenceHighlight3Desc: "Live-Events, freundliche Ranglisten und gemeinsame Challenges mit Lernenden aus aller Welt.",
 
       testimonialsTitle: "Erfahrungen von Japanify-Nutzern",
       testimonialsSubtitle: "Meinungen von Nutzerinnen und Nutzern zur App.",
@@ -469,8 +436,6 @@ const translations = {
       heroPrimaryCta: "Disponible sur Google Play",
       heroSecondaryCta: "Explorer les fonctionnalités",
 
-      heroStat2Value: "92%",
-      heroStat2Label: "Des utilisateurs progressent durant les 4 premières semaines",
       heroStat3Value: "5★",
       heroStat3Label: "Note moyenne sur Google Play",
 
@@ -503,15 +468,6 @@ const translations = {
       mockPracticeTitle: "Écouter et répondre",
       mockPracticeDesc: "Sélectionnez la bonne traduction pour continuer la conversation.",
       mockChoicesLabel: "Options :",
-
-      differenceTitle: "La différence Japanify",
-      differenceSubtitle: "L’application combine pédagogie et divertissement pour que l’étude du japonais s’intègre à votre routine.",
-      differenceHighlight1: "Apprentissage adaptatif",
-      differenceHighlight1Desc: "L’algorithme repère vos erreurs fréquentes et réorganise le contenu pour les renforcer avant de passer à la suite.",
-      differenceHighlight2: "Contenu en constante évolution",
-      differenceHighlight2Desc: "De nouvelles unités thématiques chaque mois : voyage, culture pop, affaires et préparation au JLPT.",
-      differenceHighlight3: "Communauté motivante",
-      differenceHighlight3Desc: "Événements en live, classements amicaux et défis collaboratifs avec des apprenants du monde entier.",
 
       testimonialsTitle: "Ce que disent ceux qui apprennent déjà avec Japanify",
       testimonialsSubtitle: "Avis d’utilisateurs sur leur expérience avec l’application.",
@@ -618,8 +574,6 @@ const translations = {
       heroPrimaryCta: "Google Play에서 사용 가능",
       heroSecondaryCta: "기능 살펴보기",
 
-      heroStat2Value: "92%",
-      heroStat2Label: "대부분의 사용자가 4주 안에 실력이 향상됩니다",
       heroStat3Value: "4.8★",
       heroStat3Label: "Google Play 평균 평점",
 
@@ -652,15 +606,6 @@ const translations = {
       mockPracticeTitle: "듣고 대답하기",
       mockPracticeDesc: "대화를 이어갈 수 있는 올바른 번역을 선택하세요.",
       mockChoicesLabel: "선택지:",
-
-      differenceTitle: "Japanify만의 차별점",
-      differenceSubtitle: "이 앱은 교육과 재미를 결합해 일본어 공부가 일상에 자연스럽게 스며들도록 도와줍니다.",
-      differenceHighlight1: "적응형 학습",
-      differenceHighlight1Desc: "자주 하는 실수를 감지하고, 진도에 맞게 콘텐츠 순서를 조정해 취약한 부분을 먼저 강화합니다.",
-      differenceHighlight2: "계속 늘어나는 콘텐츠",
-      differenceHighlight2Desc: "여행, 대중문화, 비즈니스, JLPT 대비 등 매달 새로운 주제 유닛이 추가됩니다.",
-      differenceHighlight3: "동기 부여가 되는 커뮤니티",
-      differenceHighlight3Desc: "라이브 이벤트, 친선 랭킹, 전 세계 학습자와 함께하는 협력 챌린지를 만나보세요.",
 
       testimonialsTitle: "Japanify와 함께하는 학습자들의 이야기",
       testimonialsSubtitle: "앱을 사용해 본 이용자들의 후기입니다.",
@@ -767,8 +712,6 @@ const translations = {
       heroPrimaryCta: "在 Google Play 获取",
       heroSecondaryCta: "查看功能",
 
-      heroStat2Value: "92%",
-      heroStat2Label: "大部分用户在前 4 周内就有提升",
       heroStat3Value: "4.8★",
       heroStat3Label: "Google Play 平均评分",
 
@@ -801,15 +744,6 @@ const translations = {
       mockPracticeTitle: "听力与回答",
       mockPracticeDesc: "选择正确的翻译来继续对话。",
       mockChoicesLabel: "选项：",
-
-      differenceTitle: "Japanify 的独特之处",
-      differenceSubtitle: "应用将教学与娱乐相结合，让学习日语自然融入你的日常生活。",
-      differenceHighlight1: "自适应学习",
-      differenceHighlight1Desc: "算法会识别你常犯的错误，在你继续前优先强化相关内容。",
-      differenceHighlight2: "持续扩展的内容",
-      differenceHighlight2Desc: "每月新增主题单元：旅行、流行文化、商务以及 JLPT 备考。",
-      differenceHighlight3: "充满动力的学习社区",
-      differenceHighlight3Desc: "参与直播活动、好友排行榜和与全球学习者一起的合作挑战。",
 
       testimonialsTitle: "使用 Japanify 的学习者怎么说",
       testimonialsSubtitle: "以下是部分用户对应用的评价。",

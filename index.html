@@ -353,51 +353,6 @@
     .float-a{left:0;top:96px}
     .float-b{right:-4px;bottom:86px}
 
-    .metrics{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:18px;
-      margin-top:-72px;
-    }
-
-    .metric-card{
-      position:relative;
-      overflow:hidden;
-      padding:28px;
-      border-radius:var(--radius-lg);
-      background:var(--card);
-      border:1px solid rgba(255,255,255,.74);
-      box-shadow:var(--shadow-soft);
-      text-align:center;
-    }
-
-    .metric-card::after{
-      content:"";
-      position:absolute;
-      inset:auto -20% -55% -20%;
-      height:120px;
-      background:linear-gradient(90deg,rgba(226,77,59,.14),rgba(255,138,61,.14));
-      filter:blur(24px);
-    }
-
-    .metric-card strong{
-      position:relative;
-      z-index:1;
-      display:block;
-      font-size:42px;
-      letter-spacing:-.05em;
-      color:var(--accent);
-      margin-bottom:8px;
-    }
-
-    .metric-card span{
-      position:relative;
-      z-index:1;
-      color:var(--muted);
-      font-weight:700;
-      line-height:1.5;
-    }
-
     section{
       display:flex;
       flex-direction:column;
@@ -432,26 +387,325 @@
       line-height:1.7;
     }
 
+    .experience-section{
+      position:relative;
+    }
+
+    @property --panel-border-angle{
+      syntax:"<angle>";
+      initial-value:0deg;
+      inherits:false;
+    }
+
+    .experience-panel{
+      position:relative;
+      isolation:isolate;
+      display:grid;
+      grid-template-columns:minmax(300px,.9fr) minmax(440px,1.1fr);
+      gap:54px;
+      align-items:center;
+      min-height:700px;
+      padding:54px 48px 56px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.9);
+      border-radius:40px;
+      background:
+        radial-gradient(470px 360px at -7% 8%,rgba(255,205,220,.42),transparent 68%),
+        radial-gradient(520px 370px at 108% 96%,rgba(172,224,206,.34),transparent 70%),
+        linear-gradient(145deg,rgba(255,255,255,.97),rgba(255,249,244,.93) 48%,rgba(247,253,250,.93));
+      box-shadow:
+        0 34px 82px rgba(80,45,26,.15),
+        inset 0 1px 0 rgba(255,255,255,.98),
+        inset 0 -28px 72px rgba(255,255,255,.28);
+      backdrop-filter:blur(20px);
+      transition:transform .35s cubic-bezier(.18,.9,.22,1),box-shadow .35s ease;
+    }
+
+    .experience-panel:hover{
+      transform:translateY(-3px);
+      box-shadow:
+        0 44px 98px rgba(80,45,26,.19),
+        inset 0 1px 0 rgba(255,255,255,1),
+        inset 0 -28px 72px rgba(255,255,255,.34);
+    }
+
+    .experience-panel::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:1;
+      padding:2px;
+      border-radius:inherit;
+      background:conic-gradient(
+        from var(--panel-border-angle),
+        transparent 0 15%,
+        rgba(226,77,59,.78) 23%,
+        rgba(255,178,126,.84) 30%,
+        transparent 38% 57%,
+        rgba(47,125,104,.72) 66%,
+        rgba(168,224,205,.78) 73%,
+        transparent 81% 100%
+      );
+      -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      -webkit-mask-composite:xor;
+      mask-composite:exclude;
+      opacity:.72;
+      animation:panelBorderOrbit 13s linear infinite;
+      pointer-events:none;
+      transition:opacity .3s ease;
+    }
+
+    .experience-panel:hover::before{opacity:1}
+
+    .experience-panel::after{
+      content:"";
+      position:absolute;
+      inset:-18%;
+      z-index:0;
+      pointer-events:none;
+      background:
+        radial-gradient(circle at 16% 22%,rgba(255,255,255,.88) 0 3px,transparent 4px),
+        radial-gradient(circle at 78% 16%,rgba(226,77,59,.12) 0 2px,transparent 3px),
+        radial-gradient(circle at 88% 76%,rgba(47,125,104,.12) 0 3px,transparent 4px),
+        repeating-linear-gradient(118deg,transparent 0 42px,rgba(226,77,59,.024) 43px 44px,transparent 45px 86px);
+      opacity:.68;
+      transform:translate3d(0,0,0) rotate(-1deg);
+      animation:panelTextureDrift 18s ease-in-out infinite alternate;
+    }
+
+    @keyframes panelBorderOrbit{
+      to{--panel-border-angle:360deg}
+    }
+
+    @keyframes panelTextureDrift{
+      from{transform:translate3d(-8px,-4px,0) rotate(-1deg)}
+      to{transform:translate3d(12px,8px,0) rotate(1deg)}
+    }
+
+    .experience-copy{
+      position:relative;
+      z-index:3;
+      display:flex;
+      flex-direction:column;
+      gap:26px;
+    }
+
+    .experience-copy::before{
+      content:"";
+      position:absolute;
+      z-index:-1;
+      inset:-42px -24px -42px -52px;
+      border-radius:45% 55% 52% 48%;
+      background:radial-gradient(circle at 42% 50%,rgba(255,255,255,.66),rgba(255,255,255,.22) 48%,transparent 74%);
+      filter:blur(9px);
+      pointer-events:none;
+    }
+
+    .experience-copy .section-heading{
+      max-width:560px;
+    }
+
+    .experience-features{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    .experience-feature{
+      display:grid;
+      grid-template-columns:52px minmax(0,1fr);
+      align-items:start;
+      gap:16px;
+      padding:17px 18px;
+      border-radius:21px;
+      background:rgba(255,255,255,.68);
+      border:1px solid rgba(255,255,255,.84);
+      box-shadow:0 12px 30px rgba(80,45,26,.075);
+      backdrop-filter:blur(14px);
+      transition:transform .22s ease,background .22s ease,box-shadow .22s ease;
+    }
+
+    .experience-feature:nth-child(1){
+      background:linear-gradient(135deg,rgba(255,255,255,.82),rgba(255,231,238,.62));
+    }
+
+    .experience-feature:nth-child(2){
+      background:linear-gradient(135deg,rgba(255,255,255,.82),rgba(255,244,214,.64));
+    }
+
+    .experience-feature:nth-child(3){
+      background:linear-gradient(135deg,rgba(255,255,255,.82),rgba(223,243,235,.66));
+    }
+
+    .experience-feature:hover{
+      transform:translateX(7px);
+      background:rgba(255,255,255,.94);
+      box-shadow:0 18px 38px rgba(80,45,26,.11);
+    }
+
+    .experience-feature .card-icon{
+      width:52px;
+      height:52px;
+      margin:0;
+      border-radius:17px;
+      font-size:23px;
+      box-shadow:inset 0 0 0 1px rgba(226,77,59,.08);
+    }
+
+    .experience-feature-copy{
+      min-width:0;
+      padding-top:2px;
+    }
+
+    .experience-feature strong{
+      display:block;
+      margin-bottom:6px;
+      font-size:17px;
+      letter-spacing:-.025em;
+    }
+
+    .experience-feature span{
+      display:block;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.56;
+    }
+
+    .shorts-showcase{
+      position:relative;
+      z-index:2;
+      min-height:620px;
+    }
+
+    .shorts-showcase::before,
+    .shorts-showcase::after{
+      content:"";
+      position:absolute;
+      border-radius:50%;
+      pointer-events:none;
+    }
+
+    .shorts-showcase::before{
+      width:430px;
+      height:430px;
+      left:50%;
+      top:50%;
+      transform:translate(-50%,-50%);
+      border:1px solid rgba(226,77,59,.13);
+      box-shadow:
+        0 0 0 32px rgba(226,77,59,.035),
+        0 0 0 66px rgba(47,125,104,.025);
+    }
+
+    .shorts-showcase::after{
+      width:310px;
+      height:310px;
+      right:4%;
+      top:10%;
+      background:linear-gradient(135deg,rgba(226,77,59,.18),rgba(255,138,61,.12),rgba(47,125,104,.12));
+      filter:blur(42px);
+    }
+
+    .shorts-badge{
+      position:absolute;
+      z-index:7;
+      top:4px;
+      left:50%;
+      transform:translateX(-50%);
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 15px;
+      border-radius:999px;
+      color:var(--accent-dark);
+      background:rgba(255,255,255,.88);
+      border:1px solid rgba(255,255,255,.94);
+      box-shadow:0 14px 32px rgba(80,45,26,.11);
+      backdrop-filter:blur(12px);
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      white-space:nowrap;
+    }
+
+    .shorts-badge::before{
+      content:"";
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:var(--accent);
+      box-shadow:0 0 0 5px rgba(226,77,59,.11);
+    }
+
     .video-card{
-      padding:12px;
+      position:absolute;
+      z-index:4;
+      width:min(292px,54%);
+      padding:9px;
       border-radius:32px;
       background:
-        linear-gradient(#fff,#fff) padding-box,
-        linear-gradient(135deg,rgba(226,77,59,.42),rgba(255,138,61,.3),rgba(47,125,104,.32)) border-box;
+        linear-gradient(rgba(255,255,255,.96),rgba(255,255,255,.9)) padding-box,
+        linear-gradient(145deg,rgba(226,77,59,.72),rgba(255,138,61,.38),rgba(47,125,104,.48)) border-box;
       border:1px solid transparent;
-      box-shadow:var(--shadow);
+      box-shadow:0 34px 70px rgba(80,45,26,.22);
+      transform-origin:center;
+      transition:transform .32s cubic-bezier(.18,.9,.22,1),box-shadow .32s ease,z-index 0s;
+    }
+
+    .short-card-one{
+      left:2%;
+      top:76px;
+      transform:rotate(-5.5deg);
+    }
+
+    .short-card-two{
+      right:1%;
+      top:42px;
+      transform:rotate(5deg);
+    }
+
+    .video-card:hover{
+      z-index:8;
+      transform:translateY(-10px) rotate(0deg) scale(1.025);
+      box-shadow:0 42px 86px rgba(80,45,26,.28);
+    }
+
+    .video-number{
+      position:absolute;
+      z-index:6;
+      top:20px;
+      left:20px;
+      display:grid;
+      place-items:center;
+      width:38px;
+      height:38px;
+      border-radius:13px;
+      color:#fff;
+      background:rgba(24,32,29,.72);
+      border:1px solid rgba(255,255,255,.18);
+      backdrop-filter:blur(10px);
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.06em;
+      pointer-events:none;
     }
 
     .video-frame{
       position:relative;
       width:100%;
-      aspect-ratio:16/9;
+      aspect-ratio:9/16;
       overflow:hidden;
       border-radius:24px;
-      background:#1d1b18;
+      background:
+        radial-gradient(circle at 50% 20%,rgba(255,255,255,.14),transparent 34%),
+        #1d1b18;
     }
 
-    .video-frame iframe{
+    .video-frame iframe,
+    .video-cover{
       position:absolute;
       inset:0;
       width:100%;
@@ -459,13 +713,81 @@
       border:0;
     }
 
-    .feature-grid,.benefit-grid,.difference-grid,.testimonials-grid,.blog-grid{
+    .video-cover{
+      display:block;
+      padding:0;
+      overflow:hidden;
+      color:#fff;
+      text-decoration:none;
+      background:#1d1b18;
+      cursor:pointer;
+      font:inherit;
+    }
+
+    .video-cover img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center;
+      opacity:1;
+      transform:none;
+      filter:saturate(1.03) contrast(1.025);
+      transition:transform .3s ease,filter .3s ease;
+      image-rendering:auto;
+    }
+
+    .video-cover::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg,rgba(12,14,13,.02) 42%,rgba(12,14,13,.62));
+    }
+
+    .video-cover:hover img{
+      transform:scale(1.035);
+      filter:saturate(1.07) contrast(1.04);
+    }
+
+    .video-play{
+      position:absolute;
+      z-index:2;
+      left:50%;
+      top:50%;
+      transform:translate(-50%,-50%);
+      display:grid;
+      place-items:center;
+      width:70px;
+      height:70px;
+      padding-left:4px;
+      border-radius:50%;
+      color:#fff;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      box-shadow:0 18px 42px rgba(226,77,59,.38),0 0 0 10px rgba(255,255,255,.13);
+      font-size:25px;
+      pointer-events:none;
+    }
+
+    .video-fallback-text{
+      position:absolute;
+      z-index:2;
+      left:0;
+      right:0;
+      bottom:24px;
+      color:#fff;
+      text-align:center;
+      font-size:13px;
+      font-weight:850;
+      letter-spacing:.03em;
+      pointer-events:none;
+    }
+
+    .feature-grid,.benefit-grid,.testimonials-grid,.blog-grid{
       display:grid;
       grid-template-columns:repeat(3,minmax(0,1fr));
       gap:18px;
     }
 
-    .feature-card,.benefit-card,.difference-item,.testimonial,.blog-card{
+    .feature-card,.benefit-card,.testimonial,.blog-card{
       position:relative;
       overflow:hidden;
       padding:28px;
@@ -476,7 +798,7 @@
       transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
     }
 
-    .feature-card:hover,.benefit-card:hover,.difference-item:hover,.testimonial:hover,.blog-card:hover{
+    .feature-card:hover,.benefit-card:hover,.testimonial:hover,.blog-card:hover{
       transform:translateY(-6px);
       box-shadow:var(--shadow);
       border-color:rgba(226,77,59,.2);
@@ -493,14 +815,14 @@
       font-size:22px;
     }
 
-    .feature-card strong,.benefit-card strong,.difference-item strong{
+    .feature-card strong,.benefit-card strong{
       display:block;
       font-size:19px;
       letter-spacing:-.025em;
       margin-bottom:10px;
     }
 
-    .feature-card span,.benefit-card span,.difference-item,.testimonial,.blog-card p{
+    .feature-card span,.benefit-card span,.testimonial,.blog-card p{
       color:var(--muted);
       line-height:1.68;
     }
@@ -555,28 +877,155 @@
     .showcase-visual{
       display:grid;
       place-items:center;
-      min-height:390px;
+      min-height:470px;
       position:relative;
+      perspective:1200px;
     }
 
     .showcase-visual::before{
       content:"";
       position:absolute;
-      width:260px;
-      height:260px;
+      width:330px;
+      height:330px;
       border-radius:50%;
-      background:linear-gradient(135deg,rgba(226,77,59,.18),rgba(47,125,104,.18));
-      filter:blur(10px);
+      background:
+        radial-gradient(circle at 32% 28%,rgba(255,255,255,.92),transparent 25%),
+        linear-gradient(135deg,rgba(226,77,59,.2),rgba(255,138,61,.13) 48%,rgba(47,125,104,.2));
+      filter:blur(18px);
+      opacity:.9;
+      animation:kanjiGlow 6s ease-in-out infinite alternate;
     }
 
-    .showcase-mobile-image{
+    .showcase-device-stack{
       position:relative;
-      z-index:1;
-      width:min(310px,100%);
-      border-radius:34px;
-      box-shadow:0 42px 80px rgba(80,45,26,.22);
-      border:8px solid #1b201d;
-      background:#1b201d;
+      z-index:2;
+      width:min(310px,82vw);
+      aspect-ratio:9 / 19.5;
+      transform:rotate(2deg) translateY(-4px);
+      transition:transform .35s cubic-bezier(.2,.85,.25,1),filter .35s ease;
+      filter:drop-shadow(0 38px 42px rgba(80,45,26,.2));
+    }
+
+    .showcase-device-stack::before,
+    .showcase-device-stack::after{
+      content:"";
+      position:absolute;
+      inset:14px -16px -18px 18px;
+      border-radius:38px;
+      pointer-events:none;
+    }
+
+    .showcase-device-stack::before{
+      z-index:-2;
+      background:linear-gradient(150deg,rgba(226,77,59,.24),rgba(255,255,255,.5) 46%,rgba(47,125,104,.2));
+      transform:rotate(-5deg);
+      box-shadow:0 26px 55px rgba(80,45,26,.12);
+    }
+
+    .showcase-device-stack::after{
+      z-index:-1;
+      inset:8px -8px -10px 10px;
+      border:1px solid rgba(255,255,255,.78);
+      background:rgba(255,255,255,.3);
+      backdrop-filter:blur(8px);
+      transform:rotate(-2deg);
+    }
+
+    .showcase-device-stack:hover{
+      transform:rotate(0deg) translateY(-10px) scale(1.015);
+      filter:drop-shadow(0 46px 48px rgba(80,45,26,.24));
+    }
+
+    .showcase-device{
+      position:absolute;
+      inset:0;
+      overflow:visible;
+      border:0;
+      border-radius:0;
+      background:transparent;
+      box-shadow:none;
+      isolation:isolate;
+    }
+
+    /* Las imágenes ya incluyen su propio marco de móvil. */
+    .showcase-device::after{display:none}
+
+    .kanji-screen{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      display:block;
+      opacity:0;
+      transform:scale(1.018);
+      animation:kanjiScreenCycle 10s ease-in-out infinite;
+      will-change:opacity,transform;
+    }
+
+    .kanji-screen--two{
+      animation-delay:-5s;
+    }
+
+    .showcase-device-stack.single-screen .kanji-screen{
+      animation:none !important;
+      opacity:1;
+      transform:none;
+    }
+
+    .showcase-device-stack.single-screen .showcase-screen-progress{
+      display:none;
+    }
+
+    .showcase-screen-progress{
+      position:absolute;
+      left:50%;
+      bottom:-42px;
+      z-index:5;
+      transform:translateX(-50%);
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.76);
+      border:1px solid rgba(255,255,255,.9);
+      box-shadow:0 12px 28px rgba(80,45,26,.11);
+      backdrop-filter:blur(12px);
+    }
+
+    .showcase-screen-progress span{
+      width:9px;
+      height:9px;
+      border-radius:999px;
+      background:rgba(24,32,29,.18);
+      animation:kanjiProgressCycle 10s ease-in-out infinite;
+    }
+
+    .showcase-screen-progress span:nth-child(2){
+      animation-delay:-5s;
+    }
+
+    .showcase-device-stack:hover .kanji-screen,
+    .showcase-device-stack:hover .showcase-screen-progress span{
+      animation-play-state:paused;
+    }
+
+    @keyframes kanjiScreenCycle{
+      0%,42%{opacity:1;transform:scale(1)}
+      49%,93%{opacity:0;transform:scale(1.025)}
+      100%{opacity:1;transform:scale(1)}
+    }
+
+    @keyframes kanjiProgressCycle{
+      0%,42%{width:25px;background:var(--accent)}
+      49%,93%{width:9px;background:rgba(24,32,29,.18)}
+      100%{width:25px;background:var(--accent)}
+    }
+
+    @keyframes kanjiGlow{
+      from{transform:scale(.96) rotate(-3deg);opacity:.72}
+      to{transform:scale(1.04) rotate(3deg);opacity:1}
     }
 
     .testimonial{
@@ -769,11 +1218,24 @@
       .hero-visual{min-height:460px;order:-1}
       .float-a{left:20px;top:42px}
       .float-b{right:20px;bottom:32px}
-      .metrics{margin-top:-20px}
-      .feature-grid,.benefit-grid,.difference-grid,.testimonials-grid,.blog-grid{
+      .feature-grid,.benefit-grid,.testimonials-grid,.blog-grid{
         grid-template-columns:1fr 1fr;
       }
       .showcase{grid-template-columns:1fr}
+      .experience-panel{
+        grid-template-columns:1fr;
+        gap:30px;
+        padding:42px 32px 46px;
+        border-radius:34px;
+      }
+      .experience-copy .section-heading{
+        max-width:720px;
+      }
+      .shorts-showcase{
+        width:min(650px,100%);
+        min-height:610px;
+        margin:0 auto;
+      }
     }
 
     @media (max-width:720px){
@@ -798,13 +1260,58 @@
       .floating-card strong{font-size:24px}
       .float-a{left:0;top:24px}
       .float-b{right:0;bottom:20px}
-      .metrics,.feature-grid,.benefit-grid,.difference-grid,.testimonials-grid,.blog-grid{
+      .feature-grid,.benefit-grid,.testimonials-grid,.blog-grid{
         grid-template-columns:1fr;
       }
+      .experience-panel{
+        grid-template-columns:1fr;
+        gap:36px;
+        min-height:0;
+        padding:32px 18px 36px;
+        border-radius:28px;
+      }
+      .experience-panel:hover{transform:none}
+      .experience-panel::before{padding:1.5px}
+      .experience-panel::after{inset:-26%}
+      .experience-copy .section-heading{text-align:center;align-items:center;margin:0 auto}
+      .experience-feature:hover{transform:none}
+      .shorts-showcase{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        gap:24px;
+        min-height:0;
+        padding-top:58px;
+      }
+      .shorts-showcase::before{
+        width:280px;
+        height:280px;
+        top:34%;
+      }
+      .shorts-showcase::after{
+        width:240px;
+        height:240px;
+        right:4%;
+        top:22%;
+      }
+      .shorts-badge{top:0}
+      .video-card,
+      .short-card-one,
+      .short-card-two{
+        position:relative;
+        top:auto;
+        left:auto;
+        right:auto;
+        width:min(100%,310px);
+        transform:none;
+      }
+      .video-card:hover{transform:translateY(-6px)}
       .hero-actions,.btn-group{flex-direction:column;align-items:stretch;width:100%}
       .btn-primary,.btn-secondary{width:100%}
       .showcase,.cta-banner{padding:30px 20px}
-      .showcase-visual{min-height:330px}
+      .showcase-visual{min-height:455px}
+      .showcase-device-stack{width:min(280px,78vw);transform:rotate(1deg)}
+      .showcase-device-stack:hover{transform:rotate(0deg) translateY(-5px)}
       .portfolio-btn{right:16px;bottom:16px}
     }
 
@@ -1386,10 +1893,8 @@
 
     .feature-card,
     .benefit-card,
-    .difference-item,
     .testimonial,
     .blog-card,
-    .metric-card,
     .showcase,
     .video-card{
       backdrop-filter:blur(16px);
@@ -1428,7 +1933,9 @@
 
     @media (prefers-reduced-motion: reduce){
       .petal,
-      .sakura-branch{animation:none}
+      .sakura-branch,
+      .experience-panel::before,
+      .experience-panel::after{animation:none}
       .petal{display:none}
     }
 
@@ -1496,12 +2003,6 @@
     .float-a{animation-delay:1.02s}
     .float-b{animation-delay:1.14s}
 
-    .metrics{
-      opacity:0;
-      transform:translateY(18px);
-      animation:sectionSoftIn .9s ease-out 1.18s forwards;
-    }
-
     @keyframes japanifyHeaderIn{
       to{opacity:1;transform:translateY(0)}
     }
@@ -1547,6 +2048,12 @@
     }
 
     @media (prefers-reduced-motion: reduce){
+      .experience-feature,
+      .video-card,
+      .video-cover img{
+        transition:none !important;
+      }
+
       .site-header,
       .sakura-scene::before,
       .sakura-branch,
@@ -1557,8 +2064,7 @@
       .hero-actions,
       .hero-blob,
       .hero-pet-image,
-      .floating-card,
-      .metrics{
+      .floating-card{
         opacity:1;
         transform:none;
         animation:none;
@@ -1566,6 +2072,11 @@
 
       .hero-pet-image{transform:translateY(14px)}
       .sakura-branch-left{transform:scaleX(-1) rotate(-5deg)}
+      .showcase-visual::before,
+      .kanji-screen,
+      .showcase-screen-progress span{animation:none !important}
+      .kanji-screen--one{opacity:1;transform:none}
+      .kanji-screen--two{opacity:0}
     }
 
 
@@ -1720,54 +2231,53 @@
       </div>
     </section>
 
-    <section class="metrics" aria-label="Métricas de Japanify">
-      <div class="metric-card">
-        <strong data-i18n="heroStat2Value">92%</strong>
-        <span data-i18n="heroStat2Label">De usuarios mejora en las primeras 4 semanas</span>
-      </div>
-      <div class="metric-card">
-        <strong data-i18n="heroStat3Value">5★</strong>
-        <span data-i18n="heroStat3Label">Valoración media en Google Play</span>
-      </div>
-    </section>
+    <section id="features" class="experience-section">
+      <div class="experience-panel">
+        <div class="experience-copy">
+          <div class="section-heading">
+            <h2 data-i18n="videoTitle">Mira Japanify en acción</h2>
+            <p data-i18n="videoSubtitle">Un recorrido rápido por los minijuegos, la gramática y el repaso inteligente.</p>
+          </div>
 
-    <section id="features">
-      <div class="section-heading center">
-        <h2 data-i18n="videoTitle">Mira Japanify en acción</h2>
-        <p data-i18n="videoSubtitle">Un recorrido rápido por los minijuegos, la gramática y el repaso inteligente.</p>
-      </div>
+          <div class="experience-features">
+            <article class="experience-feature">
+              <div class="card-icon">🎮</div>
+              <div class="experience-feature-copy">
+                <strong data-i18n="feature1Title">Minijuegos interactivos</strong>
+                <span data-i18n="feature1Desc">Practica vocabulario, lectura y escucha con quizzes, emparejar cartas y dictados interactivos.</span>
+              </div>
+            </article>
 
-      <div class="video-card">
-        <div class="video-frame">
-          <iframe
-            id="promoVideo"
-            width="560"
-            height="315"
-            src="https://www.youtube.com/embed/2rxV00pIBgg"
-            title="Japanify video"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen
-            referrerpolicy="strict-origin-when-cross-origin">
-          </iframe>
-        </div>
-      </div>
+            <article class="experience-feature">
+              <div class="card-icon">📚</div>
+              <div class="experience-feature-copy">
+                <strong data-i18n="feature2Title">Lecciones estructuradas</strong>
+                <span data-i18n="feature2Desc">Sigue unidades organizadas por temas y nivel, con explicaciones claras y ejemplos prácticos.</span>
+              </div>
+            </article>
 
-      <div class="feature-grid">
-        <div class="feature-card">
-          <div class="card-icon">🎮</div>
-          <strong data-i18n="feature1Title">Minijuegos interactivos</strong>
-          <span data-i18n="feature1Desc">Practica vocabulario, lectura y escucha con quizzes, emparejar cartas y dictados interactivos.</span>
+            <article class="experience-feature">
+              <div class="card-icon">🧠</div>
+              <div class="experience-feature-copy">
+                <strong data-i18n="feature3Title">Repetición espaciada de kana y kanji</strong>
+                <span data-i18n="feature3Desc">Repasa hiragana, katakana y kanji justo cuando estás a punto de olvidarlos para fijarlos a largo plazo.</span>
+              </div>
+            </article>
+          </div>
         </div>
-        <div class="feature-card">
-          <div class="card-icon">📚</div>
-          <strong data-i18n="feature2Title">Lecciones estructuradas</strong>
-          <span data-i18n="feature2Desc">Sigue unidades organizadas por temas y nivel, con explicaciones claras y ejemplos prácticos.</span>
-        </div>
-        <div class="feature-card">
-          <div class="card-icon">🧠</div>
-          <strong data-i18n="feature3Title">Repetición espaciada de kana y kanji</strong>
-          <span data-i18n="feature3Desc">Repasa hiragana, katakana y kanji justo cuando estás a punto de olvidarlos para fijarlos a largo plazo.</span>
+
+        <div class="shorts-showcase" aria-label="Vídeos cortos de Japanify">
+          <div class="shorts-badge">Japanify Shorts</div>
+
+          <div class="video-card short-card-one">
+            <span class="video-number">01</span>
+            <div class="video-frame" data-youtube-id="3_V9NV4r-1U" data-youtube-title="Japanify Short 1"></div>
+          </div>
+
+          <div class="video-card short-card-two">
+            <span class="video-number">02</span>
+            <div class="video-frame" data-youtube-id="Ta4GwYZeCis" data-youtube-title="Japanify Short 2"></div>
+          </div>
         </div>
       </div>
     </section>
@@ -1809,31 +2319,18 @@
       </div>
 
       <div class="showcase-visual">
-        <img src="./mobile.webp" alt="Pantalla de Japanify en móvil" class="showcase-mobile-image" onerror="this.style.display='none'">
-      </div>
-    </section>
-
-    <section>
-      <div class="section-heading center">
-        <h2 data-i18n="differenceTitle">El diferencial Japanify</h2>
-        <p data-i18n="differenceSubtitle">La app combina pedagogía y entretenimiento para que estudiar japonés encaje en tu rutina.</p>
-      </div>
-
-      <div class="difference-grid">
-        <div class="difference-item">
-          <strong data-i18n="differenceHighlight1">Aprendizaje adaptativo</strong>
-          <span data-i18n="differenceHighlight1Desc">El algoritmo detecta tus errores frecuentes y reordena el contenido para reforzarlo antes de avanzar.</span>
-        </div>
-        <div class="difference-item">
-          <strong data-i18n="differenceHighlight2">Contenido en constante expansión</strong>
-          <span data-i18n="differenceHighlight2Desc">Nuevas unidades temáticas cada mes: viajes, cultura pop, negocios y certificaciones JLPT.</span>
-        </div>
-        <div class="difference-item">
-          <strong data-i18n="differenceHighlight3">Comunidad motivadora</strong>
-          <span data-i18n="differenceHighlight3Desc">Eventos en vivo, rankings amistosos y retos colaborativos con estudiantes de todo el mundo.</span>
+        <div class="showcase-device-stack" aria-label="Capturas de las lecciones de kanji de Japanify">
+          <div class="showcase-device">
+            <img src="./mobile.webp" alt="Lección de kanji en Japanify" class="kanji-screen kanji-screen--one" onerror="this.remove(); document.querySelector('.showcase-device-stack')?.classList.add('single-screen')">
+            <img src="./mobile2.webp" alt="Ejercicio de kanji en Japanify" class="kanji-screen kanji-screen--two" onerror="this.remove(); document.querySelector('.showcase-device-stack')?.classList.add('single-screen')">
+          </div>
+          <div class="showcase-screen-progress" aria-hidden="true">
+            <span></span><span></span>
+          </div>
         </div>
       </div>
     </section>
+
 
     <section>
       <div class="section-heading center">
@@ -1934,6 +2431,59 @@
 
   <script src="i18n.js"></script>
   <script>
+    const mountYouTubeShorts = () => {
+      const frames = document.querySelectorAll('.video-frame[data-youtube-id]');
+      const liveEmbedHost = /(^|\.)shiruacademy\.com$/i.test(window.location.hostname);
+
+      frames.forEach((frame) => {
+        const videoId = frame.dataset.youtubeId;
+        const title = frame.dataset.youtubeTitle || 'Japanify Short';
+        const thumbnailSources = [
+          `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`,
+          `https://i.ytimg.com/vi/${videoId}/sddefault.jpg`,
+          `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`
+        ];
+
+        const cover = document.createElement('button');
+        cover.className = 'video-cover';
+        cover.type = 'button';
+        cover.setAttribute('aria-label', `${title} — Reproducir vídeo`);
+        cover.innerHTML = `
+          <img src="${thumbnailSources[0]}" alt="${title}" loading="lazy" decoding="async">
+          <span class="video-play" aria-hidden="true">▶</span>
+          <span class="video-fallback-text">Reproducir Short</span>
+        `;
+
+        const thumbnail = cover.querySelector('img');
+        let thumbnailIndex = 0;
+        thumbnail.addEventListener('error', () => {
+          thumbnailIndex += 1;
+          if (thumbnailIndex < thumbnailSources.length) {
+            thumbnail.src = thumbnailSources[thumbnailIndex];
+          }
+        });
+
+        cover.addEventListener('click', () => {
+          if (!liveEmbedHost) {
+            window.open(`https://youtu.be/${videoId}`, '_blank', 'noopener');
+            return;
+          }
+
+          const iframe = document.createElement('iframe');
+          iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&playsinline=1&rel=0`;
+          iframe.title = title;
+          iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+          iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+          iframe.allowFullscreen = true;
+          frame.replaceChildren(iframe);
+        });
+
+        frame.replaceChildren(cover);
+      });
+    };
+
+    mountYouTubeShorts();
+
     const siteTranslations = {
       "es-ES": {
             "title": "Japanify – Aprende japonés con minijuegos",
@@ -1947,8 +2497,6 @@
             "heroSubtitle": "Japanify reúne minijuegos rápidos, práctica guiada y repaso inteligente de vocabulario y kanji para que estudiar japonés encaje fácil en tu día a día.",
             "heroPrimaryCta": "Disponible en Google Play",
             "heroSecondaryCta": "Explorar funcionalidades",
-            "heroStat2Value": "92%",
-            "heroStat2Label": "De usuarios mejora en las primeras 4 semanas",
             "heroStat3Value": "5★",
             "heroStat3Label": "Valoración media en Google Play",
             "dailyPracticeLabel": "Practica japonés un poco cada día",
@@ -1975,14 +2523,6 @@
             "showcaseBullet1": "Aprende kanji desde sus componentes básicos y significados clave.",
             "showcaseBullet2": "Refuerza lecturas y vocabulario con minijuegos de reconocimiento y tarjetas.",
             "showcaseBullet3": "Utiliza repaso espaciado para no olvidar los kanji que ya has estudiado.",
-            "differenceTitle": "El diferencial Japanify",
-            "differenceSubtitle": "La app combina pedagogía y entretenimiento para que estudiar japonés encaje en tu rutina.",
-            "differenceHighlight1": "Aprendizaje adaptativo",
-            "differenceHighlight1Desc": "El algoritmo detecta tus errores frecuentes y reordena el contenido para reforzarlo antes de avanzar.",
-            "differenceHighlight2": "Contenido en constante expansión",
-            "differenceHighlight2Desc": "Nuevas unidades temáticas cada mes: viajes, cultura pop, negocios y certificaciones JLPT.",
-            "differenceHighlight3": "Comunidad motivadora",
-            "differenceHighlight3Desc": "Eventos en vivo, rankings amistosos y retos colaborativos con estudiantes de todo el mundo.",
             "testimonialsTitle": "Lo que dicen quienes ya aprenden con Japanify",
             "testimonialsSubtitle": "Opiniones de usuarios sobre su experiencia con la app.",
             "testimonial1Quote": "Muy buena, te enseña desde cero y es fácil de aprender.",
@@ -2022,8 +2562,6 @@
             "heroSubtitle": "Japanify brings together quick mini-games, guided practice, and smart vocabulary and kanji review so Japanese fits naturally into your day.",
             "heroPrimaryCta": "Available on Google Play",
             "heroSecondaryCta": "Explore features",
-            "heroStat2Value": "92%",
-            "heroStat2Label": "Users improve in the first 4 weeks",
             "heroStat3Value": "5★",
             "heroStat3Label": "Average rating on Google Play",
             "dailyPracticeLabel": "Practise Japanese a little every day",
@@ -2050,14 +2588,6 @@
             "showcaseBullet1": "Learn kanji from their basic components and key meanings.",
             "showcaseBullet2": "Reinforce readings and vocabulary with recognition mini-games and cards.",
             "showcaseBullet3": "Use spaced review so you don’t forget the kanji you have already studied.",
-            "differenceTitle": "The Japanify difference",
-            "differenceSubtitle": "The app combines teaching and entertainment so Japanese study fits your routine.",
-            "differenceHighlight1": "Adaptive learning",
-            "differenceHighlight1Desc": "The algorithm detects your frequent mistakes and reorders content to reinforce it before you move on.",
-            "differenceHighlight2": "Constantly expanding content",
-            "differenceHighlight2Desc": "New thematic units every month: travel, pop culture, business, and JLPT certifications.",
-            "differenceHighlight3": "Motivating community",
-            "differenceHighlight3Desc": "Live events, friendly rankings, and collaborative challenges with learners around the world.",
             "testimonialsTitle": "What learners say about Japanify",
             "testimonialsSubtitle": "User opinions about their experience with the app.",
             "testimonial1Quote": "Very good, it teaches you from scratch and is easy to learn with.",
@@ -2097,8 +2627,6 @@
             "heroSubtitle": "Japanify réunit des mini-jeux rapides, de la pratique guidée et une révision intelligente du vocabulaire et des kanji pour intégrer le japonais à ton quotidien.",
             "heroPrimaryCta": "Disponible sur Google Play",
             "heroSecondaryCta": "Découvrir les fonctionnalités",
-            "heroStat2Value": "92%",
-            "heroStat2Label": "Des utilisateurs progressent durant les 4 premières semaines",
             "heroStat3Value": "5★",
             "heroStat3Label": "Note moyenne sur Google Play",
             "dailyPracticeLabel": "Pratique un peu le japonais chaque jour",
@@ -2125,14 +2653,6 @@
             "showcaseBullet1": "Apprends les kanji à partir de leurs composants et sens clés.",
             "showcaseBullet2": "Renforce lectures et vocabulaire avec des mini-jeux de reconnaissance et des cartes.",
             "showcaseBullet3": "Utilise la répétition espacée pour ne pas oublier les kanji étudiés.",
-            "differenceTitle": "Ce qui rend Japanify différent",
-            "differenceSubtitle": "L’app combine pédagogie et divertissement pour faire entrer le japonais dans ta routine.",
-            "differenceHighlight1": "Apprentissage adaptatif",
-            "differenceHighlight1Desc": "L’algorithme repère tes erreurs fréquentes et réorganise le contenu pour les renforcer avant d’avancer.",
-            "differenceHighlight2": "Contenu en expansion constante",
-            "differenceHighlight2Desc": "De nouvelles unités thématiques chaque mois : voyage, pop culture, business et JLPT.",
-            "differenceHighlight3": "Communauté motivante",
-            "differenceHighlight3Desc": "Événements en direct, classements amicaux et défis collaboratifs avec des apprenants du monde entier.",
             "testimonialsTitle": "Ce que disent les apprenants de Japanify",
             "testimonialsSubtitle": "Avis d’utilisateurs sur leur expérience avec l’app.",
             "testimonial1Quote": "Très bonne app, elle enseigne depuis zéro et facilite l’apprentissage.",
@@ -2172,8 +2692,6 @@
             "heroSubtitle": "Japanify verbindet schnelle Minispiele, geführtes Üben und intelligente Wiederholung von Wortschatz und Kanji, damit Japanisch leicht in deinen Alltag passt.",
             "heroPrimaryCta": "Verfügbar bei Google Play",
             "heroSecondaryCta": "Funktionen ansehen",
-            "heroStat2Value": "92%",
-            "heroStat2Label": "Nutzer verbessern sich in den ersten 4 Wochen",
             "heroStat3Value": "5★",
             "heroStat3Label": "Durchschnittsbewertung bei Google Play",
             "dailyPracticeLabel": "Übe jeden Tag ein wenig Japanisch",
@@ -2200,14 +2718,6 @@
             "showcaseBullet1": "Lerne Kanji über Grundbestandteile und zentrale Bedeutungen.",
             "showcaseBullet2": "Festige Lesungen und Wortschatz mit Erkennungs-Minispielen und Karten.",
             "showcaseBullet3": "Nutze verteilte Wiederholung, damit du gelernte Kanji nicht vergisst.",
-            "differenceTitle": "Der Japanify-Unterschied",
-            "differenceSubtitle": "Die App kombiniert Pädagogik und Unterhaltung, damit Japanischlernen in deinen Alltag passt.",
-            "differenceHighlight1": "Adaptives Lernen",
-            "differenceHighlight1Desc": "Der Algorithmus erkennt häufige Fehler und ordnet Inhalte neu, um sie vor dem Weitergehen zu festigen.",
-            "differenceHighlight2": "Ständig wachsender Inhalt",
-            "differenceHighlight2Desc": "Neue thematische Einheiten jeden Monat: Reisen, Popkultur, Business und JLPT.",
-            "differenceHighlight3": "Motivierende Community",
-            "differenceHighlight3Desc": "Live-Events, freundliche Ranglisten und gemeinsame Challenges mit Lernenden weltweit.",
             "testimonialsTitle": "Was Lernende über Japanify sagen",
             "testimonialsSubtitle": "Nutzermeinungen zur Erfahrung mit der App.",
             "testimonial1Quote": "Sehr gut, sie bringt dir alles von Grund auf bei und ist leicht zu lernen.",
@@ -2247,8 +2757,6 @@
             "heroSubtitle": "Japanify는 짧은 미니게임, 가이드 연습, 스마트 어휘·한자 복습을 모아 일본어 공부를 매일 쉽게 이어가게 해줍니다.",
             "heroPrimaryCta": "Google Play에서 이용 가능",
             "heroSecondaryCta": "기능 살펴보기",
-            "heroStat2Value": "92%",
-            "heroStat2Label": "사용자가 첫 4주 안에 실력 향상",
             "heroStat3Value": "5★",
             "heroStat3Label": "Google Play 평균 평점",
             "dailyPracticeLabel": "매일 조금씩 일본어를 연습하세요",
@@ -2275,14 +2783,6 @@
             "showcaseBullet1": "기본 구성 요소와 핵심 의미부터 한자를 배웁니다.",
             "showcaseBullet2": "인식 미니게임과 카드로 읽기와 어휘를 강화합니다.",
             "showcaseBullet3": "간격 반복으로 이미 공부한 한자를 잊지 않게 합니다.",
-            "differenceTitle": "Japanify만의 차이",
-            "differenceSubtitle": "학습과 재미를 결합해 일본어 공부가 일상에 자연스럽게 들어오도록 합니다.",
-            "differenceHighlight1": "적응형 학습",
-            "differenceHighlight1Desc": "알고리즘이 자주 틀리는 부분을 감지하고 다음 단계 전 다시 강화합니다.",
-            "differenceHighlight2": "계속 늘어나는 콘텐츠",
-            "differenceHighlight2Desc": "여행, 팝컬처, 비즈니스, JLPT 등 새로운 주제 유닛이 매달 추가됩니다.",
-            "differenceHighlight3": "동기부여 커뮤니티",
-            "differenceHighlight3Desc": "라이브 이벤트, 친근한 랭킹, 전 세계 학습자와 함께하는 챌린지를 제공합니다.",
             "testimonialsTitle": "Japanify 학습자들의 후기",
             "testimonialsSubtitle": "앱 사용 경험에 대한 사용자 의견입니다.",
             "testimonial1Quote": "아주 좋아요. 처음부터 가르쳐 주고 배우기 쉽습니다.",
@@ -2322,8 +2822,6 @@
             "heroSubtitle": "Japanify 结合快速小游戏、引导练习和智能词汇/汉字复习，让日语学习轻松融入你的日常。",
             "heroPrimaryCta": "已上线 Google Play",
             "heroSecondaryCta": "查看功能",
-            "heroStat2Value": "92%",
-            "heroStat2Label": "用户在前 4 周取得进步",
             "heroStat3Value": "5★",
             "heroStat3Label": "Google Play 平均评分",
             "dailyPracticeLabel": "每天练一点日语",
@@ -2350,14 +2848,6 @@
             "showcaseBullet1": "从基本部件和核心含义开始学习汉字。",
             "showcaseBullet2": "通过识别小游戏和卡片强化读音与词汇。",
             "showcaseBullet3": "使用间隔复习，避免忘记已经学过的汉字。",
-            "differenceTitle": "Japanify 的不同之处",
-            "differenceSubtitle": "应用结合教学与娱乐，让日语学习自然融入你的日常。",
-            "differenceHighlight1": "自适应学习",
-            "differenceHighlight1Desc": "算法会识别你的常见错误，并在继续学习前重新安排内容进行强化。",
-            "differenceHighlight2": "持续扩展的内容",
-            "differenceHighlight2Desc": "每月新增主题单元：旅行、流行文化、商务和 JLPT。",
-            "differenceHighlight3": "激励型社区",
-            "differenceHighlight3Desc": "直播活动、友好排行榜以及与全球学习者一起完成挑战。",
             "testimonialsTitle": "学习者如何评价 Japanify",
             "testimonialsSubtitle": "用户对应用体验的评价。",
             "testimonial1Quote": "非常好，从零开始教，学起来很容易。",
@@ -2397,8 +2887,6 @@
             "heroSubtitle": "Japanify объединяет быстрые мини-игры, практику с подсказками и умное повторение слов и кандзи, чтобы японский легко вошёл в твой день.",
             "heroPrimaryCta": "Доступно в Google Play",
             "heroSecondaryCta": "Посмотреть функции",
-            "heroStat2Value": "92%",
-            "heroStat2Label": "Пользователи улучшают результат за первые 4 недели",
             "heroStat3Value": "5★",
             "heroStat3Label": "Средняя оценка в Google Play",
             "dailyPracticeLabel": "Практикуй японский понемногу каждый день",
@@ -2425,14 +2913,6 @@
             "showcaseBullet1": "Изучай кандзи через базовые компоненты и ключевые значения.",
             "showcaseBullet2": "Закрепляй чтения и лексику мини-играми на распознавание и карточками.",
             "showcaseBullet3": "Используй интервальное повторение, чтобы не забывать изученные кандзи.",
-            "differenceTitle": "Чем Japanify отличается",
-            "differenceSubtitle": "Приложение сочетает обучение и развлечения, чтобы японский вписался в твою рутину.",
-            "differenceHighlight1": "Адаптивное обучение",
-            "differenceHighlight1Desc": "Алгоритм находит частые ошибки и перестраивает контент, чтобы закрепить их перед следующим шагом.",
-            "differenceHighlight2": "Постоянно растущий контент",
-            "differenceHighlight2Desc": "Новые тематические блоки каждый месяц: путешествия, поп-культура, бизнес и JLPT.",
-            "differenceHighlight3": "Мотивирующее сообщество",
-            "differenceHighlight3Desc": "Живые события, дружеские рейтинги и совместные челленджи с учениками со всего мира.",
             "testimonialsTitle": "Что говорят ученики Japanify",
             "testimonialsSubtitle": "Отзывы пользователей об опыте в приложении.",
             "testimonial1Quote": "Очень хорошее приложение, учит с нуля и с ним легко заниматься.",
@@ -2519,9 +2999,6 @@
       'https://www.instagram.com/p/DVJmzoBjWYT/'
     ];
 
-    const videoEn = 'https://www.youtube.com/embed/kopksIYuOzM';
-    const videoEs = 'https://www.youtube.com/embed/2rxV00pIBgg';
-
     const getIsSpanishContent = () => currentLocale === 'es-ES';
 
     const getInstagramProfileUrl = () => getIsSpanishContent()
@@ -2583,10 +3060,6 @@ const updateInstagramCarousel = () => {
     };
 
     const updateLanguageDependentEmbeds = () => {
-      const promoVideo = document.getElementById('promoVideo');
-      if (promoVideo) {
-        promoVideo.src = getIsSpanishContent() ? videoEs : videoEn;
-      }
       renderInstagramFeed();
     };
 
