@@ -274,7 +274,7 @@
 
     .window {
       position: absolute;
-      z-index: -2;
+      z-index: -6;
       left: 22px;
       top: 151px;
       width: 142px;
@@ -648,17 +648,6 @@
       background: #b87352;
       box-shadow: 0 12px 0 #c8865e;
       transform: rotate(-13deg);
-    }
-
-    .small-dish {
-      left: 9px;
-      top: 306px;
-      width: 77px;
-      height: 43px;
-      border-radius: 50%;
-      background:
-        radial-gradient(ellipse at center, #8c5b50 0 44%, #f8efe4 46% 67%, #efb7b0 69% 73%, #fff8ec 75%);
-      box-shadow: 0 7px 10px rgba(100, 69, 54, .14);
     }
 
     /* ---------- answer tray ---------- */
@@ -1080,7 +1069,6 @@
       .wasabi { top: 208px; }
       .ginger { top: 222px; }
       .chopsticks { top: 228px; }
-      .small-dish { top: 272px; }
       .answer-tray { bottom: max(10px, env(safe-area-inset-bottom)); min-height: 132px; padding-top: 10px; }
       .sushi-option { height: 108px; }
       .sushi-piece { transform: scale(1.13); }
@@ -1258,7 +1246,6 @@
     <div class="decor wasabi"></div>
     <div class="decor ginger"></div>
     <div class="decor chopsticks"></div>
-    <div class="decor small-dish"></div>
   </section>
 
   <section class="answer-tray" id="answerTray" aria-label="Opciones de respuesta"></section>
