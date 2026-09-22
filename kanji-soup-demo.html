@@ -1,0 +1,1629 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Japanify · Ramen Search</title>
+
+  <style>
+    :root {
+      --bg-top: #fff1d8;
+      --bg-bottom: #f4d1ad;
+      --wood-light: #d69b70;
+      --wood-mid: #b7785d;
+      --wood-dark: #8f5e4e;
+      --cream: #fff8e9;
+      --ink: #5c474d;
+      --muted: #92757b;
+      --red: #d96e72;
+      --red-dark: #b75662;
+      --broth: #dca65c;
+      --broth-dark: #bf8248;
+      --broth-light: #efc77d;
+      --green: #77a476;
+      --green-dark: #5f8a67;
+      --gold: #efbc63;
+      --soft-shadow: 0 8px 17px rgba(92, 61, 54, .14);
+      --deep-shadow: 0 17px 29px rgba(83, 53, 48, .20);
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    body {
+      font-family:
+        Inter,
+        ui-rounded,
+        "Hiragino Maru Gothic ProN",
+        "Noto Sans JP",
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+      color: var(--ink);
+      background: #fff7e8;
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .game-shell {
+      position: relative;
+      width: min(100vw, 520px);
+      height: 100dvh;
+      min-height: 640px;
+      margin: 0 auto;
+      overflow: hidden;
+      isolation: isolate;
+      background:
+        radial-gradient(circle at 12% 11%, rgba(255,255,255,.30), transparent 20%),
+        linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
+      box-shadow: 0 0 52px rgba(104, 71, 62, .14);
+    }
+
+    /* ---------- wooden table ---------- */
+    .table {
+      position: absolute;
+      z-index: -5;
+      inset: 80px -18px -24px;
+      border-radius: 34px 34px 0 0;
+      background:
+        repeating-linear-gradient(
+          90deg,
+          transparent 0 72px,
+          rgba(94, 56, 46, .09) 73px 77px
+        ),
+        repeating-linear-gradient(
+          0deg,
+          rgba(255,255,255,.06) 0 4px,
+          transparent 5px 61px,
+          rgba(91, 56, 45, .08) 62px 65px
+        ),
+        linear-gradient(180deg, var(--wood-light), var(--wood-mid));
+      box-shadow:
+        inset 0 10px 0 rgba(255,255,255,.12),
+        inset 0 -10px 0 rgba(101,61,48,.13);
+    }
+
+    .table::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 14px;
+      border-radius: 34px 34px 0 0;
+      background: linear-gradient(180deg, #e2b88e, #be8162);
+    }
+
+    .placemat {
+      position: absolute;
+      z-index: -2;
+      left: 50%;
+      top: 130px;
+      width: min(484px, calc(100% - 16px));
+      height: calc(100dvh - 153px);
+      min-height: 510px;
+      transform: translateX(-50%);
+      border: 6px solid #a46b54;
+      border-radius: 31px;
+      background:
+        radial-gradient(circle at 18% 16%, rgba(255,255,255,.08), transparent 21%),
+        repeating-linear-gradient(
+          135deg,
+          rgba(255,255,255,.025) 0 9px,
+          transparent 10px 22px
+        ),
+        linear-gradient(180deg, #75998b, #587d74);
+      box-shadow:
+        inset 0 0 0 4px rgba(255,255,255,.11),
+        0 15px 24px rgba(75, 49, 45, .18);
+    }
+
+    .placemat::before {
+      content: "";
+      position: absolute;
+      inset: 15px;
+      border: 2px dashed rgba(255,244,214,.20);
+      border-radius: 21px;
+    }
+
+    /* ---------- decorations ---------- */
+    .chopsticks {
+      position: absolute;
+      z-index: 2;
+      right: 20px;
+      bottom: 39px;
+      width: 42px;
+      height: 191px;
+      transform: rotate(11deg);
+      pointer-events: none;
+    }
+
+    .chopstick {
+      position: absolute;
+      bottom: 0;
+      width: 8px;
+      height: 100%;
+      border-radius: 999px 999px 4px 4px;
+      background: linear-gradient(90deg, #7c4b3e, #a56853, #71443a);
+      box-shadow: 0 5px 9px rgba(75,45,41,.15);
+    }
+
+    .chopstick.a { left: 6px; }
+    .chopstick.b { right: 6px; }
+
+    .chopsticks::after {
+      content: "";
+      position: absolute;
+      left: -4px;
+      right: -4px;
+      bottom: 47px;
+      height: 19px;
+      border-radius: 7px;
+      background: #e7c79d;
+      box-shadow: 0 4px 7px rgba(71,47,44,.11);
+    }
+
+    .tea-cup {
+      position: absolute;
+      z-index: 2;
+      left: 20px;
+      bottom: 36px;
+      width: 66px;
+      height: 54px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 47%, #8dad7d 0 37%, #fbf3df 39% 59%, #d8c49d 61% 68%, transparent 69%);
+      box-shadow: 0 8px 10px rgba(76, 54, 48, .13);
+    }
+
+    .tea-cup::after {
+      content: "";
+      position: absolute;
+      right: -13px;
+      top: 18px;
+      width: 19px;
+      height: 17px;
+      border: 5px solid #eadbb9;
+      border-left: 0;
+      border-radius: 0 14px 14px 0;
+    }
+
+    .soy-dish {
+      position: absolute;
+      z-index: 2;
+      left: 17px;
+      top: 111px;
+      width: 71px;
+      height: 52px;
+      border-radius: 50%;
+      background:
+        radial-gradient(ellipse at 50% 50%, #785542 0 42%, #eee0bf 44% 64%, #d2b78c 66% 73%, transparent 74%);
+      box-shadow: 0 8px 10px rgba(76,54,48,.12);
+    }
+
+    .kanji-hint-dish {
+      position: absolute;
+      z-index: 27;
+      right: 7px;
+      top: 94px;
+      display: grid;
+      width: 132px;
+      height: 119px;
+      place-items: center;
+      transform: rotate(5deg);
+      pointer-events: none;
+    }
+
+    .kanji-hint-dish::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border: 5px solid #d8c29b;
+      border-radius: 46% 54% 50% 50% / 52% 48% 52% 48%;
+      background:
+        radial-gradient(circle at 30% 25%, rgba(255,255,255,.36), transparent 25%),
+        linear-gradient(180deg, #fff4dd, #ead6b3);
+      box-shadow:
+        inset 0 0 0 3px rgba(255,255,255,.28),
+        0 8px 12px rgba(75,50,45,.12);
+    }
+
+    .hint-wasabi {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      width: 108px;
+      height: 94px;
+      place-items: center;
+      pointer-events: none;
+    }
+
+    .wasabi-blob {
+      position: absolute;
+      inset: 0;
+      border-radius: 49% 51% 46% 54% / 52% 44% 56% 48%;
+      background:
+        radial-gradient(circle at 30% 25%, rgba(255,255,255,.28), transparent 25%),
+        linear-gradient(145deg, #b8d78d, #7daa70);
+      box-shadow:
+        inset 0 -6px 0 rgba(82,130,83,.13),
+        0 7px 10px rgba(75,92,64,.14);
+      transform: rotate(-8deg);
+    }
+
+    .hint-wasabi img {
+      position: relative;
+      z-index: 2;
+      display: block;
+      width: 82%;
+      height: 82%;
+      object-fit: contain;
+    }
+
+    .hint-fallback {
+      position: relative;
+      z-index: 2;
+      display: none;
+      color: #5f7653;
+      font-size: 28px;
+      font-weight: 1000;
+    }
+
+    .hint-wasabi.image-error img {
+      display: none;
+    }
+
+    .hint-wasabi.image-error .hint-fallback {
+      display: block;
+    }
+
+    /* ---------- HUD ---------- */
+    .hud {
+      position: absolute;
+      z-index: 45;
+      inset: 0 0 auto;
+      padding: max(14px, env(safe-area-inset-top)) 14px 0;
+      pointer-events: none;
+    }
+
+    .hud-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .icon-btn {
+      pointer-events: auto;
+      display: grid;
+      width: 42px;
+      height: 42px;
+      flex: 0 0 42px;
+      place-items: center;
+      border: 0;
+      border-radius: 15px;
+      color: var(--ink);
+      background: rgba(255,249,236,.93);
+      box-shadow: var(--soft-shadow);
+      font-size: 27px;
+      font-weight: 950;
+      line-height: 1;
+    }
+
+    .title-card {
+      display: flex;
+      min-width: 0;
+      flex: 1;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 11px 8px;
+      border-radius: 17px;
+      background: rgba(255,249,236,.93);
+      box-shadow: var(--soft-shadow);
+    }
+
+    .title-card .emoji {
+      display: grid;
+      width: 30px;
+      height: 30px;
+      place-items: center;
+      border-radius: 10px;
+      background: rgba(255,226,180,.84);
+      font-size: 19px;
+    }
+
+    .title-copy {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .title-copy strong {
+      display: block;
+      font-size: 14px;
+      letter-spacing: .02em;
+    }
+
+    .progress-track {
+      height: 6px;
+      margin-top: 5px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(190,148,121,.19);
+    }
+
+    .progress-fill {
+      display: block;
+      width: 0%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--red), var(--gold));
+      transition: width .35s ease;
+    }
+
+    .score-pill {
+      display: flex;
+      width: 63px;
+      height: 42px;
+      flex: 0 0 63px;
+      align-items: center;
+      justify-content: center;
+      gap: 1px;
+      white-space: nowrap;
+      border-radius: 15px;
+      color: var(--red-dark);
+      background: rgba(255,249,236,.93);
+      box-shadow: var(--soft-shadow);
+      font-size: 14px;
+      font-weight: 950;
+      line-height: 1;
+    }
+
+    /* ---------- target ---------- */
+    .target-card {
+      position: absolute;
+      z-index: 25;
+      left: 50%;
+      top: 104px;
+      display: grid;
+      width: min(194px, calc(100% - 178px));
+      min-height: 52px;
+      place-items: center;
+      padding: 8px 13px;
+      transform: translateX(-50%);
+      border: 2px solid rgba(255,255,255,.62);
+      border-radius: 18px;
+      color: #6a5052;
+      background: rgba(255,248,232,.92);
+      box-shadow: var(--soft-shadow);
+      text-align: center;
+    }
+
+    .target-kanji {
+      display: block;
+      max-width: 100%;
+      overflow: hidden;
+      color: #765459;
+      font-size: clamp(25px, 7vw, 36px);
+      font-weight: 1000;
+      letter-spacing: -.08em;
+      line-height: 1;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+
+    /* ---------- ramen bowl ---------- */
+    .ramen-station {
+      position: absolute;
+      z-index: 20;
+      left: 50%;
+      top: 52%;
+      width: min(438px, calc(100% - 24px));
+      height: min(438px, calc(100vw - 24px));
+      max-height: 438px;
+      transform: translate(-50%, -42%);
+    }
+
+    .bowl-shadow {
+      position: absolute;
+      left: 50%;
+      bottom: -16px;
+      width: 82%;
+      height: 17%;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      background: rgba(74,48,43,.18);
+      filter: blur(11px);
+    }
+
+    .bowl {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      border: 12px solid #f6ead5;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 32% 21%, rgba(255,245,198,.28), transparent 21%),
+        radial-gradient(circle at 55% 52%, rgba(235,185,103,.22), transparent 57%),
+        linear-gradient(145deg, var(--broth-light), var(--broth-dark));
+      box-shadow:
+        inset 0 0 0 7px #d76e70,
+        inset 0 0 0 12px rgba(255,244,219,.40),
+        0 17px 24px rgba(79,50,45,.20);
+    }
+
+    .bowl::before {
+      content: "";
+      position: absolute;
+      inset: 20px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,241,201,.24);
+      pointer-events: none;
+    }
+
+    .noodle {
+      position: absolute;
+      z-index: 1;
+      border: 5px solid rgba(249,222,147,.53);
+      border-left-color: transparent;
+      border-right-color: transparent;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .noodle.a {
+      left: 12%;
+      top: 19%;
+      width: 77%;
+      height: 53%;
+      transform: rotate(13deg);
+    }
+
+    .noodle.b {
+      left: 20%;
+      top: 34%;
+      width: 66%;
+      height: 43%;
+      transform: rotate(-12deg);
+    }
+
+    .noodle.c {
+      left: 18%;
+      top: 23%;
+      width: 56%;
+      height: 66%;
+      transform: rotate(31deg);
+    }
+
+    .egg {
+      position: absolute;
+      z-index: 4;
+      left: 12%;
+      top: 16%;
+      width: 79px;
+      height: 66px;
+      transform: rotate(-14deg);
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 53% 49%, #f2b447 0 29%, #f9d16a 31% 36%, transparent 38%),
+        #fff1d5;
+      box-shadow: 0 7px 10px rgba(96,67,50,.14);
+    }
+
+    .naruto {
+      position: absolute;
+      z-index: 4;
+      right: 15%;
+      top: 17%;
+      display: grid;
+      width: 61px;
+      height: 61px;
+      place-items: center;
+      border-radius: 50%;
+      background: #fff4e6;
+      box-shadow: 0 7px 10px rgba(96,67,50,.13);
+    }
+
+    .naruto::before {
+      content: "🌀";
+      font-size: 41px;
+      line-height: 1;
+      filter: hue-rotate(300deg) saturate(.65);
+    }
+
+    .nori {
+      position: absolute;
+      z-index: 3;
+      right: 9%;
+      bottom: 14%;
+      width: 73px;
+      height: 94px;
+      transform: rotate(17deg);
+      border-radius: 8px;
+      background:
+        repeating-linear-gradient(
+          90deg,
+          rgba(255,255,255,.04) 0 6px,
+          transparent 7px 11px
+        ),
+        linear-gradient(135deg, #315348, #1f4039);
+      box-shadow: 0 7px 9px rgba(65,56,47,.13);
+    }
+
+    .scallions {
+      position: absolute;
+      z-index: 4;
+      left: 16%;
+      bottom: 14%;
+      width: 93px;
+      height: 67px;
+      pointer-events: none;
+    }
+
+    .scallion {
+      position: absolute;
+      width: 22px;
+      height: 18px;
+      border: 5px solid #8dbb74;
+      border-radius: 50%;
+      background: rgba(121,164,105,.22);
+    }
+
+    .scallion:nth-child(1) { left: 2px; top: 21px; }
+    .scallion:nth-child(2) { left: 29px; top: 5px; }
+    .scallion:nth-child(3) { left: 54px; top: 28px; }
+    .scallion:nth-child(4) { left: 37px; top: 43px; }
+
+    /* ---------- word grid ---------- */
+    .grid-wrap {
+      position: absolute;
+      z-index: 12;
+      left: 50%;
+      top: 50%;
+      width: 72%;
+      height: 72%;
+      transform: translate(-50%, -50%);
+      padding: 4px;
+      border-radius: 23px;
+      background: rgba(255,246,207,.13);
+      backdrop-filter: blur(2px);
+    }
+
+    .word-grid {
+      display: grid;
+      width: 100%;
+      height: 100%;
+      gap: 3px;
+      touch-action: none;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .letter {
+      display: grid;
+      min-width: 0;
+      min-height: 0;
+      place-items: center;
+      border: 1px solid rgba(255,240,192,.43);
+      border-radius: 50%;
+      color: #684a43;
+      background: rgba(255,237,184,.72);
+      box-shadow:
+        inset 0 2px 0 rgba(255,255,255,.20),
+        0 3px 5px rgba(106,69,50,.09);
+      font-size: clamp(17px, 5.1vw, 27px);
+      font-weight: 1000;
+      line-height: 1;
+      transition:
+        transform .13s ease,
+        background .13s ease,
+        color .13s ease,
+        box-shadow .13s ease;
+    }
+
+    .letter.selected {
+      color: #fff9e7;
+      background: rgba(215, 103, 108, .93);
+      box-shadow:
+        inset 0 2px 0 rgba(255,255,255,.18),
+        0 4px 7px rgba(127,61,62,.16);
+      transform: scale(1.05);
+    }
+
+    .letter.found {
+      color: #fffef2;
+      background: rgba(104,154,108,.94);
+      box-shadow:
+        inset 0 2px 0 rgba(255,255,255,.18),
+        0 4px 7px rgba(70,113,77,.16);
+    }
+
+    /* ---------- toast / overlays ---------- */
+    .toast {
+      position: absolute;
+      z-index: 90;
+      left: 50%;
+      top: 166px;
+      max-width: calc(100% - 28px);
+      padding: 10px 16px;
+      transform: translate(-50%, -10px);
+      border: 1px solid rgba(255,255,255,.72);
+      border-radius: 999px;
+      color: #fff;
+      background: rgba(96,145,103,.95);
+      box-shadow: var(--soft-shadow);
+      font-size: 13px;
+      font-weight: 950;
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .22s ease, transform .22s ease;
+    }
+
+    .toast.wrong {
+      background: rgba(191,88,101,.95);
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    .overlay {
+      position: absolute;
+      z-index: 120;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      background: rgba(80,55,51,.38);
+      backdrop-filter: blur(8px);
+      transition: opacity .24s ease;
+    }
+
+    .overlay.hidden {
+      visibility: hidden;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .modal {
+      width: min(340px, 100%);
+      padding: 23px 21px 21px;
+      border: 1px solid rgba(255,255,255,.70);
+      border-radius: 24px;
+      color: var(--ink);
+      background: rgba(255,249,236,.97);
+      box-shadow: 0 19px 32px rgba(76,50,49,.20);
+      text-align: center;
+    }
+
+    .modal-icon {
+      display: grid;
+      width: 62px;
+      height: 62px;
+      margin: 0 auto 11px;
+      place-items: center;
+      border-radius: 21px;
+      background: #f6dfb9;
+      font-size: 35px;
+    }
+
+    .modal h1,
+    .modal h2 {
+      margin: 0;
+      color: #654f55;
+      font-size: 22px;
+    }
+
+    .modal p {
+      margin: 10px 0 19px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 650;
+      line-height: 1.48;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+      width: 100%;
+      border: 0;
+      border-radius: 17px;
+      font-weight: 950;
+      transition: transform .16s ease, box-shadow .16s ease;
+    }
+
+    .primary-btn {
+      padding: 14px 18px;
+      color: #fff;
+      background: linear-gradient(135deg, var(--red), var(--red-dark));
+      box-shadow: 0 7px 0 #a44d59, 0 12px 17px rgba(105,50,60,.16);
+      font-size: 15px;
+    }
+
+    .primary-btn:active {
+      transform: translateY(5px);
+      box-shadow: 0 2px 0 #a44d59, 0 7px 11px rgba(105,50,60,.13);
+    }
+
+    .secondary-btn {
+      margin-top: 11px;
+      padding: 13px 18px;
+      color: #74545c;
+      background: #fff4e3;
+      box-shadow: 0 6px 0 #e7c69e, 0 10px 15px rgba(104,72,54,.12);
+      font-size: 14px;
+    }
+
+    .finish-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9px;
+      margin: 15px 0 18px;
+    }
+
+    .finish-stat {
+      padding: 12px 7px;
+      border-radius: 17px;
+      background: #fff1dc;
+    }
+
+    .finish-stat strong {
+      display: block;
+      color: var(--red-dark);
+      font-size: 22px;
+    }
+
+    .finish-stat span {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    @media (max-height: 735px) {
+      .placemat {
+        top: 121px;
+        height: calc(100dvh - 140px);
+      }
+
+      .target-card {
+        top: 91px;
+        width: min(165px, calc(100% - 154px));
+        min-height: 47px;
+      }
+
+      .target-kanji {
+        font-size: clamp(23px, 6.5vw, 32px);
+      }
+
+      .kanji-hint-dish {
+        right: 3px;
+        top: 86px;
+        width: 112px;
+        height: 101px;
+      }
+
+      .hint-wasabi {
+        width: 91px;
+        height: 79px;
+      }
+
+      .ramen-station {
+        top: 53%;
+        width: min(397px, calc(100% - 30px));
+        height: min(397px, calc(100vw - 30px));
+        transform: translate(-50%, -42%);
+      }
+
+      .tea-cup {
+        bottom: 20px;
+      }
+
+      .chopsticks {
+        bottom: 20px;
+      }
+    }
+
+    @media (max-width: 365px) {
+      .ramen-station {
+        width: min(367px, calc(100% - 16px));
+        height: min(367px, calc(100vw - 16px));
+      }
+
+      .grid-wrap {
+        width: 74%;
+        height: 74%;
+      }
+
+      .letter {
+        font-size: clamp(15px, 4.8vw, 23px);
+      }
+
+      .soy-dish {
+        left: 8px;
+      }
+
+      .napkin {
+        right: 4px;
+      }
+    }
+    /* Keep the full target word clear of its illustration on narrow screens. */
+    .target-card{left:14px;right:132px;width:auto;transform:none;padding:8px 5px}
+    .target-kanji{font-size:clamp(18px,6vw,25px);letter-spacing:-.04em}
+    .soy-dish{top:158px}
+  </style>
+</head>
+
+<body>
+<main class="game-shell">
+  <div class="table"></div>
+  <div class="placemat"></div>
+
+  <div class="soy-dish"></div>
+  <div class="tea-cup"></div>
+
+  <div class="chopsticks">
+    <span class="chopstick a"></span>
+    <span class="chopstick b"></span>
+  </div>
+
+  <section class="hud">
+    <div class="hud-top">
+      <button class="icon-btn" id="backBtn" type="button">Ⅱ</button>
+
+      <div class="title-card">
+        <div class="emoji">🍜</div>
+        <div class="title-copy">
+          <strong>Ramen Search</strong>
+          <div class="progress-track">
+            <span class="progress-fill" id="progressFill"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="score-pill">
+        <span id="score">0</span>/<span id="total">6</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="target-card">
+    <strong class="target-kanji" id="hintKanji"></strong>
+  </section>
+
+  <div class="kanji-hint-dish">
+    <div class="hint-wasabi">
+      <span class="wasabi-blob"></span>
+      <img id="hintImage" alt="" />
+      <span class="hint-fallback">?</span>
+    </div>
+  </div>
+
+  <section class="ramen-station">
+    <div class="bowl-shadow"></div>
+
+    <div class="bowl">
+      <span class="noodle a"></span>
+      <span class="noodle b"></span>
+      <span class="noodle c"></span>
+
+      <span class="egg"></span>
+      <span class="naruto"></span>
+      <span class="nori"></span>
+
+      <span class="scallions">
+          <span class="scallion"></span>
+          <span class="scallion"></span>
+          <span class="scallion"></span>
+          <span class="scallion"></span>
+        </span>
+
+      <div class="grid-wrap">
+        <div class="word-grid" id="wordGrid"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <section class="overlay" id="introOverlay">
+    <div class="modal">
+      <div class="modal-icon">🍜</div>
+      <h1>Ramen Search</h1>
+      <p data-i18n="introText"></p>
+      <button class="primary-btn" id="startBtn" type="button" data-i18n="start"></button>
+    </div>
+  </section>
+
+  <section class="overlay hidden" id="pauseOverlay">
+    <div class="modal">
+      <div class="modal-icon">🍵</div>
+      <h2 data-i18n="pauseTitle"></h2>
+      <p data-i18n="pauseText"></p>
+      <button class="primary-btn" id="resumeBtn" type="button" data-i18n="continue"></button>
+    </div>
+  </section>
+
+  <section class="overlay hidden" id="finishOverlay">
+    <div class="modal">
+      <div class="modal-icon">✨</div>
+      <h2 data-i18n="finishTitle"></h2>
+      <p data-i18n="finishText"></p>
+
+      <div class="finish-stats">
+        <div class="finish-stat">
+          <strong id="finishWords">6</strong>
+          <span data-i18n="words"></span>
+        </div>
+
+        <div class="finish-stat">
+          <strong id="finishMistakes">0</strong>
+          <span data-i18n="mistakes"></span>
+        </div>
+      </div>
+
+      <button class="primary-btn" id="restartBtn" type="button" data-i18n="playAgain"></button>
+    </div>
+  </section>
+</main>
+
+<script src="family-data.js"></script>
+<script>
+  (() => {
+    const translations = {
+      es: {
+        findInBroth: "Encuentra en el caldo",
+        introText: "Busca la palabra escondida entre los ingredientes del ramen. Arrastra el dedo desde la primera letra hasta la última.",
+        start: "Comenzar",
+        pauseTitle: "Partida en pausa",
+        pauseText: "Puedes continuar preparando sushi cuando quieras.",
+        continue: "Continuar",
+
+        finishTitle: "¡Bol terminado!",
+        finishText: "Has encontrado todas las palabras escondidas en el ramen.",
+        words: "PALABRAS",
+        mistakes: "ERRORES",
+        playAgain: "Jugar otra vez",
+        found: "¡Palabra encontrada! ✨",
+        miss: "Esa no es la palabra",
+        back: "Pausar"
+      },
+      en: {
+        findInBroth: "Find it in the broth",
+        introText: "Find the hidden word among the ramen ingredients. Drag your finger from the first character to the last.",
+        start: "Start",
+        pauseTitle: "Game paused",
+        pauseText: "Continue preparing sushi whenever you’re ready.",
+        continue: "Continue",
+
+        finishTitle: "Bowl completed!",
+        finishText: "You found every hidden word in the ramen.",
+        words: "WORDS",
+        mistakes: "MISTAKES",
+        playAgain: "Play again",
+        found: "Word found! ✨",
+        miss: "That is not the word",
+        back: "Pause"
+      },
+      de: {
+        findInBroth: "Finde es in der Brühe",
+        introText: "Finde das versteckte Wort zwischen den Ramen-Zutaten. Ziehe deinen Finger vom ersten bis zum letzten Zeichen.",
+        start: "Starten",
+        pauseTitle: "Spiel pausiert",
+        pauseText: "Du kannst jederzeit weiter Sushi zubereiten.",
+        continue: "Fortsetzen",
+
+        finishTitle: "Schüssel fertig!",
+        finishText: "Du hast alle versteckten Wörter in den Ramen gefunden.",
+        words: "WÖRTER",
+        mistakes: "FEHLER",
+        playAgain: "Noch einmal spielen",
+        found: "Wort gefunden! ✨",
+        miss: "Das ist nicht das Wort",
+        back: "Pausieren"
+      },
+      fr: {
+        findInBroth: "Trouve-le dans le bouillon",
+        introText: "Trouve le mot caché parmi les ingrédients du ramen. Fais glisser ton doigt du premier au dernier caractère.",
+        start: "Commencer",
+        pauseTitle: "Partie en pause",
+        pauseText: "Reprends la préparation des sushis quand tu veux.",
+        continue: "Continuer",
+
+        finishTitle: "Bol terminé !",
+        finishText: "Tu as trouvé tous les mots cachés dans le ramen.",
+        words: "MOTS",
+        mistakes: "ERREURS",
+        playAgain: "Rejouer",
+        found: "Mot trouvé ! ✨",
+        miss: "Ce n’est pas le bon mot",
+        back: "Mettre en pause"
+      },
+      ko: {
+        findInBroth: "국물에서 찾으세요",
+        introText: "라멘 재료 사이에 숨겨진 단어를 찾으세요. 첫 글자부터 마지막 글자까지 손가락으로 드래그하세요.",
+        start: "시작",
+        pauseTitle: "게임 일시 정지",
+        pauseText: "준비되면 초밥 만들기를 계속하세요.",
+        continue: "계속하기",
+
+        finishTitle: "라멘 완성!",
+        finishText: "라멘 속 숨겨진 단어를 모두 찾았습니다.",
+        words: "단어",
+        mistakes: "실수",
+        playAgain: "다시 플레이",
+        found: "단어를 찾았어요! ✨",
+        miss: "그 단어가 아니에요",
+        back: "일시 정지"
+      },
+      ru: {
+        findInBroth: "Найди в бульоне",
+        introText: "Найди слово среди ингредиентов рамэна. Проведи пальцем от первого символа к последнему.",
+        start: "Начать",
+        pauseTitle: "Игра на паузе",
+        pauseText: "Продолжай готовить суши, когда будешь готов.",
+        continue: "Продолжить",
+
+        finishTitle: "Миска готова!",
+        finishText: "Ты нашёл все спрятанные слова в рамэне.",
+        words: "СЛОВА",
+        mistakes: "ОШИБКИ",
+        playAgain: "Играть снова",
+        found: "Слово найдено! ✨",
+        miss: "Это не то слово",
+        back: "Пауза"
+      },
+      zh: {
+        findInBroth: "在汤里找到它",
+        introText: "在拉面配料中找到隐藏的单词。从第一个字符拖动到最后一个字符。",
+        start: "开始",
+        pauseTitle: "游戏已暂停",
+        pauseText: "准备好后，随时继续制作寿司。",
+        continue: "继续",
+
+        finishTitle: "拉面完成！",
+        finishText: "你已经找到了拉面中所有隐藏的单词。",
+        words: "单词",
+        mistakes: "错误",
+        playAgain: "再玩一次",
+        found: "找到单词！✨",
+        miss: "这不是正确的单词",
+        back: "暂停"
+      }
+    };
+
+    const directions = [
+      { row: 0, col: 1 },
+      { row: 1, col: 0 },
+      { row: 1, col: 1 },
+      { row: 1, col: -1 },
+      { row: 0, col: -1 },
+      { row: -1, col: 0 },
+      { row: -1, col: -1 },
+      { row: -1, col: 1 }
+    ];
+
+    const fillerHiragana = Array.from("あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん");
+    const fillerKatakana = Array.from("アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン");
+
+    const state = {
+      locale: "es",
+      words: [],
+      wordIndex: 0,
+      gridSize: 8,
+      grid: [],
+      solution: [],
+      selection: [],
+      dragging: false,
+      mistakes: 0,
+      started: false,
+      locked: false,
+      pointerId: null
+    };
+
+    const wordGrid = document.getElementById("wordGrid");
+    const score = document.getElementById("score");
+    const total = document.getElementById("total");
+    const progress = document.getElementById("progressFill");
+    const toast = document.getElementById("toast");
+    const intro = document.getElementById("introOverlay");
+    const pause = document.getElementById("pauseOverlay");
+    const finish = document.getElementById("finishOverlay");
+    const finishWords = document.getElementById("finishWords");
+    const finishMistakes = document.getElementById("finishMistakes");
+    const hint = document.querySelector(".hint-wasabi");
+    const hintImage = document.getElementById("hintImage");
+    const hintKanji = document.getElementById("hintKanji");
+
+    function normalizeLocale(locale) {
+      const language = String(locale || "es").toLowerCase().split(/[-_]/)[0];
+      return translations[language] ? language : "en";
+    }
+
+    function t(key) {
+      return translations[state.locale]?.[key] || translations.en[key] || key;
+    }
+
+    function applyLocale(locale) {
+      state.locale = normalizeLocale(locale);
+      document.documentElement.lang = state.locale;
+
+      document.querySelectorAll("[data-i18n]").forEach(element => {
+        element.textContent = t(element.dataset.i18n);
+      });
+
+      document.getElementById("backBtn")?.setAttribute("aria-label", t("back"));
+    }
+
+    function notifyFlutter(payload) {
+      if (window.Japanify && typeof window.Japanify.postMessage === "function") {
+        window.Japanify.postMessage(JSON.stringify(payload));
+      }
+    }
+
+    function randomOf(items) {
+      return items[Math.floor(Math.random() * items.length)];
+    }
+
+    function splitCharacters(text) {
+      return Array.from(String(text || "").trim());
+    }
+
+    function isKatakana(text) {
+      return splitCharacters(text).some(character => {
+        const codePoint = character.codePointAt(0);
+        return codePoint >= 0x30A0 && codePoint <= 0x30FF;
+      });
+    }
+
+    function calculateGridSize(words) {
+      const longest = Math.max(
+        1,
+        ...words.map(item => splitCharacters(item.word).length)
+      );
+
+      return Math.max(7, Math.min(8, longest));
+    }
+
+    function normalizeWord(raw, index) {
+      const item = raw || {};
+
+      return {
+        id: String(item.id ?? index),
+        kanji: String(item.kanji ?? "").trim(),
+        word: String(item.word ?? "").trim(),
+        image: String(item.image ?? "").trim()
+      };
+    }
+
+    function safeWords(words) {
+      const cleaned = words
+        .map(normalizeWord)
+        .filter(item => item.kanji && item.word && item.image);
+
+      const gridSize = calculateGridSize(cleaned);
+
+      return cleaned.filter(item => splitCharacters(item.word).length <= gridSize);
+    }
+
+    function createEmptyGrid(size, filler) {
+      return Array.from({ length: size }, () =>
+        Array.from({ length: size }, () => randomOf(filler))
+      );
+    }
+
+    function canPlace(wordCharacters, startRow, startCol, direction) {
+      const endRow = startRow + direction.row * (wordCharacters.length - 1);
+      const endCol = startCol + direction.col * (wordCharacters.length - 1);
+
+      return (
+        endRow >= 0 &&
+        endRow < state.gridSize &&
+        endCol >= 0 &&
+        endCol < state.gridSize
+      );
+    }
+
+    function buildSolution(word) {
+      const characters = splitCharacters(word);
+      const attempts = 120;
+
+      for (let attempt = 0; attempt < attempts; attempt++) {
+        const direction = randomOf(directions);
+        const startRow = Math.floor(Math.random() * state.gridSize);
+        const startCol = Math.floor(Math.random() * state.gridSize);
+
+        if (!canPlace(characters, startRow, startCol, direction)) {
+          continue;
+        }
+
+        const cells = characters.map((character, index) => ({
+          row: startRow + direction.row * index,
+          col: startCol + direction.col * index,
+          character
+        }));
+
+        cells.forEach(cell => {
+          state.grid[cell.row][cell.col] = cell.character;
+        });
+
+        return cells;
+      }
+
+      return characters.map((character, index) => {
+        state.grid[0][index] = character;
+
+        return {
+          row: 0,
+          col: index,
+          character
+        };
+      });
+    }
+
+    function renderGrid() {
+      wordGrid.innerHTML = "";
+      wordGrid.style.gridTemplateColumns =
+        `repeat(${state.gridSize}, minmax(0, 1fr))`;
+
+      state.grid.forEach((row, rowIndex) => {
+        row.forEach((character, colIndex) => {
+          const cell = document.createElement("div");
+
+          cell.className = "letter";
+          cell.textContent = character;
+          cell.dataset.row = String(rowIndex);
+          cell.dataset.col = String(colIndex);
+
+          wordGrid.appendChild(cell);
+        });
+      });
+    }
+
+    function currentWord() {
+      return state.words[state.wordIndex];
+    }
+
+    function renderRound() {
+      if (state.wordIndex >= state.words.length) {
+        finishGame();
+        return;
+      }
+
+      const item = currentWord();
+      const filler = isKatakana(item.word)
+        ? fillerKatakana
+        : fillerHiragana;
+
+      state.grid = createEmptyGrid(state.gridSize, filler);
+      state.solution = buildSolution(item.word);
+      state.selection = [];
+      state.dragging = false;
+      state.pointerId = null;
+      state.locked = false;
+
+      score.textContent = String(state.wordIndex);
+      total.textContent = String(state.words.length);
+      progress.style.width =
+        `${Math.round((state.wordIndex / state.words.length) * 100)}%`;
+
+      hint.classList.remove("image-error");
+      hintImage.src = item.image;
+      hintKanji.textContent = item.kanji;
+
+      renderGrid();
+    }
+
+    function startGame() {
+      state.wordIndex = 0;
+      state.mistakes = 0;
+      state.started = true;
+      state.locked = false;
+
+      intro.classList.add("hidden");
+      pause.classList.add("hidden");
+      finish.classList.add("hidden");
+
+      renderRound();
+    }
+
+    function cellFromPoint(clientX, clientY) {
+      const element = document.elementFromPoint(clientX, clientY);
+      return element?.closest(".letter") || null;
+    }
+
+    function keyForCell(cell) {
+      return `${cell.dataset.row}:${cell.dataset.col}`;
+    }
+
+    function clearSelection() {
+      document.querySelectorAll(".letter.selected").forEach(cell => {
+        cell.classList.remove("selected");
+      });
+
+      state.selection = [];
+    }
+
+    function markCell(cell) {
+      if (!cell || state.locked) return;
+
+      const key = keyForCell(cell);
+
+      if (state.selection.some(selected => selected.key === key)) {
+        return;
+      }
+
+      state.selection.push({
+        key,
+        row: Number(cell.dataset.row),
+        col: Number(cell.dataset.col),
+        character: cell.textContent,
+        element: cell
+      });
+
+      cell.classList.add("selected");
+
+      notifyFlutter({
+        type: "speak",
+        text: cell.textContent
+      });
+    }
+
+    function expectedKeys() {
+      return state.solution.map(cell => `${cell.row}:${cell.col}`);
+    }
+
+    function selectedKeys() {
+      return state.selection.map(cell => cell.key);
+    }
+
+    function samePath(selected, expected) {
+      if (selected.length !== expected.length) return false;
+
+      const direct = selected.every((key, index) => key === expected[index]);
+      const reverse = selected.every(
+        (key, index) => key === expected[expected.length - 1 - index]
+      );
+
+      return direct || reverse;
+    }
+
+    function checkSelection() {
+      if (!state.started || state.locked || state.selection.length === 0) {
+        clearSelection();
+        return;
+      }
+
+      state.locked = true;
+
+      const item = currentWord();
+      // Accept any straight, contiguous occurrence of the requested word.
+      // Random filler can legitimately create the same reading more than once.
+      const chosen = state.selection;
+      const chars = chosen.map(cell => cell.character);
+      const reading = splitCharacters(item.word);
+      const matches = chars.join('') === reading.join('') ||
+        chars.join('') === [...reading].reverse().join('');
+      const dr = chosen.length > 1 ? chosen[1].row - chosen[0].row : 0;
+      const dc = chosen.length > 1 ? chosen[1].col - chosen[0].col : 0;
+      const straight = chosen.length < 2 ||
+        ((dr !== 0 || dc !== 0) && Math.abs(dr) <= 1 && Math.abs(dc) <= 1 &&
+          chosen.every((cell, i) => cell.row === chosen[0].row + dr * i &&
+            cell.col === chosen[0].col + dc * i));
+      const correct = matches && straight;
+
+      /*
+       * Avisamos primero del sonido para que se reproduzca sin esperar
+       * al registro del progreso en Flutter.
+       */
+      notifyFlutter({
+        type: "sound",
+        correct
+      });
+
+      notifyFlutter({
+        type: "answer",
+        kanji: item.kanji,
+        correct
+      });
+
+      if (correct) {
+        state.selection.forEach(cell => {
+          cell.element.classList.remove("selected");
+          cell.element.classList.add("found");
+        });
+
+        showToast(t("found"));
+
+        state.wordIndex += 1;
+
+        setTimeout(renderRound, 720);
+        return;
+      }
+
+      state.mistakes += 1;
+
+      showToast(t("miss"), true);
+
+      setTimeout(() => {
+        clearSelection();
+        state.locked = false;
+      }, 520);
+    }
+
+    function finishGame() {
+      state.started = false;
+      state.locked = true;
+
+      score.textContent = String(state.words.length);
+      progress.style.width = "100%";
+
+      finishWords.textContent = String(state.words.length);
+      finishMistakes.textContent = String(state.mistakes);
+
+      finish.classList.remove("hidden");
+
+      notifyFlutter({
+        type: "finished",
+        words: state.words.length,
+        mistakes: state.mistakes
+      });
+    }
+
+    function pauseGame(showOverlay = true) {
+      state.locked = true;
+
+      if (showOverlay) {
+        pause.classList.remove("hidden");
+      }
+    }
+
+    function resumeGame() {
+      pause.classList.add("hidden");
+
+      if (!state.started) return;
+
+      state.locked = false;
+    }
+
+    function showToast(message, wrong = false) {
+      toast.textContent = message;
+      toast.classList.toggle("wrong", wrong);
+      toast.classList.remove("show");
+      void toast.offsetWidth;
+      toast.classList.add("show");
+
+      setTimeout(() => toast.classList.remove("show"), 900);
+    }
+
+    hintImage.addEventListener("error", () => {
+      hint.classList.add("image-error");
+    });
+
+    wordGrid.addEventListener("pointerdown", event => {
+      if (!state.started || state.locked) return;
+
+      event.preventDefault();
+
+      clearSelection();
+
+      state.dragging = true;
+      state.pointerId = event.pointerId;
+
+      wordGrid.setPointerCapture?.(event.pointerId);
+      markCell(cellFromPoint(event.clientX, event.clientY));
+    }, { passive: false });
+
+    wordGrid.addEventListener("pointermove", event => {
+      if (
+        !state.dragging ||
+        state.locked ||
+        event.pointerId !== state.pointerId
+      ) return;
+
+      event.preventDefault();
+      markCell(cellFromPoint(event.clientX, event.clientY));
+    }, { passive: false });
+
+    wordGrid.addEventListener("pointerup", event => {
+      if (!state.dragging || event.pointerId !== state.pointerId) return;
+
+      event.preventDefault();
+
+      state.dragging = false;
+      state.pointerId = null;
+
+      checkSelection();
+    }, { passive: false });
+
+    wordGrid.addEventListener("pointercancel", () => {
+      state.dragging = false;
+      state.pointerId = null;
+      clearSelection();
+    });
+
+    document.getElementById("startBtn").addEventListener("click", startGame);
+    document.getElementById("restartBtn").addEventListener("click", startGame);
+    document.getElementById("backBtn").addEventListener("click", () => pauseGame(true));
+    document.getElementById("resumeBtn").addEventListener("click", resumeGame);
+
+    window.JapanifyRamenSearch = {
+      setLocale: applyLocale,
+      configure(config = {}) {
+        applyLocale(config.locale);
+
+        state.words = safeWords(
+          Array.isArray(config.words) ? config.words : []
+        );
+
+        state.gridSize = calculateGridSize(state.words);
+
+        total.textContent = String(state.words.length);
+        score.textContent = "0";
+        progress.style.width = "0%";
+
+        notifyFlutter({
+          type: "configured",
+          words: state.words.length,
+          gridSize: state.gridSize
+        });
+
+        const notifyRendered = () => {
+          notifyFlutter({
+            type: "rendered",
+            words: state.words.length
+          });
+        };
+
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            notifyRendered();
+            setTimeout(notifyRendered, 350);
+          });
+        });
+      },
+
+      pause() {
+        pauseGame(false);
+      },
+
+      openExitMenu() {
+        pauseGame(true);
+      },
+
+      resume() {
+        resumeGame();
+      }
+    };
+
+    window.JapanifyRamenSearch.configure({locale: "es", words:
+      window.JapanifyFamilyDemo.items.map((item, id) => ({
+        id, kanji: item.kanji.split('/').pop().trim(), word: item.reading, image: item.image
+      }))
+    });
+
+    const notifyReady = () => {
+      notifyFlutter({ type: "ready" });
+    };
+
+    notifyReady();
+    setTimeout(notifyReady, 350);
+    setTimeout(notifyReady, 1000);
+  })();
+</script>
+</body>
+</html>

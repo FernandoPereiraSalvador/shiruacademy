@@ -2120,6 +2120,21 @@
     .sushi-demo a{white-space:normal;text-align:center}
     @media(max-width:900px){.sushi-demo .experience-panel{grid-template-columns:1fr;gap:38px;padding:32px}.sushi-demo .experience-copy{max-width:560px;margin:auto}.sushi-showcase{width:100%}}
     @media(max-width:480px){.sushi-demo .experience-panel{padding:24px 14px;border-radius:26px}.kana-guide{gap:6px}.kana-card{padding:14px 3px;border-radius:12px}.sushi-phone{padding:6px;border-radius:32px}.sushi-phone iframe{border-radius:24px}.sushi-demo .section-heading h2{font-size:34px}.demo-label{font-size:9px}}
+
+    .kanji-demo-layout{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);align-items:center;gap:56px}
+    .family-panel{min-width:0;background:#faf5d8;padding:28px;border:1px solid #e5dfc2;border-radius:28px;box-shadow:0 22px 50px #244e3914}
+    .family-panel-heading{display:flex;align-items:center;gap:12px}.family-panel h3{margin:0;font-size:26px;color:#284e40;letter-spacing:-.03em}
+    .family-mark{display:grid;place-items:center;width:44px;height:44px;background:#3c7262;border-radius:14px;color:#fff;font-size:26px}
+    .family-hint{font-size:14px;color:#666b58;line-height:1.6;margin:14px 0 20px}
+    .family-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+    .family-card{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-width:0;padding:12px 6px;background:#fff;border:2px solid transparent;border-radius:12px;box-shadow:0 5px 12px #00000013;font:inherit;cursor:pointer;color:#263a32;transition:border-color .2s,transform .2s}
+    .family-card:hover{transform:translateY(-3px)}.family-card[aria-pressed="true"]{border-color:#3c7262;background:#f9fffb}
+    .family-card img{width:100%;height:100px;object-fit:contain}.family-card .family-kanji{font-size:17px;line-height:1.5;overflow-wrap:anywhere;text-align:center}.family-card .family-meaning{font-size:12px;line-height:1.4;color:#637067;min-height:2.8em;display:flex;align-items:center;text-align:center}
+    .family-detail{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;padding:20px;margin-top:22px;background:#fffdf1;border:1px solid #d8dec6;border-radius:16px;min-height:112px}.family-detail .detail-kanji{font-size:clamp(20px,2.5vw,32px);color:#305e50}.family-detail p{margin:3px 0;font-size:13px;color:#58674f;line-height:1.5}.family-detail strong{font-size:18px;color:#233f33}.family-detail small{font-size:11px;color:#687458}
+    .family-game-column{display:flex;flex-direction:column;align-items:center;gap:14px;min-width:0}.family-game-column h3{font-size:21px;margin:0;color:#284e40;text-align:center}.family-game-column>p{font-size:14px;line-height:1.6;color:var(--muted);text-align:center;max-width:360px;margin:0 0 8px}.family-cta{display:flex;justify-content:center}.family-cta a{white-space:normal;text-align:center}
+    .family-card:focus-visible{outline:3px solid #a65268;outline-offset:3px}
+    @media(max-width:900px){.kanji-demo-layout{grid-template-columns:1fr;gap:36px}.family-panel{width:100%;max-width:580px;justify-self:center}.family-game-column>p{max-width:440px}}
+    @media(max-width:480px){.family-panel{padding:18px 12px;border-radius:22px}.family-cards{gap:8px}.family-card{padding:9px 3px}.family-card img{height:74px}.family-card .family-kanji{font-size:14px}.family-card .family-meaning{font-size:11px}.family-detail{gap:10px;padding:14px}.family-detail .detail-kanji{font-size:22px}}
   </style>
 </head>
 
@@ -2301,30 +2316,26 @@
       </div>
     </section>
 
-    <section class="showcase">
-      <div class="section-heading">
+    <section id="kanji-demo" class="kanji-demo">
+      <div class="section-heading center">
         <h2 data-i18n="showcaseTitle">Domina los kanji paso a paso</h2>
-        <p data-i18n="showcaseSubtitle">Japanify te ayuda a entender el significado, la lectura y el uso real de los kanji con ejercicios guiados y repaso inteligente.</p>
-        <ul class="showcase-list">
-          <li data-i18n="showcaseBullet1">Aprende kanji desde sus componentes básicos y significados clave.</li>
-          <li data-i18n="showcaseBullet2">Refuerza lecturas y vocabulario con minijuegos de reconocimiento y tarjetas.</li>
-          <li data-i18n="showcaseBullet3">Utiliza repaso espaciado para no olvidar los kanji que ya has estudiado.</li>
-        </ul>
+        <p data-family-text="subtitle">Explora esta familia y encuentra sus lecturas en la sopa de letras.</p>
       </div>
-
-      <div class="showcase-visual">
-        <div class="showcase-device-stack" aria-label="Capturas de las lecciones de kanji de Japanify">
-          <div class="showcase-device">
-            <img src="./mobile.webp" alt="Lección de kanji en Japanify" class="kanji-screen kanji-screen--one" onerror="this.remove(); document.querySelector('.showcase-device-stack')?.classList.add('single-screen')">
-            <img src="./mobile2.webp" alt="Ejercicio de kanji en Japanify" class="kanji-screen kanji-screen--two" onerror="this.remove(); document.querySelector('.showcase-device-stack')?.classList.add('single-screen')">
-          </div>
-          <div class="showcase-screen-progress" aria-hidden="true">
-            <span></span><span></span>
-          </div>
+      <div class="kanji-demo-layout">
+        <div class="family-panel">
+          <div class="family-panel-heading"><span class="family-mark" aria-hidden="true">家</span><h3 data-family-text="family">Familia</h3></div>
+          <p class="family-hint" data-family-text="hint">Toca una tarjeta para consultar su lectura.</p>
+          <div id="familyCards" class="family-cards"></div>
+          <div id="familyDetail" class="family-detail" aria-live="polite"></div>
+        </div>
+        <div class="family-game-column">
+          <h3 data-family-text="practice">Practica con la sopa de letras</h3>
+          <p data-family-text="instructions">Busca la lectura en hiragana del kanji que aparece sobre el bol. Arrastra desde el primer carácter hasta el último.</p>
+          <div class="sushi-phone"><div class="phone-speaker" aria-hidden="true"></div><iframe id="familyGame" src="kanji-soup-demo.html" title="Japanify · Ramen Search" loading="lazy"></iframe></div>
         </div>
       </div>
+      <div class="family-cta"><a href="https://play.google.com/store/apps/details?id=com.shiruacademy.japanify" class="btn-primary" target="_blank" rel="noopener" data-family-text="download">Sigue aprendiendo en Japanify ↗</a></div>
     </section>
-
 
     <section>
       <div class="section-heading center">
@@ -3094,6 +3105,7 @@ const updateInstagramCarousel = () => {
       if (languageSelect) languageSelect.value = currentLocale;
 
       document.getElementById("sushiGame")?.contentWindow?.JapanifyQuiz?.setLocale(currentLocale);
+      window.dispatchEvent(new CustomEvent("japanify:language", {detail: currentLocale}));
       updateLanguageDependentEmbeds();
     };
 
@@ -3235,5 +3247,7 @@ const updateInstagramCarousel = () => {
     // --- /SHIRU90 welcome promo ---
   </script>
   <script async src="https://www.instagram.com/embed.js" onload="window.instgrm?.Embeds?.process && window.instgrm.Embeds.process();"></script>
+  <script src="family-data.js"></script>
+  <script src="family-demo.js"></script>
 </body>
 </html>
