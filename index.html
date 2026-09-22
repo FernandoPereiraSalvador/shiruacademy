@@ -429,7 +429,7 @@
         inset 0 -28px 72px rgba(255,255,255,.34);
     }
 
-    .experience-panel::before{
+    .experience-panel::before,.kanji-demo-layout::before{
       content:"";
       position:absolute;
       inset:0;
@@ -457,7 +457,7 @@
       transition:opacity .3s ease;
     }
 
-    .experience-panel:hover::before{opacity:1}
+    .experience-panel:hover::before,.kanji-demo-layout:hover::before{opacity:1}
 
     .experience-panel::after{
       content:"";
@@ -1272,7 +1272,7 @@
         border-radius:28px;
       }
       .experience-panel:hover{transform:none}
-      .experience-panel::before{padding:1.5px}
+      .experience-panel::before,.kanji-demo-layout::before{padding:1.5px}
       .experience-panel::after{inset:-26%}
       .experience-copy .section-heading{text-align:center;align-items:center;margin:0 auto}
       .experience-feature:hover{transform:none}
@@ -1936,6 +1936,7 @@
       .petal,
       .sakura-branch,
       .experience-panel::before,
+      .kanji-demo-layout::before,
       .experience-panel::after{animation:none}
       .petal{display:none}
     }
@@ -2122,7 +2123,7 @@
     @media(max-width:900px){.sushi-demo .experience-panel{grid-template-columns:1fr;gap:38px;padding:32px}.sushi-demo .experience-copy{max-width:560px;margin:auto}.sushi-showcase{width:100%}}
     @media(max-width:480px){.sushi-demo .experience-panel{padding:24px 14px;border-radius:26px}.kana-guide{gap:6px}.kana-card{padding:14px 3px;border-radius:12px}.sushi-phone{padding:6px;border-radius:32px}.sushi-phone iframe{border-radius:24px}.sushi-demo .section-heading h2{font-size:34px}.demo-label{font-size:9px}}
 
-    .kanji-demo-layout{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);align-items:center;gap:48px;padding:42px;background:linear-gradient(145deg,#fff,#fffaf8 55%,#f6fbf8);border:1px solid #fff;border-radius:40px;box-shadow:0 26px 65px #60392912}
+    .kanji-demo-layout{position:relative;isolation:isolate;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);align-items:center;gap:48px;padding:42px;background:linear-gradient(145deg,#fff,#fffaf8 55%,#f6fbf8);border:1px solid #fff;border-radius:40px;box-shadow:0 26px 65px #60392912}
     .kanji-demo-layout>.section-heading,.kanji-demo-layout>.family-cta{grid-column:1 / -1;margin:0 auto;width:100%}
     .family-panel{min-width:0;background:#fff;padding:24px;border:1px solid #eee2df;border-radius:26px;box-shadow:0 12px 34px #51372e09}
     .family-panel-heading{display:flex;align-items:center;gap:12px}.family-panel h3{margin:0;font-size:25px;color:#284e40;letter-spacing:-.03em}
