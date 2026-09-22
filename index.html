@@ -2122,6 +2122,7 @@
     @media(max-width:480px){.sushi-demo .experience-panel{padding:24px 14px;border-radius:26px}.kana-guide{gap:6px}.kana-card{padding:14px 3px;border-radius:12px}.sushi-phone{padding:6px;border-radius:32px}.sushi-phone iframe{border-radius:24px}.sushi-demo .section-heading h2{font-size:34px}.demo-label{font-size:9px}}
 
     .kanji-demo-layout{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);align-items:center;gap:48px;padding:42px;background:linear-gradient(145deg,#fff,#fffaf8 55%,#f6fbf8);border:1px solid #fff;border-radius:40px;box-shadow:0 26px 65px #60392912}
+    .kanji-demo-layout>.section-heading,.kanji-demo-layout>.family-cta{grid-column:1 / -1;margin:0 auto;width:100%}
     .family-panel{min-width:0;background:#fff;padding:24px;border:1px solid #eee2df;border-radius:26px;box-shadow:0 12px 34px #51372e09}
     .family-panel-heading{display:flex;align-items:center;gap:12px}.family-panel h3{margin:0;font-size:25px;color:#284e40;letter-spacing:-.03em}
     .family-mark{display:grid;place-items:center;width:42px;height:42px;background:#e9f1ec;border:1px solid #dbe8df;border-radius:14px;color:#35624f;font-size:25px}
@@ -2322,11 +2323,11 @@
     </section>
 
     <section id="kanji-demo" class="kanji-demo">
-      <div class="section-heading center">
-        <h2 data-i18n="showcaseTitle">Domina los kanji paso a paso</h2>
-        <p data-family-text="subtitle">Explora esta familia y encuentra sus lecturas en la sopa de letras.</p>
-      </div>
       <div class="kanji-demo-layout">
+        <div class="section-heading center">
+          <h2 data-i18n="showcaseTitle">Domina los kanji paso a paso</h2>
+          <p data-family-text="subtitle">Explora esta familia y encuentra sus lecturas en la sopa de letras.</p>
+        </div>
         <div class="family-panel">
           <div class="family-panel-heading"><span class="family-mark" aria-hidden="true">家</span><h3 data-family-text="family">Familia</h3></div>
           <p class="family-hint" data-family-text="hint">Toca una tarjeta para ver su lectura y escritura.</p>
@@ -2337,8 +2338,8 @@
           <h3 data-family-text="practice">Sopa de letras</h3>
           <div class="sushi-phone"><div class="phone-speaker" aria-hidden="true"></div><iframe id="familyGame" src="kanji-soup-demo.html" title="Japanify · Ramen Search" loading="lazy"></iframe></div>
         </div>
+        <div class="family-cta"><a href="https://play.google.com/store/apps/details?id=com.shiruacademy.japanify" class="btn-primary" target="_blank" rel="noopener" data-family-text="download">Sigue aprendiendo en Japanify ↗</a></div>
       </div>
-      <div class="family-cta"><a href="https://play.google.com/store/apps/details?id=com.shiruacademy.japanify" class="btn-primary" target="_blank" rel="noopener" data-family-text="download">Sigue aprendiendo en Japanify ↗</a></div>
     </section>
 
     <section>

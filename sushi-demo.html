@@ -933,7 +933,7 @@
       animation: toastShow 1.1s ease both;
     }
 
-    /* ---------- intro and finish overlays ---------- */
+    /* ---------- pause and finish overlays ---------- */
     .overlay {
       position: absolute;
       z-index: 80;
@@ -1252,15 +1252,6 @@
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <section class="overlay" id="introOverlay">
-    <div class="modal">
-      <div class="modal-icon">🍱</div>
-      <h1 data-i18n="introTitle"></h1>
-      <p data-i18n="introText"></p>
-      <button class="primary-btn" id="startBtn" type="button" data-i18n="start"></button>
-    </div>
-  </section>
-
   <section class="overlay hidden" id="pauseOverlay">
     <div class="modal">
       <div class="modal-icon">🍵</div>
@@ -1505,7 +1496,6 @@
     const progressFill = document.getElementById("progressFill");
     const scoreLabel = document.getElementById("score");
     const totalLabel = document.getElementById("total");
-    const introOverlay = document.getElementById("introOverlay");
     const pauseOverlay = document.getElementById("pauseOverlay");
     const finishOverlay = document.getElementById("finishOverlay");
     const finishScore = document.getElementById("finishScore");
@@ -1619,7 +1609,7 @@
       }
     }
 
-    function initializeGame() {
+    function initializeGame({focusAnswer = true} = {}) {
       const source = currentSet();
 
       if (!source.length) {
@@ -1639,12 +1629,11 @@
       totalLabel.textContent = String(state.questions.length);
       progressFill.style.width = "0%";
 
-      introOverlay.classList.add("hidden");
       pauseOverlay.classList.add("hidden");
       finishOverlay.classList.add("hidden");
 
       renderQuestion();
-      answerTray.querySelector("button")?.focus({preventScroll: true});
+      if (focusAnswer) answerTray.querySelector("button")?.focus({preventScroll: true});
     }
 
     function renderQuestion() {
@@ -1977,7 +1966,6 @@
       });
     }
 
-    document.getElementById("startBtn").addEventListener("click", initializeGame);
     document.getElementById("restartBtn").addEventListener("click", initializeGame);
     document.getElementById("resumeBtn").addEventListener("click", resume);
     document.getElementById("backBtn").addEventListener("click", () => pause(true));
@@ -2016,16 +2004,10 @@
         applyLocale(config.locale);
 
         modeRow.style.display = "none";
-        introOverlay.classList.remove("hidden");
         pauseOverlay.classList.add("hidden");
         finishOverlay.classList.add("hidden");
 
-        const preview = state.sets[mode][0];
-
-        state.questions = preview ? [preview] : [];
-        state.currentIndex = 0;
-
-        setPlateCharacter();
+        initializeGame({focusAnswer: false});
 
         notifyFlutter({
           type: "configured",

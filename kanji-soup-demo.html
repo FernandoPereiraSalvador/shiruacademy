@@ -940,15 +940,6 @@
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <section class="overlay" id="introOverlay">
-    <div class="modal">
-      <div class="modal-icon">🍜</div>
-      <h1>Ramen Search</h1>
-      <p data-i18n="introText"></p>
-      <button class="primary-btn" id="startBtn" type="button" data-i18n="start"></button>
-    </div>
-  </section>
-
   <section class="overlay hidden" id="pauseOverlay">
     <div class="modal">
       <div class="modal-icon">🍵</div>
@@ -1140,7 +1131,6 @@
     const total = document.getElementById("total");
     const progress = document.getElementById("progressFill");
     const toast = document.getElementById("toast");
-    const intro = document.getElementById("introOverlay");
     const pause = document.getElementById("pauseOverlay");
     const finish = document.getElementById("finishOverlay");
     const finishWords = document.getElementById("finishWords");
@@ -1334,7 +1324,6 @@
       state.started = true;
       state.locked = false;
 
-      intro.classList.add("hidden");
       pause.classList.add("hidden");
       finish.classList.add("hidden");
 
@@ -1556,7 +1545,6 @@
       clearSelection();
     });
 
-    document.getElementById("startBtn").addEventListener("click", startGame);
     document.getElementById("restartBtn").addEventListener("click", startGame);
     document.getElementById("backBtn").addEventListener("click", () => pauseGame(true));
     document.getElementById("resumeBtn").addEventListener("click", resumeGame);
@@ -1575,6 +1563,7 @@
         total.textContent = String(state.words.length);
         score.textContent = "0";
         progress.style.width = "0%";
+        startGame();
 
         notifyFlutter({
           type: "configured",
